@@ -1,0 +1,26 @@
+[
+  {
+    "question": "How satisfied are you with your life?",
+    "options": [
+      { "text": "Not at all", "value": 1, "wellbeingDelta": -0.5 },
+      { "text": "Somewhat", "value": 2, "wellbeingDelta": -0.25 },
+      { "text": "Very satisfied", "value": 3, "wellbeingDelta": 0.5 }
+    ]
+  },
+  {
+    "question": "How satisfied are you with your job?",
+    "options": [
+      { "text": "Not at all", "value": 1, "wellbeingDelta": -0.7 },
+      { "text": "Somewhat", "value": 2, "wellbeingDelta": -0.3 },
+      { "text": "Very satisfied", "value": 3, "wellbeingDelta": 0.6 }
+    ]
+  },
+  {
+    "question": "How satisfied are you with your relationship?",
+    "options": [
+      { "text": "Not at all", "value": 1, "wellbeingDelta": -1.0 },
+      { "text": "Somewhat", "value": 2, "wellbeingDelta": 0.0 },
+      { "text": "Very satisfied", "value": 3, "wellbeingDelta": 0.8 }
+    ]
+  }
+]
