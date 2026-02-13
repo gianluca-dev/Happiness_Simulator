@@ -68,3 +68,9 @@ footer {
 .copyright-container {
     color: var(--footer-text-color);
 }
+
+
+.wellbeing-chart-container {
+    width: 750px;
+    height: auto;
+}
