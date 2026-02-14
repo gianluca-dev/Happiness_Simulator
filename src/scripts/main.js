@@ -80,10 +80,19 @@ function chooseOption(option) {
     applyWellbeingDelta(delta);
 }
 
-function applyWellbeingDelta(delta) {
-    const current = wellbeingHistory[wellbeingHistory.length - 1];
-    const newValue = current + delta;
+let deltaSum = 0;
 
-    wellbeingHistory.push(Math.max(0, Math.min(newValue, 10)));
-    updateChart(wellbeingHistory);
+function applyWellbeingDelta(delta) {
+    if (!wellbeingHistory.length) return;
+
+    const current = wellbeingHistory[wellbeingHistory.length - 1];
+    const newValue = current + (deltaSum += delta);
+
+    if ((currentIndex + 1) % 3 === 0) {
+        console.log('Chart updated!');
+        wellbeingHistory.push(Math.max(0, Math.min(newValue, 10)));
+        deltaSum = 0;
+
+        updateChart(wellbeingHistory);
+    }
 }
