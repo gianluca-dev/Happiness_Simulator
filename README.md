@@ -1,3 +1,3 @@
 # Happiness Simulator
 
-Hier entsteht ein Simulator inklusive einer Website.
+Hier entsteht ein Simulator-Spiel inklusive einer Website.
