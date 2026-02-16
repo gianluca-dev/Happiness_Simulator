@@ -1,4 +1,4 @@
-import { updateChart } from './chart.js';
+import { updateWellbeingChart, globalComparisonChart, updateGlobalComparisonChart } from './chart.js';
 
 // Enable EventListener for start on index.html
 if (window.location.pathname.includes('index.html')) {
@@ -14,7 +14,7 @@ async function loadQuestions() {
     try {
         const response = await fetch('../questions.json');
         mailQuestions = await response.json();
-        updateChart(wellbeingHistory);
+        updateWellbeingChart(wellbeingHistory);
         showNextQuestion();
     } catch (error) {
         console.error(error);
@@ -27,7 +27,7 @@ let currentIndex = 0;
 
 function showNextQuestion() {
     if (currentIndex > mailQuestions.length - 1) {
-        console.log('No more questions available!');
+        console.log('No more questions available!');                                                           // console.log
         return;
     }
 
@@ -45,6 +45,7 @@ function showNextQuestion() {
 
 function createOptionBtn(text, optionValue) {
     const optionElement = document.createElement('button');
+    optionElement.className = 'option-btn';
     optionElement.textContent = text;
     optionElement.addEventListener('click', () => {
         chooseOption(optionValue);
@@ -76,7 +77,7 @@ function chooseOption(option) {
         break;
     }
 
-    console.log(message);
+    console.log(message);                                                                                   // console.log()
     applyWellbeingDelta(delta);
 }
 
@@ -89,10 +90,108 @@ function applyWellbeingDelta(delta) {
     const newValue = current + (deltaSum += delta);
 
     if ((currentIndex + 1) % 3 === 0) {
-        console.log('Chart updated!');
+        console.log('Chart updated!');                                                                     // console.log()
         wellbeingHistory.push(Math.max(0, Math.min(newValue, 10)));
         deltaSum = 0;
 
-        updateChart(wellbeingHistory);
+        updateWellbeingChart(wellbeingHistory);
     }
+}
+
+document.getElementById('aspect-menu-navigation').addEventListener('click', (event) => {
+    const clickedAspect = event.target.closest('.aspect-container');
+    if (clickedAspect) openAspectMenu(clickedAspect.id);
+});
+
+function openAspectMenu(aspectId) {
+    const aspectMenu = document.getElementById(`aspect-menu-${aspectId.replace('aspect-', '')}`);
+    const aspectContainer = document.getElementById(aspectId);
+
+    aspectMenu.classList.toggle('aspect-menu-active');
+    aspectContainer.classList.toggle('aspect-container-shifted');
+}
+
+let globalComparisonData = [];
+
+async function loadGlobalComparisonData() {
+    try {
+        const response = await fetch('../simulator-data.json');
+        globalComparisonData = await response.json();
+        console.log(globalComparisonData);                                                              // console.log()
+        updateGlobalComparisonChart(globalComparisonData.globalComparisonData);
+        createNationBtn();
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+loadGlobalComparisonData();
+
+document.getElementById('global-comparison-app-container').addEventListener('click', openGlobalComparisonWrapper);
+document.getElementById('global-comparison-close-container').addEventListener('click', closeGlobalComparisonWrapper);
+
+function openGlobalComparisonWrapper() {
+    const globalComparisonWrapper = document.getElementById('global-comparison-wrapper');
+    globalComparisonWrapper.classList.remove('global-comparison-wrapper-inactive');
+}
+
+function closeGlobalComparisonWrapper() {
+    const globalComparisonWrapper = document.getElementById('global-comparison-wrapper');
+    globalComparisonWrapper.classList.add('global-comparison-wrapper-inactive');
+}
+
+function createNationBtn() {
+    const nationBtnWrapper = document.getElementById('nation-btn-wrapper');
+
+    globalComparisonData.globalComparisonData.forEach(nation => {
+        const nationBtnContainer = document.createElement('div');
+        nationBtnContainer.className = 'nation-btn-container';
+        nationBtnContainer.id = `nation-btn-container-${nation.id}`;
+
+        const nationBtnElement = document.createElement('button');
+        nationBtnElement.className = 'nation-btn-element';
+        nationBtnElement.textContent = nation.nation;
+        nationBtnElement.addEventListener('click', () => {
+            console.log(`Selected Nation: ${nation.nation}`);                                           // console.log()
+            showOnlyNation(nation.id);
+        });
+        
+        nationBtnContainer.appendChild(nationBtnElement);
+        nationBtnWrapper.appendChild(nationBtnContainer);
+
+        showLifeEvaluation(nationBtnContainer, nation);
+    });
+} 
+
+let selectedNationId = null;
+
+function showOnlyNation(nationId) {
+    if (selectedNationId === nationId) {
+        globalComparisonChart.data.datasets.forEach((_, i) => {
+            globalComparisonChart.show(i);
+        });
+        selectedNationId = null;
+    } else {
+        globalComparisonChart.data.datasets.forEach((_, i) => {
+            if (i === nationId) {
+                globalComparisonChart.show(i);
+            } else {
+                globalComparisonChart.hide(i);
+            }
+        });
+        selectedNationId = nationId;
+    }
+}
+
+function showLifeEvaluation(nationBtnContainer, nation, year = 1) {
+    if (!nation || !nation.lifeEvaluation || nation.lifeEvaluation.length === 0) {
+        console.warn('No Life Evaluation data found!');
+        return;
+    }
+
+    const nationLifeEvaluationElement = document.createElement('p');
+    nationLifeEvaluationElement.className = 'nation-life-evaluation-element';
+    nationLifeEvaluationElement.textContent = nation.lifeEvaluation[year].toFixed(3);
+
+    nationBtnContainer.appendChild(nationLifeEvaluationElement);
 }

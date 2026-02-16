@@ -1,6 +1,7 @@
 [
   {
     "question": "How satisfied are you with your life?",
+    "type": "social",
     "options": [
       { "text": "Not at all", "value": 1, "wellbeingDelta": -0.5 },
       { "text": "Somewhat", "value": 2, "wellbeingDelta": -0.25 },
@@ -9,6 +10,7 @@
   },
   {
     "question": "How satisfied are you with your job?",
+    "type": "economical",
     "options": [
       { "text": "Not at all", "value": 1, "wellbeingDelta": -0.7 },
       { "text": "Somewhat", "value": 2, "wellbeingDelta": -0.3 },
@@ -17,6 +19,7 @@
   },
   {
     "question": "How satisfied are you with your relationship?",
+    "type": "social",
     "options": [
       { "text": "Not at all", "value": 1, "wellbeingDelta": -1.0 },
       { "text": "Somewhat", "value": 2, "wellbeingDelta": 0.0 },

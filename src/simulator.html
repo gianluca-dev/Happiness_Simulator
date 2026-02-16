@@ -11,13 +11,80 @@
 
     </header>
     <main>
+        <div class="coins-container">
+            <p class="coin-output" id="coin-output">0.00 €</p>
+        </div>
+        <aside class="aspect-menu-navigation" id="aspect-menu-navigation">
+            <!--Aspect-Economic-->
+            <div class="aspect-wrapper">
+                <div class="aspect-container" id="aspect-economic">
+                    <img src="../src/assets/icons/economic.svg" loading="eager" alt="aspect-economic-icon">
+                </div>
+            </div>
+            <!--Aspect-Political-->
+            <div class="aspect-wrapper">
+                <div class="aspect-container" id="aspect-political">
+                    <img src="../src/assets/icons/political.svg" loading="eager" alt="aspect-political-icon">
+                </div>
+            </div>
+            <!--Aspect-Social-->
+            <div class="aspect-wrapper">
+                <div class="aspect-container" id="aspect-social">
+                    <img src="../src/assets/icons/social.svg" loading="eager" alt="aspect-social-icon">
+                </div>
+            </div>
+            <!--Aspect-Health-->
+            <div class="aspect-wrapper">
+                <div class="aspect-container" id="aspect-health">
+                    <img src="../src/assets/icons/health.svg" loading="eager" alt="aspect-health-icon">
+                </div>
+            </div>
+            <!--Aspect-Menu-Section-->
+            <section class="aspect-menu-section">
+                <!--Aspect-Menu-Economic-->
+                <div class="aspect-menu" id="aspect-menu-economic">
+                    <p>Economic Aspects</p>
+                </div>
+                <!--Aspect-Menu-Political-->
+                <div class="aspect-menu" id="aspect-menu-political">
+                    <p>Political Aspects</p>
+                </div>
+                <!--Aspect-Menu-Social-->
+                <div class="aspect-menu" id="aspect-menu-social">
+                    <p>Social Aspects</p>
+                </div>
+                <!--Aspect-Menu-Health-->
+                <div class="aspect-menu" id="aspect-menu-health">
+                    <p>Health Aspects</p>
+                </div>
+            </section>
+        </aside>
+
         <div class="mail-container" id="mail-container"></div>
         <div class="wellbeing-chart-container">
             <canvas id="wellbeing-chart"></canvas>
         </div>
+
+        <div class="global-comparison-wrapper global-comparison-wrapper-inactive" id="global-comparison-wrapper">
+            <div class="global-comparison-header">
+                <p>Nationenvergleich</p>
+                <div class="global-comparison-close-container" id="global-comparison-close-container">
+                    <img src="../src/assets/icons/close.svg" loading="eager" alt="close-icon">
+                </div>
+            </div>
+            <div class="global-comparison-container">
+                <div class="global-comparison-chart-container">
+                    <canvas id="global-comparison-chart"></canvas>
+                </div>
+                <!--Nation-Buttons-->
+                <div class="nation-btn-wrapper" id="nation-btn-wrapper"></div>
+            </div>
+        </div>
     </main>
-    <footer>
-        
+    <footer class="simulator-footer">
+        <div class="global-comparison-app-container" id="global-comparison-app-container">
+            <img src="../src/assets/icons/globe.svg" loading="eager" alt="global-comparison-icon">
+        </div>
     </footer>
 </body>
     <script type="module" src="../src/scripts/main.js"></script>
