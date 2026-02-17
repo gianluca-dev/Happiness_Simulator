@@ -1,0 +1,46 @@
+{
+    "globalComparisonData": [
+        {
+            "id": 0,
+            "nation": "Finnland",
+            "lifeEvaluation": [7.809, 7.842, 7.821],
+            "border": "#80c463",
+            "background": "rgba(128, 196, 99, 0.15)"
+        },
+        {
+            "id": 1,
+            "nation": "Dänemark",
+            "lifeEvaluation": [7.646, 7.620, 7.636],
+            "border": "#959595",
+            "background": "rgba(149, 149, 149, 0.15)"
+        },
+        {
+            "id": 2,
+            "nation": "Island",
+            "lifeEvaluation": [7.504, 7.554, 7.557],
+            "border": "#deb94c",
+            "background": "rgba(222, 185, 76, 0.15)"
+        },
+        {
+            "id": 3,
+            "nation": "Schweden",
+            "lifeEvaluation": [7.353, 7.363, 7.384],
+            "border": "#d13945",
+            "background": "rgba(209, 57, 69, 0.15)"
+        },
+        {
+            "id": 4,
+            "nation": "Niederlande",
+            "lifeEvaluation": [7.449, 7.464, 7.415],
+            "border": "#a23371",
+            "background": "rgba(162, 51, 113, 0.15)"
+        },
+        {
+            "id": 5,
+            "nation": "Norwegen",
+            "lifeEvaluation": [7.488, 7.392, 7.365],
+            "border": "#6a28da",
+            "background": "rgba(106, 40, 218, 0.15)"
+        }
+    ]
+}
