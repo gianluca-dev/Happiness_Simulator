@@ -1,4 +1,86 @@
 {
+    "events": [
+        {
+            "id": 0,
+            "type": "economic",
+            "title": "Steuersenkung_1",
+            "description": "Mehrwertsteuer von 19% auf 7% gesenkt.",
+            "cost": "1.000",
+            "image": {
+                "src": "../src/assets/icons/economic.svg",
+                "alt": "aspect-economic-icon"
+            }
+        },
+        {
+            "id": 1,
+            "type": "political",
+            "title": "Steuersenkung_2",
+            "description": "Mehrwertsteuer von 19% auf 7% gesenkt.",
+            "cost": "1.000",
+            "image": {
+                "src": "../src/assets/icons/economic.svg",
+                "alt": "aspect-economic-icon"
+            }
+        },
+        {  
+            "id": 2,
+            "type": "economic",
+            "title": "Steuersenkung_3",
+            "description": "Mehrwertsteuer von 19% auf 7% gesenkt.",
+            "cost": "1.000",
+            "image": {
+                "src": "../src/assets/icons/economic.svg",
+                "alt": "aspect-economic-icon"
+            }
+        },
+        {
+            "id": 3,
+            "type": "social",
+            "title": "Steuersenkung_4",
+            "description": "Mehrwertsteuer von 19% auf 7% gesenkt.",
+            "cost": "1.000",
+            "image": {
+                "src": "../src/assets/icons/economic.svg",
+                "alt": "aspect-economic-icon"
+            }
+        },
+        {
+            "id": 4,
+            "type": "social",
+            "title": "Steuersenkung_5",
+            "description": "Mehrwertsteuer von 19% auf 7% gesenkt.",
+            "cost": "1.000",
+            "image": {
+                "src": "../src/assets/icons/economic.svg",
+                "alt": "aspect-economic-icon"
+            }
+        },
+        {
+            "id": 5,
+            "type": "health",
+            "title": "Steuersenkung_6",
+            "description": "Mehrwertsteuer von 19% auf 7% gesenkt.",
+            "cost": "1.000",
+            "image": {
+                "src": "../src/assets/icons/economic.svg",
+                "alt": "aspect-economic-icon"
+            }
+        }
+    ],
+    "mails": [
+        {
+            "id": 0,
+            "type": "economic",
+            "subject": "Steuern",
+            "sender": "Wirtschaftsminister",
+            "information": "Die Zufriedenheit der Bürger sinkt durch zu hohe Steuern.",
+            "eventSuggestion": {
+                "id": 0,
+                "type": "economic",
+                "title": "Steuersenkung"
+            }
+        }
+    ],
     "globalComparisonData": [
         {
             "id": 0,
