@@ -5,9 +5,26 @@ if (window.location.pathname.includes('index.html')) {
     document.getElementById('start-btn').addEventListener('click', () => {
         window.location.href = '../src/simulator.html';
     });
+} else if (window.location.pathname.includes('simulator.html')) {
+    document.getElementById('tutorial-app-container').addEventListener('click', () => {
+        window.open('../src/tutorial.html', '_blank');
+    });
 }
 
-let mailQuestions = [];
+// ---------- loading simulator data ---------- //
+
+export async function loadSimulatorData() {
+    try {
+        const response = await fetch('../simulator-data.json');
+        return await response.json();
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+loadSimulatorData();
+
+/*let mailQuestions = [];
 let wellbeingHistory = [7.076];
 // Loading Questions from JSON file
 async function loadQuestions() {
@@ -96,15 +113,15 @@ function applyWellbeingDelta(delta) {
 
         updateWellbeingChart(wellbeingHistory);
     }
-}
+}*/
 
 document.getElementById('aspect-menu-navigation').addEventListener('click', (event) => {
     const clickedAspect = event.target.closest('.aspect-container');
     if (clickedAspect) openAspectMenu(clickedAspect.id);
 });
 
-function openAspectMenu(aspectId) {
-    const aspectMenu = document.getElementById(`aspect-menu-${aspectId.replace('aspect-', '')}`);
+export function openAspectMenu(aspectId) {
+    const aspectMenu = document.getElementById(`aspect-menu-${aspectId}`);
     const aspectContainer = document.getElementById(aspectId);
 
     aspectMenu.classList.toggle('aspect-menu-active');
