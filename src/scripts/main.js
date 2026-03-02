@@ -3,11 +3,11 @@ import { updateWellbeingChart, globalComparisonChart, updateGlobalComparisonChar
 // Enable EventListener for start on index.html
 if (window.location.pathname.includes('index.html')) {
     document.getElementById('start-btn').addEventListener('click', () => {
-        window.location.href = '../src/simulator.html';
+        window.location.href = 'simulator.html';
     });
 } else if (window.location.pathname.includes('simulator.html')) {
     document.getElementById('tutorial-app-container').addEventListener('click', () => {
-        window.open('../src/tutorial.html', '_blank');
+        window.open('tutorial.html', '_blank');
     });
 }
 
@@ -15,7 +15,7 @@ if (window.location.pathname.includes('index.html')) {
 
 export async function loadSimulatorData() {
     try {
-        const response = await fetch('../simulator-data.json');
+        const response = await fetch('simulator-data.json');
         return await response.json();
     } catch (error) {
         console.error(error);
@@ -132,7 +132,7 @@ let globalComparisonData = [];
 
 async function loadGlobalComparisonData() {
     try {
-        const response = await fetch('../simulator-data.json');
+        const response = await fetch('simulator-data.json');
         globalComparisonData = await response.json();
         console.log(globalComparisonData);                                                              // console.log()
         updateGlobalComparisonChart(globalComparisonData.globalComparisonData);
