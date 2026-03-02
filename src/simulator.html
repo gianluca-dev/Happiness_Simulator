@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happiness Simulator - Simulator</title>
-    <link rel="stylesheet" href="../src/styles/styles.css">
+    <link rel="stylesheet" href="../src/styles/simulator-styles.css">
 </head>
 <body>
     <header>
@@ -17,25 +17,25 @@
         <aside class="aspect-menu-navigation" id="aspect-menu-navigation">
             <!--Aspect-Economic-->
             <div class="aspect-wrapper">
-                <div class="aspect-container" id="aspect-economic">
+                <div class="aspect-container" id="economic">
                     <img src="../src/assets/icons/economic.svg" loading="eager" alt="aspect-economic-icon">
                 </div>
             </div>
             <!--Aspect-Political-->
             <div class="aspect-wrapper">
-                <div class="aspect-container" id="aspect-political">
+                <div class="aspect-container" id="political">
                     <img src="../src/assets/icons/political.svg" loading="eager" alt="aspect-political-icon">
                 </div>
             </div>
             <!--Aspect-Social-->
             <div class="aspect-wrapper">
-                <div class="aspect-container" id="aspect-social">
+                <div class="aspect-container" id="social">
                     <img src="../src/assets/icons/social.svg" loading="eager" alt="aspect-social-icon">
                 </div>
             </div>
             <!--Aspect-Health-->
             <div class="aspect-wrapper">
-                <div class="aspect-container" id="aspect-health">
+                <div class="aspect-container" id="health">
                     <img src="../src/assets/icons/health.svg" loading="eager" alt="aspect-health-icon">
                 </div>
             </div>
@@ -43,19 +43,23 @@
             <section class="aspect-menu-section">
                 <!--Aspect-Menu-Economic-->
                 <div class="aspect-menu" id="aspect-menu-economic">
-                    <p>Economic Aspects</p>
+                    <p class="aspect-menu-title">Ökonomische Ereignisse</p>
+                    <div class="event-container" id="event-container-economic"></div>
                 </div>
                 <!--Aspect-Menu-Political-->
                 <div class="aspect-menu" id="aspect-menu-political">
-                    <p>Political Aspects</p>
+                    <p class="aspect-menu-title">Politische Ereignisse</p>
+                    <div class="event-container" id="event-container-political"></div>
                 </div>
                 <!--Aspect-Menu-Social-->
                 <div class="aspect-menu" id="aspect-menu-social">
-                    <p>Social Aspects</p>
+                    <p class="aspect-menu-title">Soziale Ereignisse</p>
+                    <div class="event-container" id="event-container-social"></div>
                 </div>
                 <!--Aspect-Menu-Health-->
                 <div class="aspect-menu" id="aspect-menu-health">
-                    <p>Health Aspects</p>
+                    <p class="aspect-menu-title">Gesundheitliche Ereignisse</p>
+                    <div class="event-container" id="event-container-health"></div>
                 </div>
             </section>
         </aside>
@@ -85,8 +89,14 @@
         <div class="global-comparison-app-container" id="global-comparison-app-container">
             <img src="../src/assets/icons/globe.svg" loading="eager" alt="global-comparison-icon">
         </div>
+        <div class="tutorial-app-container" id="tutorial-app-container" title="Öffne das Tutorial für hilfreiche Tipps">
+            <img src="../src/assets/icons/info.svg" loading="eager" alt="tutorial-icon">
+        </div>
     </footer>
 </body>
     <script type="module" src="../src/scripts/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!--Alles unterhalb ist optional, sollte in den Modulen importiert werden!-->
+    <script type="module" src="../src/scripts/mail.js"></script>
+    <script type="module" src="../src/scripts/event.js"></script>
 </html>
