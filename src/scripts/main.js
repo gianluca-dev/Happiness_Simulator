@@ -115,10 +115,13 @@ function applyWellbeingDelta(delta) {
     }
 }*/
 
-document.getElementById('aspect-menu-navigation').addEventListener('click', (event) => {
-    const clickedAspect = event.target.closest('.aspect-container');
-    if (clickedAspect) openAspectMenu(clickedAspect.id);
-});
+const aspectMenuNavigation = document.getElementById('aspect-menu-navigation')
+if (aspectMenuNavigation) {
+    aspectMenuNavigation.addEventListener('click', (event) => {
+        const clickedAspect = event.target.closest('.aspect-container');
+        if (clickedAspect) openAspectMenu(clickedAspect.id);
+    });
+}
 
 export function openAspectMenu(aspectId) {
     const aspectMenu = document.getElementById(`aspect-menu-${aspectId}`);
@@ -144,8 +147,15 @@ async function loadGlobalComparisonData() {
 
 loadGlobalComparisonData();
 
-document.getElementById('global-comparison-app-container').addEventListener('click', openGlobalComparisonWrapper);
-document.getElementById('global-comparison-close-container').addEventListener('click', closeGlobalComparisonWrapper);
+const globalComparisonApp = document.getElementById('global-comparison-app-container');                 // geht besser
+if (globalComparisonApp) {
+    globalComparisonApp.addEventListener('click', openGlobalComparisonWrapper);
+}
+
+const globalComparisonClose = document.getElementById('global-comparison-close-container');             // geht besser
+if (globalComparisonClose) {
+    globalComparisonClose.addEventListener('click', closeGlobalComparisonWrapper);
+}
 
 function openGlobalComparisonWrapper() {
     const globalComparisonWrapper = document.getElementById('global-comparison-wrapper');
