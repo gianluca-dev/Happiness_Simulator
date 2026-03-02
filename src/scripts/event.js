@@ -1,6 +1,6 @@
 async function loadEventData() {
     try {
-        const response = await fetch('../simulator-data.json');
+        const response = await fetch('simulator-data.json');
         const eventData = await response.json();
 
         showEventCards(eventData);
@@ -26,7 +26,7 @@ function showEventCards(eventData) {
         const infoIcon = document.createElement('img');
         infoIcon.className = 'info-icon';
         infoIcon.loading = 'lazy';
-        infoIcon.src = '../src/assets/icons/info.svg';
+        infoIcon.src = 'assets/icons/info.svg';
         infoIcon.alt = 'info-icon';
         infoIcon.addEventListener('click', () => {console.log('Is working!');});
 

@@ -7,7 +7,7 @@
             "description": "Mehrwertsteuer von 19% auf 7% gesenkt.",
             "cost": "1.000",
             "image": {
-                "src": "../src/assets/icons/economic.svg",
+                "src": "assets/icons/economic.svg",
                 "alt": "aspect-economic-icon"
             }
         },
@@ -18,7 +18,7 @@
             "description": "Mehrwertsteuer von 19% auf 7% gesenkt.",
             "cost": "1.000",
             "image": {
-                "src": "../src/assets/icons/economic.svg",
+                "src": "assets/icons/economic.svg",
                 "alt": "aspect-economic-icon"
             }
         },
@@ -29,7 +29,7 @@
             "description": "Mehrwertsteuer von 19% auf 7% gesenkt.",
             "cost": "1.000",
             "image": {
-                "src": "../src/assets/icons/economic.svg",
+                "src": "assets/icons/economic.svg",
                 "alt": "aspect-economic-icon"
             }
         },
@@ -40,7 +40,7 @@
             "description": "Mehrwertsteuer von 19% auf 7% gesenkt.",
             "cost": "1.000",
             "image": {
-                "src": "../src/assets/icons/economic.svg",
+                "src": "assets/icons/economic.svg",
                 "alt": "aspect-economic-icon"
             }
         },
@@ -51,7 +51,7 @@
             "description": "Mehrwertsteuer von 19% auf 7% gesenkt.",
             "cost": "1.000",
             "image": {
-                "src": "../src/assets/icons/economic.svg",
+                "src": "assets/icons/economic.svg",
                 "alt": "aspect-economic-icon"
             }
         },
@@ -62,7 +62,7 @@
             "description": "Mehrwertsteuer von 19% auf 7% gesenkt.",
             "cost": "1.000",
             "image": {
-                "src": "../src/assets/icons/economic.svg",
+                "src": "assets/icons/economic.svg",
                 "alt": "aspect-economic-icon"
             }
         }
