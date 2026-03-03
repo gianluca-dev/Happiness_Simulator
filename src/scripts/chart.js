@@ -1,8 +1,8 @@
-let wellbeingChart = null;
+let lifeEvalChart = null;
 export let nationComparisonChart = null;
 
-export function updateWellbeingChart(wellbeingHistory) {
-    const canvas = document.getElementById('wellbeing-chart');
+export function updateLifeEvaluationChart(lifeEvalScores) {
+    const canvas = document.getElementById('life-evaluation-chart');
     if (!canvas) {
         console.error('Canvas Element was not found!');
         return;
@@ -10,8 +10,8 @@ export function updateWellbeingChart(wellbeingHistory) {
 
     const ctx = canvas.getContext('2d');
 
-    if (!wellbeingChart) {
-        wellbeingChart = new Chart(ctx, {
+    if (!lifeEvalChart) {
+        lifeEvalChart = new Chart(ctx, {
             type: 'line',
             data: {
                 labels: ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
@@ -53,12 +53,11 @@ export function updateWellbeingChart(wellbeingHistory) {
         });
     }
 
-    wellbeingChart.data.datasets[0].data = wellbeingHistory;
-
-    wellbeingChart.update();
+    lifeEvalChart.data.datasets[0].data = lifeEvalScores;
+    lifeEvalChart.update();
 }
 
-export function updateNationComparisonChart(nationComparisonData) {
+export function updateNationComparisonChart(nationCompData) {
     const canvas = document.getElementById('nation-comparison-chart');
     if (!canvas) {
         console.error('Canvas Element was not found!');
@@ -103,12 +102,12 @@ export function updateNationComparisonChart(nationComparisonData) {
         });
     }
 
-    for (let i = 0; i < nationComparisonData.length; i++) {
+    for (let i = 0; i < nationCompData.length; i++) {
         nationComparisonChart.data.datasets.push({
-            label: nationComparisonData[i].nation,
-            data: nationComparisonData[i].lifeEvaluation,
-            borderColor: nationComparisonData[i].border,
-            backgroundColor: nationComparisonData[i].background,
+            label: nationCompData[i].nation,
+            data: nationCompData[i].lifeEvaluation,
+            borderColor: nationCompData[i].border,
+            backgroundColor: nationCompData[i].background,
             tension: 0.3,
         });
     }
