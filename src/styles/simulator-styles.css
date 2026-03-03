@@ -168,7 +168,7 @@ footer {
   height: auto;
 }
 
-.global-comparison-app-container {
+.nation-comparison-app-container {
   width: 50px;
   height: 50px;
   display: flex;
@@ -204,7 +204,7 @@ footer {
   cursor: pointer;
 }
 
-.global-comparison-wrapper {
+.nation-comparison-wrapper {
   width: 1050px;
   height: 500px;
   position: absolute;
@@ -218,11 +218,11 @@ footer {
   background-color: var(--secondary-component-bg-color);
 }
 
-.global-comparison-wrapper-inactive {
+.nation-comparison-wrapper-inactive {
   display: none;
 }
 
-.global-comparison-header {
+.nation-comparison-header {
   width: 100%;
   height: 50px;
   display: flex;
@@ -234,13 +234,13 @@ footer {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.global-comparison-header img {
+.nation-comparison-header img {
   width: 25px;
   height: 25px;
   cursor: pointer;
 }
 
-.global-comparison-container {
+.nation-comparison-container {
   width: 100%;
   height: 450px;
   display: flex;
@@ -249,7 +249,7 @@ footer {
   padding: 0px 25px;
 }
 
-.global-comparison-chart-container {
+.nation-comparison-chart-container {
   width: 750px;
   height: auto;
 }
