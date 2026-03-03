@@ -1,11 +1,12 @@
 import { updateWellbeingChart, nationComparisonChart, updateNationComparisonChart } from './chart.js';
 
+const path = window.location.pathname;
 // Enabling EventListener for start on index.html
-if (window.location.pathname.includes('index.html')) {
+if (path.includes('index.html') || path.endsWith('/')) {
     document.getElementById('start-btn').addEventListener('click', () => {
         window.location.href = 'simulator.html';
     });
-} else if (window.location.pathname.includes('simulator.html')) {
+} else if (path.includes('simulator.html')) {
         // Managing clicks & data for nation-comparison
     document.addEventListener('DOMContentLoaded', async () => {
         try {
