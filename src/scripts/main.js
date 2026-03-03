@@ -1,4 +1,4 @@
-import { updateWellbeingChart, nationComparisonChart, updateNationComparisonChart } from './chart.js';
+import { updateLifeEvaluationChart, nationComparisonChart, updateNationComparisonChart } from './chart.js';
 
 const path = window.location.pathname;
 // Enabling EventListener for start on index.html
@@ -11,15 +11,18 @@ if (path.includes('index.html') || path.endsWith('/')) {
     document.addEventListener('DOMContentLoaded', async () => {
         try {
             const nationComparisonData = await loadSimulatorData();
-            updateNationComparisonChart(nationComparisonData);
+            updateNationComparisonChart(nationComparisonData.nationComparisonData);
             createNationBtn(nationComparisonData);
         } catch (error) {
             console.error(error);
         }
 
         initEventListeners();
+        updateLifeEvaluationChart(lifeEvalScores);
     });
 }
+
+const lifeEvalScores = [7.406, 7.771, 7.534, 8.239, 7.674, 6.954];
 
 // ---------- Loading simulator data ---------- //
 
@@ -31,6 +34,13 @@ export async function loadSimulatorData() {
         console.error(error);
     }
 }
+
+function showCoins(coins) {
+    const coinEl = document.getElementById('coin-element');
+    coinEl.innerText = `${coins.toLocaleString('de-DE')} €`;
+}
+
+showCoins(1000000);
 
 /*let mailQuestions = [];
 let wellbeingHistory = [7.076];
@@ -125,7 +135,7 @@ function applyWellbeingDelta(delta) {
 
 function initEventListeners() {
     // Loading tutorial.html as an external site
-    document.getElementById('tutorial-app-container').addEventListener('click', () => {
+    document.getElementById('tips-app-container').addEventListener('click', () => {
         window.open('tutorial.html', '_blank');
     });
     // Opening the clicked aspect-menu
