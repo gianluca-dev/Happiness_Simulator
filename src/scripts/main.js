@@ -1,17 +1,26 @@
-import { updateWellbeingChart, globalComparisonChart, updateGlobalComparisonChart } from './chart.js';
+import { updateWellbeingChart, nationComparisonChart, updateNationComparisonChart } from './chart.js';
 
-// Enable EventListener for start on index.html
+// Enabling EventListener for start on index.html
 if (window.location.pathname.includes('index.html')) {
     document.getElementById('start-btn').addEventListener('click', () => {
         window.location.href = 'simulator.html';
     });
 } else if (window.location.pathname.includes('simulator.html')) {
-    document.getElementById('tutorial-app-container').addEventListener('click', () => {
-        window.open('tutorial.html', '_blank');
+        // Managing clicks & data for nation-comparison
+    document.addEventListener('DOMContentLoaded', async () => {
+        try {
+            const nationComparisonData = await loadSimulatorData();
+            updateNationComparisonChart(nationComparisonData);
+            createNationBtn(nationComparisonData);
+        } catch (error) {
+            console.error(error);
+        }
+
+        initEventListeners();
     });
 }
 
-// ---------- loading simulator data ---------- //
+// ---------- Loading simulator data ---------- //
 
 export async function loadSimulatorData() {
     try {
@@ -21,8 +30,6 @@ export async function loadSimulatorData() {
         console.error(error);
     }
 }
-
-loadSimulatorData();
 
 /*let mailQuestions = [];
 let wellbeingHistory = [7.076];
@@ -115,12 +122,21 @@ function applyWellbeingDelta(delta) {
     }
 }*/
 
-const aspectMenuNavigation = document.getElementById('aspect-menu-navigation')
-if (aspectMenuNavigation) {
-    aspectMenuNavigation.addEventListener('click', (event) => {
-        const clickedAspect = event.target.closest('.aspect-container');
-        if (clickedAspect) openAspectMenu(clickedAspect.id);
+function initEventListeners() {
+    // Loading tutorial.html as an external site
+    document.getElementById('tutorial-app-container').addEventListener('click', () => {
+        window.open('tutorial.html', '_blank');
     });
+    // Opening the clicked aspect-menu
+    const aspectMenuNavigation = document.getElementById('aspect-menu-navigation');
+    if (aspectMenuNavigation) {
+        aspectMenuNavigation.addEventListener('click', (event) => {
+            const clickedAspect = event.target.closest('.aspect-container');
+            if (clickedAspect) openAspectMenu(clickedAspect.id);
+        });
+    }
+    // Controlling enter & exit in nation-comparison
+    appIconControl();
 }
 
 export function openAspectMenu(aspectId) {
@@ -131,46 +147,27 @@ export function openAspectMenu(aspectId) {
     aspectContainer.classList.toggle('aspect-container-shifted');
 }
 
-let globalComparisonData = [];
+function appIconControl() {
+    const nationComparisonApp = document.getElementById('nation-comparison-app-container');
+    const nationComparisonExit = document.getElementById('nation-comparison-exit-container');
 
-async function loadGlobalComparisonData() {
-    try {
-        const response = await fetch('simulator-data.json');
-        globalComparisonData = await response.json();
-        console.log(globalComparisonData);                                                              // console.log()
-        updateGlobalComparisonChart(globalComparisonData.globalComparisonData);
-        createNationBtn();
-    } catch (error) {
-        console.error(error);
+    if (nationComparisonApp) {
+        nationComparisonApp.addEventListener('click', () => controlNationComparison(false));
+    }
+    if (nationComparisonExit) {
+        nationComparisonExit.addEventListener('click', () => controlNationComparison(true));
     }
 }
 
-loadGlobalComparisonData();
-
-const globalComparisonApp = document.getElementById('global-comparison-app-container');                 // geht besser
-if (globalComparisonApp) {
-    globalComparisonApp.addEventListener('click', openGlobalComparisonWrapper);
+function controlNationComparison(state) {
+    const nationComparisonWrapper = document.getElementById('nation-comparison-wrapper');
+    nationComparisonWrapper.classList.toggle('nation-comparison-wrapper-inactive', state);
 }
 
-const globalComparisonClose = document.getElementById('global-comparison-close-container');             // geht besser
-if (globalComparisonClose) {
-    globalComparisonClose.addEventListener('click', closeGlobalComparisonWrapper);
-}
-
-function openGlobalComparisonWrapper() {
-    const globalComparisonWrapper = document.getElementById('global-comparison-wrapper');
-    globalComparisonWrapper.classList.remove('global-comparison-wrapper-inactive');
-}
-
-function closeGlobalComparisonWrapper() {
-    const globalComparisonWrapper = document.getElementById('global-comparison-wrapper');
-    globalComparisonWrapper.classList.add('global-comparison-wrapper-inactive');
-}
-
-function createNationBtn() {
+function createNationBtn(nationComparisonData) {
     const nationBtnWrapper = document.getElementById('nation-btn-wrapper');
 
-    globalComparisonData.globalComparisonData.forEach(nation => {
+    nationComparisonData.nationComparisonData.forEach(nation => {
         const nationBtnContainer = document.createElement('div');
         nationBtnContainer.className = 'nation-btn-container';
         nationBtnContainer.id = `nation-btn-container-${nation.id}`;
@@ -194,16 +191,16 @@ let selectedNationId = null;
 
 function showOnlyNation(nationId) {
     if (selectedNationId === nationId) {
-        globalComparisonChart.data.datasets.forEach((_, i) => {
-            globalComparisonChart.show(i);
+        nationComparisonChart.data.datasets.forEach((_, i) => {
+            nationComparisonChart.show(i);
         });
         selectedNationId = null;
     } else {
-        globalComparisonChart.data.datasets.forEach((_, i) => {
+        nationComparisonChart.data.datasets.forEach((_, i) => {
             if (i === nationId) {
-                globalComparisonChart.show(i);
+                nationComparisonChart.show(i);
             } else {
-                globalComparisonChart.hide(i);
+                nationComparisonChart.hide(i);
             }
         });
         selectedNationId = nationId;

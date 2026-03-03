@@ -1,5 +1,5 @@
 let wellbeingChart = null;
-export let globalComparisonChart = null;
+export let nationComparisonChart = null;
 
 export function updateWellbeingChart(wellbeingHistory) {
     const canvas = document.getElementById('wellbeing-chart');
@@ -58,8 +58,8 @@ export function updateWellbeingChart(wellbeingHistory) {
     wellbeingChart.update();
 }
 
-export function updateGlobalComparisonChart(globalComparisonData) {
-    const canvas = document.getElementById('global-comparison-chart');
+export function updateNationComparisonChart(nationComparisonData) {
+    const canvas = document.getElementById('nation-comparison-chart');
     if (!canvas) {
         console.error('Canvas Element was not found!');
         return;
@@ -67,8 +67,8 @@ export function updateGlobalComparisonChart(globalComparisonData) {
 
     const ctx = canvas.getContext('2d');
 
-    if (!globalComparisonChart) {
-        globalComparisonChart = new Chart(ctx, {
+    if (!nationComparisonChart) {
+        nationComparisonChart = new Chart(ctx, {
             type: 'line',
             data: {
                 labels: ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
@@ -103,15 +103,15 @@ export function updateGlobalComparisonChart(globalComparisonData) {
         });
     }
 
-    for (let i = 0; i < globalComparisonData.length; i++) {
-        globalComparisonChart.data.datasets.push({
-            label: globalComparisonData[i].nation,
-            data: globalComparisonData[i].lifeEvaluation,
-            borderColor: globalComparisonData[i].border,
-            backgroundColor: globalComparisonData[i].background,
+    for (let i = 0; i < nationComparisonData.length; i++) {
+        nationComparisonChart.data.datasets.push({
+            label: nationComparisonData[i].nation,
+            data: nationComparisonData[i].lifeEvaluation,
+            borderColor: nationComparisonData[i].border,
+            backgroundColor: nationComparisonData[i].background,
             tension: 0.3,
         });
     }
 
-    globalComparisonChart.update();
+    nationComparisonChart.update();
 }
