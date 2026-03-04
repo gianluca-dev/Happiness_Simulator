@@ -14,12 +14,12 @@
         {
             "id": 1,
             "type": "political",
-            "title": "Steuersenkung_2",
-            "description": "Mehrwertsteuer von 19% auf 7% gesenkt.",
+            "title": "Neuwahlen",
+            "description": "Es werden Neuwahlen angesetzt.",
             "cost": "1.000",
             "image": {
-                "src": "assets/icons/economic.svg",
-                "alt": "aspect-economic-icon"
+                "src": "assets/icons/political.svg",
+                "alt": "aspect-political-icon"
             }
         },
         {  
@@ -36,34 +36,34 @@
         {
             "id": 3,
             "type": "social",
-            "title": "Steuersenkung_4",
-            "description": "Mehrwertsteuer von 19% auf 7% gesenkt.",
+            "title": "Ferienlager für Jugendliche",
+            "description": "Sie organisieren ein Ferienlager für Jugendliche, damit diese,in dieser schwierigen Zeit, eine schöne Zeit haben und sich mit anderen austauschen können.",
             "cost": "1.000",
             "image": {
-                "src": "assets/icons/economic.svg",
-                "alt": "aspect-economic-icon"
+                "src": "assets/icons/social.svg",
+                "alt": "aspect-social-icon"
             }
         },
         {
             "id": 4,
             "type": "social",
-            "title": "Steuersenkung_5",
-            "description": "Mehrwertsteuer von 19% auf 7% gesenkt.",
+            "title": "Musikfestival ",
+            "description": "Ein Musikfestival wird veranstaltet, um die Gemeinschaft zu stärken.",
             "cost": "1.000",
             "image": {
-                "src": "assets/icons/economic.svg",
-                "alt": "aspect-economic-icon"
+                "src": "assets/icons/social.svg",
+                "alt": "aspect-social-icon"
             }
         },
         {
             "id": 5,
             "type": "health",
-            "title": "Steuersenkung_6",
-            "description": "Mehrwertsteuer von 19% auf 7% gesenkt.",
+            "title": "Impfkampagne",
+            "description": "Sie starten eine Impfkampagne, um die Bevölkerung vor Covid-19 zu schützen.",
             "cost": "1.000",
             "image": {
-                "src": "assets/icons/economic.svg",
-                "alt": "aspect-economic-icon"
+                "src": "assets/icons/health.svg",
+                "alt": "aspect-health-icon"
             }
         }
     ],
