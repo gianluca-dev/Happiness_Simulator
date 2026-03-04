@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happiness Simulator - Simulator</title>
+    <link rel="shortcut icon" href="assets/happiness_simulator/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="styles/simulator-styles.css">
-    <link rel="favicon" href="assets/icons/favicon.ico">
 </head>
 <body>
     <header>
@@ -71,19 +71,27 @@
         </div>
 
         <div class="nation-comparison-wrapper nation-comparison-wrapper-inactive" id="nation-comparison-wrapper">
+            <aside>
+                <nav class="nation-comparison-navbar">
+                    <div class="exit-container">
+                        <img src="assets/icons/arrow-circle-left.svg" loading="eager" alt="exit-icon">
+                    </div>
+                    <div class="navbar-section navbar-section-active">
+                        <img src="assets/icons/chart-line.svg" loading="eager" alt="chart-icon">
+                    </div>
+                    <div class="navbar-section">
+                        <img src="assets/icons/binary.svg" loading="eager" alt="chart-icon">
+                    </div>
+                </nav>
+            </aside>
             <div class="nation-comparison-header">
                 <p>Nationenvergleich</p>
-                <div class="nation-comparison-exit-container" id="nation-comparison-exit-container">
-                    <img src="assets/icons/exit.svg" loading="eager" alt="exit-icon">
-                </div>
             </div>
-            <div class="nation-comparison-container">
-                <div class="nation-comparison-chart-container">
-                    <canvas id="nation-comparison-chart"></canvas>
-                </div>
-                <!--Nation-Buttons-->
-                <div class="nation-btn-wrapper" id="nation-btn-wrapper"></div>
-            </div>
+            <section class="nation-comparison-chart-section">
+                    <div class="nation-comparison-chart-container">
+                        <canvas id="nation-comparison-chart"></canvas>
+                    </div>
+            </section>
         </div>
     </main>
     <footer class="simulator-footer">
