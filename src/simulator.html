@@ -65,33 +65,33 @@
             </section>
         </aside>
 
-        <div class="mail-container" id="mail-container"></div>
         <div class="life-evaluation-chart-container">
             <canvas id="life-evaluation-chart"></canvas>
         </div>
 
         <div class="nation-comparison-wrapper nation-comparison-wrapper-inactive" id="nation-comparison-wrapper">
-            <aside>
-                <nav class="nation-comparison-navbar">
-                    <div class="exit-container">
-                        <img src="assets/icons/arrow-circle-left.svg" loading="eager" alt="exit-icon">
-                    </div>
-                    <div class="navbar-section navbar-section-active">
-                        <img src="assets/icons/chart-line.svg" loading="eager" alt="chart-icon">
-                    </div>
-                    <div class="navbar-section">
-                        <img src="assets/icons/binary.svg" loading="eager" alt="chart-icon">
-                    </div>
-                </nav>
-            </aside>
             <div class="nation-comparison-header">
                 <p>Nationenvergleich</p>
+                <div class="nation-comparison-exit-container" id="nation-comparison-exit-container">
+                    <img src="assets/icons/exit.svg" loading="eager" alt="exit-icon">
+                </div>
             </div>
-            <section class="nation-comparison-chart-section">
-                    <div class="nation-comparison-chart-container">
-                        <canvas id="nation-comparison-chart"></canvas>
-                    </div>
-            </section>
+            <div class="nation-comparison-container">
+                <div class="nation-comparison-chart-container">
+                    <canvas id="nation-comparison-chart"></canvas>
+                </div>
+                <!--Nation-Buttons-->
+                <div class="nation-btn-wrapper" id="nation-btn-wrapper"></div>
+            </div>
+        </div>
+        <div class="mail-wrapper mail-wrapper-inactive" id="mail-wrapper">
+            <div class="mail-header">
+                <p>Emails</p>
+                <div class="mail-exit-container" id="mail-exit-container">
+                    <img src="assets/icons/exit.svg" loading="eager" alt="exit-icon">
+                </div>
+            </div>
+            <div class="mail-container" id="mail-container"></div>
         </div>
     </main>
     <footer class="simulator-footer">
