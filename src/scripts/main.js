@@ -1,4 +1,6 @@
-import { updateLifeEvaluationChart, nationComparisonChart, updateNationComparisonChart } from './chart.js';
+import { updateLifeEvaluationChart, nationComparisonChart, updateNationComparisonChart, updateChartYear } from './chart.js';
+import { showEventCards } from './event.js';
+import { showMail } from './mail.js';
 
 const path = window.location.pathname;
 // Enabling EventListener for start on index.html
@@ -22,7 +24,40 @@ if (path.includes('index.html') || path.endsWith('/')) {
     });
 }
 
-const lifeEvalScores = [7.406, 7.771, 7.534, 8.239, 7.674, 6.954];
+let lifeEvalScores = [7.406];
+let monthlyHappinessDelta = 0;
+let shieldPoints = 0;
+const maxShieldPoints = 2;
+
+export function applyEventDelta(event, isSuggested, isRejected = false) {
+    if (isSuggested && !isRejected) {
+        monthlyHappinessDelta += event.happinessDelta;
+    } else if (isSuggested && isRejected) {
+        monthlyHappinessDelta -= event.happinessDelta;
+    } else {
+        shieldPoints = Math.min(shieldPoints + event.shieldValue, maxShieldPoints);
+        monthlyHappinessDelta += event.happinessDelta * 0.5;
+    }
+}
+
+export function applyCrisisDelta(crisis) {
+    let delta = crisis.happinessDelta;
+    if (shieldPoints > 0) {
+        delta = delta / 2;
+        shieldPoints--;
+    }
+
+    monthlyHappinessDelta += delta;
+}
+
+function applyMonthlyHappiness() {
+    const current = lifeEvalScores[lifeEvalScores.length - 1];
+    const newValue = Math.max(0, Math.min(current + monthlyHappinessDelta, 10));
+
+    lifeEvalScores.push(newValue);
+    monthlyHappinessDelta = 0;
+    updateLifeEvaluationChart(lifeEvalScores);
+}
 
 // ---------- Loading simulator data ---------- //
 
@@ -35,12 +70,87 @@ export async function loadSimulatorData() {
     }
 }
 
+let coins = 10000000;
+const monthlyIncome = 1000000;
+
+export function deductCoins(simulatorData, cost) {
+    if (coins - cost < 0) {
+        alert('Nicht genug Coins vorhanden!');
+        return;
+    }
+
+    coins -= cost;
+    showCoins(coins);
+    nextCrisis(simulatorData);
+}
+
+export function addMonthlyIncome() {
+    coins += monthlyIncome;
+    showCoins(coins);
+}
+
 function showCoins(coins) {
     const coinEl = document.getElementById('coin-element');
     coinEl.innerText = `${coins.toLocaleString('de-DE')} €`;
 }
 
-showCoins(1000000);
+showCoins(10000000);
+
+// ---------- Processing crises ---------- //
+
+document.addEventListener('DOMContentLoaded', async () => {
+    const simulatorData = await loadSimulatorData();
+    loadCrises(simulatorData);
+    showEventCards(simulatorData);
+});
+
+function loadCrises(simulatorData) {
+    document.querySelectorAll('.event-card-highlighted').forEach(card => {
+        card.classList.remove('event-card-highlighted');
+        card.querySelector('.reject-btn').classList.add('hide-reject-btn');
+    });
+
+    const crises = simulatorData.crises;
+    const randomIndex = getRandomCrisisIndex(crises);
+
+    let currentCrisis = crises[randomIndex];
+    
+    applyCrisisDelta(currentCrisis);
+
+    const suggestedMail = simulatorData.mails[currentCrisis.mailSuggestion.id];
+    showMail(suggestedMail);
+}
+
+let lastCrisisIndex = null;
+
+function getRandomCrisisIndex(crises) {
+    let randomIndex;
+
+    do {
+        randomIndex = Math.floor(Math.random() * crises.length);
+    } while (randomIndex === lastCrisisIndex);
+
+    lastCrisisIndex = randomIndex;
+    return randomIndex;
+}
+
+let crisisCount = 0;
+let currentYear = 2019;
+
+export function nextCrisis(simulatorData) {
+    if (simulatorData) {
+        crisisCount++;
+        if (crisisCount % 2 === 0) {
+            addMonthlyIncome();
+            applyMonthlyHappiness();
+        }
+        if (crisisCount % 24 === 0) {
+            currentYear++;
+            updateChartYear(currentYear);
+        }
+        loadCrises(simulatorData);
+    }
+}
 
 /*let mailQuestions = [];
 let wellbeingHistory = [7.076];
@@ -148,6 +258,7 @@ function initEventListeners() {
     }
     // Controlling enter & exit in nation-comparison
     appIconControl();
+    mailIconControl();
 }
 
 export function openAspectMenu(aspectId) {
@@ -173,6 +284,23 @@ function appIconControl() {
 function controlNationComparison(state) {
     const nationComparisonWrapper = document.getElementById('nation-comparison-wrapper');
     nationComparisonWrapper.classList.toggle('nation-comparison-wrapper-inactive', state);
+}
+
+function mailIconControl() {
+    const mailApp = document.getElementById('mails-app-container');
+    const mailExit = document.getElementById('mail-exit-container');
+
+    if (mailApp) {
+        mailApp.addEventListener('click', () => controlMail(false));
+    }
+    if (mailExit) {
+        mailExit.addEventListener('click', () => controlMail(true));
+    }
+}
+
+function controlMail(state) {
+    const mailWrapper = document.getElementById('mail-wrapper');
+    mailWrapper.classList.toggle('mail-wrapper-inactive', state);
 }
 
 function createNationBtn(nationComparisonData) {

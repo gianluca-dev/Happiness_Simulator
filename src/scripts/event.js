@@ -1,18 +1,7 @@
-async function loadEventData() {
-    try {
-        const response = await fetch('simulator-data.json');
-        const eventData = await response.json();
+import { applyEventDelta, deductCoins, nextCrisis } from './main.js';
 
-        showEventCards(eventData);
-    } catch (error) {
-        console.error(error);
-    }
-}
-
-loadEventData();
-
-function showEventCards(eventData) {
-    const events = eventData.events;
+export function showEventCards(simulatorData) {
+    const events = simulatorData.events;
 
     events.forEach(event => {
         const eventCard = document.createElement('div');
@@ -42,17 +31,24 @@ function showEventCards(eventData) {
 
         const eventCosts = document.createElement('span');
         eventCosts.className = 'event-costs';
-        eventCosts.textContent = `${event.cost} €`;
+        eventCosts.textContent = `${event.cost.toLocaleString('de-DE')} €`;
 
         const acceptBtn = document.createElement('button');
         acceptBtn.className = 'accept-btn';
         acceptBtn.textContent = 'Akzeptieren';
-        acceptBtn.addEventListener('click', () => {console.log('Accepted');});
+        acceptBtn.addEventListener('click', () => {
+            const isSuggested = !rejectBtn.classList.contains('hide-reject-btn');
+            applyEventDelta(event, isSuggested);
+            deductCoins(simulatorData, event.cost)
+        });
 
         const rejectBtn = document.createElement('button');
         rejectBtn.className = 'reject-btn hide-reject-btn';
         rejectBtn.textContent = 'Ablehnen';
-        rejectBtn.addEventListener('click', () => {console.log('Rejected');});
+        rejectBtn.addEventListener('click', () => {
+            applyEventDelta(event, true, true);
+            nextCrisis(simulatorData);
+        });
 
         const eventCardHeader = document.createElement('div');
         eventCardHeader.className = 'event-card-header';
