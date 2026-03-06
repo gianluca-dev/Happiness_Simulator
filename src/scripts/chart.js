@@ -39,7 +39,7 @@ export function updateLifeEvaluationChart(lifeEvalScores) {
                     x: {
                         title: {
                             display: true,
-                            text: 'Monate'
+                            text: 'Monate 2019'
                         }
                     }
                 },
@@ -54,6 +54,11 @@ export function updateLifeEvaluationChart(lifeEvalScores) {
     }
 
     lifeEvalChart.data.datasets[0].data = lifeEvalScores;
+    lifeEvalChart.update();
+}
+
+export function updateChartYear(year) {
+    lifeEvalChart.options.scales.x.title.text = `Monate ${year}`;
     lifeEvalChart.update();
 }
 

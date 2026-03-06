@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happiness Simulator - Simulator</title>
+    <link rel="shortcut icon" href="assets/happiness_simulator/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="styles/simulator-styles.css">
-    <link rel="favicon" href="assets/icons/favicon.ico">
 </head>
 <body>
     <header>
@@ -65,7 +65,6 @@
             </section>
         </aside>
 
-        <div class="mail-container" id="mail-container"></div>
         <div class="life-evaluation-chart-container">
             <canvas id="life-evaluation-chart"></canvas>
         </div>
@@ -84,6 +83,15 @@
                 <!--Nation-Buttons-->
                 <div class="nation-btn-wrapper" id="nation-btn-wrapper"></div>
             </div>
+        </div>
+        <div class="mail-wrapper mail-wrapper-inactive" id="mail-wrapper">
+            <div class="mail-header">
+                <p>Emails</p>
+                <div class="mail-exit-container" id="mail-exit-container">
+                    <img src="assets/icons/exit.svg" loading="eager" alt="exit-icon">
+                </div>
+            </div>
+            <div class="mail-container" id="mail-container"></div>
         </div>
     </main>
     <footer class="simulator-footer">
