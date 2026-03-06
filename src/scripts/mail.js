@@ -13,7 +13,7 @@ export function showMail(suggestedMail) {
 
     const mailSender = document.createElement('p');
     mailSender.className = 'mail-sender';
-    mailSender.textContent = `von: ${suggestedMail.sender}`;
+    mailSender.textContent = `von: ${suggestedMail.senderInformation.sender}`;
 
     const mailInformation = document.createElement('p');
     mailInformation.className = 'mail-information';
@@ -50,4 +50,47 @@ export function showMail(suggestedMail) {
     mailEl.appendChild(mailHeader);
     mailEl.appendChild(mailContent);
     mailContainer.appendChild(mailEl);
+
+    showMailCollection(suggestedMail);
+    console.log('suggestedMail', suggestedMail);
+}
+
+function showMailCollection(suggestedMail) {
+    const mailCollectionContainer = document.getElementById('mail-collection-container');
+    mailCollectionContainer.innerHTML = '';
+
+    const mailCollectionEl = document.createElement('div');
+    mailCollectionEl.className = 'mail-collection-element';
+
+    const mailCollectionSenderContainer = document.createElement('div');
+    mailCollectionSenderContainer.className = 'mail-collection-sender-container';
+
+    const mailCollectionProfileImage = document.createElement('img');
+    mailCollectionProfileImage.className = 'mail-collection-profile-image';
+    mailCollectionProfileImage.src = suggestedMail.senderInformation.profileImage.src;
+    mailCollectionProfileImage.alt = suggestedMail.senderInformation.profileImage.alt;
+
+    const mailCollectionSender = document.createElement('p');
+    mailCollectionSender.className = 'mail-collection-sender';
+    mailCollectionSender.textContent = suggestedMail.senderInformation.sender;
+
+    const mailCollectionContentContainer = document.createElement('div');
+    mailCollectionContentContainer.className = 'mail-collection-content-container';
+
+    const mailCollectionContent = document.createElement('p');
+    mailCollectionContent.className = 'mail-collection-content';
+    mailCollectionContent.textContent = suggestedMail.information;
+
+    const mailCollectionDate = document.createElement('p');
+    mailCollectionDate.className = 'mail-collection-date';
+    mailCollectionDate.textContent = '13.01.2019';
+
+    mailCollectionSenderContainer.appendChild(mailCollectionProfileImage);
+    mailCollectionSenderContainer.appendChild(mailCollectionSender);
+
+    mailCollectionEl.appendChild(mailCollectionSenderContainer);
+    mailCollectionContentContainer.appendChild(mailCollectionContent);
+    mailCollectionEl.appendChild(mailCollectionContentContainer);
+    mailCollectionEl.appendChild(mailCollectionDate);
+    mailCollectionContainer.appendChild(mailCollectionEl);
 }
