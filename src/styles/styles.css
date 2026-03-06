@@ -7,7 +7,7 @@
   --footer-bg-color: #181b21;
   --default-white: #ffffff;
   --default-text-color: #252525;
-  --footer-text-color: #ffffff; /* Hattest du da was vergessen? */
+  --footer-text-color: #ffffff; 
 }
 
 * {
@@ -131,7 +131,7 @@ footer {
   color: var(--footer-text-color);
 }
 
-/*---Simulator-Components---*/
+
 
 .logo-container {
   width: 50px;
