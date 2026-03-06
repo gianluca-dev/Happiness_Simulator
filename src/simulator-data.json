@@ -104,8 +104,14 @@
             "id": 0,
             "type": "economic",
             "subject": "Steuern",
-            "sender": "Wirtschaftsminister",
             "information": "Die Zufriedenheit der Bürger sinkt durch zu hohe Steuern.",
+            "senderInformation": {
+                "sender": "Wirtschaftsminister",
+                "profileImage": {
+                    "src": "assets/icons/economic.svg",
+                    "alt": "Wirtschaftsminister"
+                }
+            },
             "eventSuggestion": {
                 "id": 0,
                 "type": "economic",
@@ -116,8 +122,14 @@
             "id": 1,
             "type": "health",
             "subject": "Virusmutation",
-            "sender": "Gesundheitsminister",
             "information": "Die Zufriedenheit der Bürger sinkt durch eine weitere Virusmutation.",
+            "senderInformation": {
+                "sender": "Gesundheitsminister",
+                "profileImage": {
+                    "src": "assets/icons/health.svg",
+                    "alt": "Gesundheitsminister"
+                }
+            },
             "eventSuggestion": {
                 "id": 5,
                 "type": "health",
