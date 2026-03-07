@@ -1,6 +1,6 @@
 import { updateLifeEvaluationChart, nationComparisonChart, updateNationComparisonChart, updateChartYear } from './chart.js';
 import { showEventCards } from './event.js';
-import { showMail } from './mail.js';
+import { showMailCollection } from './mail.js';
 
 const path = window.location.pathname;
 // Enabling EventListener for start on index.html
@@ -118,7 +118,7 @@ function loadCrises(simulatorData) {
     applyCrisisDelta(currentCrisis);
 
     const suggestedMail = simulatorData.mails[currentCrisis.mailSuggestion.id];
-    showMail(suggestedMail);
+    showMailCollection(suggestedMail);
 }
 
 let lastCrisisIndex = null;
