@@ -85,27 +85,41 @@
             </div>
         </div>
         <div class="mail-wrapper mail-wrapper-inactive" id="mail-wrapper">
-            <div class="mail-header">
+            <div class="mail-app-header">
                 <p>Emails</p>
                 <div class="mail-exit-container" id="mail-exit-container">
                     <img src="assets/icons/exit.svg" loading="eager" alt="exit-icon">
                 </div>
             </div>
             <div>
-                <aside>
-                    <!--Sidenavigation-->
+                <aside class="mail-navbar-container">
+                    <nav class="mail-navbar">
+                        <div class="mail-collection-option write-mail-option">
+                            <img src="assets/icons/pencil.svg" loading="eager" alt="pencil-icon">
+                        </div>
+                        <div class="border-container"></div>
+                        <div class="mail-collection-option option-active">
+                            <img src="assets/icons/envelope.svg" loading="eager" alt="mail-icon">
+                        </div>
+                        <div class="mail-collection-option">
+                            <img src="assets/icons/trash.svg" loading="eager" alt="trash-icon">
+                        </div>
+                    </nav>
                 </aside>
+                <!--Mail-Collection-Section-->
                 <section class="mail-collection-section">
                     <div class="mail-collection-container" id="mail-collection-container"></div>
+                    <div class="mail-container inactive" id="mail-container"></div>
                 </section>
             </div>
-            <div class="mail-container" id="mail-container"></div>
+            
         </div>
+        <div class="mail-container" id="mail-container"></div>
     </main>
     <footer class="simulator-footer">
         <!--App-Icon-Emails-->
         <div class="footer-app-icon" id="mails-app-container">
-            <img src="assets/icons/envelope.svg" loading="eager" alt="nation-comparison-icon">
+            <img src="assets/icons/envelope.svg" loading="eager" alt="mail-icon">
         </div>
         <!--App-Icon-Nation-Comparison-->
         <div class="footer-app-icon" id="nation-comparison-app-container">

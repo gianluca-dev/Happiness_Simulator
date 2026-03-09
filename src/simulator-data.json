@@ -108,7 +108,7 @@
             "senderInformation": {
                 "sender": "Wirtschaftsminister",
                 "profileImage": {
-                    "src": "assets/icons/economic.svg",
+                    "src": "assets/images/Copilot_20260306_205712.avif",
                     "alt": "Wirtschaftsminister"
                 }
             },
@@ -126,7 +126,7 @@
             "senderInformation": {
                 "sender": "Gesundheitsminister",
                 "profileImage": {
-                    "src": "assets/icons/health.svg",
+                    "src": "assets/images/Copilot_20260306_205712.avif",
                     "alt": "Gesundheitsminister"
                 }
             },
