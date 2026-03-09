@@ -34,6 +34,10 @@ export function updateLifeEvaluationChart(lifeEvalScores) {
                         beginAtZero: true,
                         ticks: {
                             stepSize: 1
+                        },
+                        title: {
+                            display: true,
+                            text: 'Life Evaluation'
                         }
                     },
                     x: {
@@ -57,12 +61,7 @@ export function updateLifeEvaluationChart(lifeEvalScores) {
     lifeEvalChart.update();
 }
 
-export function updateChartYear(year) {
-    lifeEvalChart.options.scales.x.title.text = `Monate ${year}`;
-    lifeEvalChart.update();
-}
-
-export function updateNationComparisonChart(nationCompData) {
+export function updateNationComparisonChart(nationCompData, lifeEvalScores) {
     const canvas = document.getElementById('nation-comparison-chart');
     if (!canvas) {
         console.error('Canvas Element was not found!');
@@ -88,12 +87,16 @@ export function updateNationComparisonChart(nationCompData) {
                         beginAtZero: true,
                         ticks: {
                             stepSize: 1
+                        },
+                        title: {
+                            display: true,
+                            text: 'Life Evaluation'
                         }
                     },
                     x: {
                         title: {
                             display: true,
-                            text: 'Monate'
+                            text: 'Monate 2019'
                         }
                     }
                 },
@@ -107,6 +110,14 @@ export function updateNationComparisonChart(nationCompData) {
         });
     }
 
+    nationComparisonChart.data.datasets.push({
+        label: 'Deutschland',
+        data: lifeEvalScores,
+        borderColor: '#36a2eb',
+        backgroundColor: 'rgba(54, 162, 235, 0.15)',
+        tension: 0.3,
+    });
+
     for (let i = 0; i < nationCompData.length; i++) {
         nationComparisonChart.data.datasets.push({
             label: nationCompData[i].nation,
@@ -117,5 +128,18 @@ export function updateNationComparisonChart(nationCompData) {
         });
     }
 
+    nationComparisonChart.update();
+}
+
+export function updateChartYear(year) {
+    lifeEvalChart.options.scales.x.title.text = `Monate ${year}`;
+    lifeEvalChart.update();
+
+    nationComparisonChart.options.scales.x.title.text = `Monate ${year}`;
+    nationComparisonChart.update();
+}
+
+export function updateNationComparisonPlayerData(lifeEvalScores) {
+    nationComparisonChart.data.datasets[0].data = lifeEvalScores;
     nationComparisonChart.update();
 }

@@ -1,6 +1,6 @@
-import { updateLifeEvaluationChart, nationComparisonChart, updateNationComparisonChart, updateChartYear } from './chart.js';
+import { updateLifeEvaluationChart, nationComparisonChart, updateNationComparisonChart, updateNationComparisonPlayerData, updateChartYear } from './chart.js';
 import { showEventCards } from './event.js';
-import { showMailCollection } from './mail.js';
+import { showMailCollection, resetUnreadMails } from './mail.js';
 
 const path = window.location.pathname;
 // Enabling EventListener for start on index.html
@@ -13,7 +13,7 @@ if (path.includes('index.html') || path.endsWith('/')) {
     document.addEventListener('DOMContentLoaded', async () => {
         try {
             const nationComparisonData = await loadSimulatorData();
-            updateNationComparisonChart(nationComparisonData.nationComparisonData);
+            updateNationComparisonChart(nationComparisonData.nationComparisonData, lifeEvalScores);
             createNationBtn(nationComparisonData);
         } catch (error) {
             console.error(error);
@@ -57,6 +57,7 @@ function applyMonthlyHappiness() {
     lifeEvalScores.push(newValue);
     monthlyHappinessDelta = 0;
     updateLifeEvaluationChart(lifeEvalScores);
+    updateNationComparisonPlayerData(lifeEvalScores)
 }
 
 // ---------- Loading simulator data ---------- //
@@ -75,7 +76,7 @@ const monthlyIncome = 1000000;
 
 export function deductCoins(simulatorData, cost) {
     if (coins - cost < 0) {
-        alert('Nicht genug Coins vorhanden!');
+        showToastNotification('Nicht genug Budget!', '#fddede', '#ef4444');
         return;
     }
 
@@ -143,6 +144,7 @@ export function nextCrisis(simulatorData) {
         if (crisisCount % 2 === 0) {
             addMonthlyIncome();
             applyMonthlyHappiness();
+            showToastNotification('Neuer Monat!', '#d0f5f0', '#14b8a6');
         }
         if (crisisCount % 24 === 0) {
             currentYear++;
@@ -301,6 +303,10 @@ function mailIconControl() {
 function controlMail(state) {
     const mailWrapper = document.getElementById('mail-wrapper');
     mailWrapper.classList.toggle('mail-wrapper-inactive', state);
+
+    if (!state) {
+        resetUnreadMails();
+    }
 }
 
 function createNationBtn(nationComparisonData) {
@@ -357,4 +363,14 @@ function showLifeEvaluation(nationBtnContainer, nation, year = 1) {
     nationLifeEvaluationElement.textContent = nation.lifeEvaluation[year].toFixed(3);
 
     nationBtnContainer.appendChild(nationLifeEvaluationElement);
+}
+
+function showToastNotification(message, bgColor, bColor) {
+    const toastNotification = document.getElementById('toast-notification');
+    toastNotification.textContent = message;
+    toastNotification.style.backgroundColor = bgColor;
+    toastNotification.style.borderColor = bColor;
+    toastNotification.style.color = bColor;
+    toastNotification.classList.add('toast-notification-active');
+    setTimeout(() => toastNotification.classList.remove('toast-notification-active'), 2500);
 }

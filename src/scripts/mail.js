@@ -1,9 +1,11 @@
 import { openAspectMenu } from './main.js';
 
 let allMails = [];
+let unreadMails = 0;
 
 export function showMailCollection(suggestedMail) {
     allMails.unshift(suggestedMail);
+    showMailNotification();
 
     const mailCollectionContainer = document.getElementById('mail-collection-container');
     mailCollectionContainer.innerHTML = '';
@@ -120,4 +122,17 @@ function showMail(suggestedMail) {
     mailEl.appendChild(mailHeader);
     mailEl.appendChild(mailContent);
     mailContainer.appendChild(mailEl);
+}
+
+function showMailNotification() {
+    unreadMails++;
+    const mailNotification = document.getElementById('mail-notification');
+    mailNotification.textContent = unreadMails;
+
+    mailNotification.classList.remove('mail-notification-inactive');
+}
+
+export function resetUnreadMails() {
+    unreadMails = 0;
+    document.getElementById('mail-notification').classList.add('mail-notification-inactive');
 }

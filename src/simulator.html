@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-
+        <div class="toast-notification" id="toast-notification"></div>
     </header>
     <main>
         <div class="coins-container">
@@ -118,8 +118,11 @@
     </main>
     <footer class="simulator-footer">
         <!--App-Icon-Emails-->
-        <div class="footer-app-icon" id="mails-app-container">
-            <img src="assets/icons/envelope.svg" loading="eager" alt="mail-icon">
+        <div class="footer-app-icon-wrapper">
+            <div class="mail-notification mail-notification-inactive" id="mail-notification"></div>
+            <div class="footer-app-icon" id="mails-app-container">
+                <img src="assets/icons/envelope.svg" loading="eager" alt="mail-icon">
+            </div>
         </div>
         <!--App-Icon-Nation-Comparison-->
         <div class="footer-app-icon" id="nation-comparison-app-container">
