@@ -4,11 +4,23 @@
   --primary-component-bg-color: #f7f7f7;
   --secondary-component-bg-color: #eeeeee;
   --primary-border-color: #e5e5e5;
-  --footer-bg-color: #181b21;
+  --footer-bg-color: #ffd23de8;
   --default-white: #ffffff;
   --default-text-color: #252525;
-  --footer-text-color: #ffffff; 
+  --footer-text-color: #252525; 
 }
+
+.darkmode {
+  --primary-component-bg-color: #252525;
+  --secondary-component-bg-color: #333333;
+  --primary-border-color: #444444;
+  --footer-bg-color: #252525;
+  --default-white: #ffffff;
+  --default-text-color: #f7f7f7;
+  --footer-text-color: #f7f7f7; 
+}
+
+
 
 * {
   margin: 0px;
@@ -55,7 +67,22 @@ header {
   color: var(--default-text-color);
 }
 
+.logo-container {
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+}
+
+.logo-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.15);
+}
+
 main {
+  background-color: var(--primary-component-bg-color);
+  color: var(--default-text-color);
   width: 100%;
   height: calc(100vh - 75px - 75px);
   position: relative;
@@ -82,7 +109,7 @@ a {
 footer {
   width: 100%;
   height: 75px;
-  position: absolute;
+  position: fixed;
   bottom: 0px;
   display: flex;
   justify-content: flex-start;
@@ -133,15 +160,4 @@ footer {
 
 
 
-.logo-container {
-  width: 50px;
-  height: 50px;
-  overflow: hidden;
-}
 
-.logo-container img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transform: scale(1.15);
-}
