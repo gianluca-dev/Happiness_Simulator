@@ -1,4 +1,7 @@
-import { applyEventDelta, deductCoins, nextCrisis } from './main.js';
+import { resetUnreadMails } from './mail.js';
+import { applyEventDelta, deductCoins, paySideEvent, nextCrisis, disableSideEvents } from './main.js';
+
+let sideEventCount = 0;
 
 export function showEventCards(simulatorData) {
     const events = simulatorData.events;
@@ -38,8 +41,21 @@ export function showEventCards(simulatorData) {
         acceptBtn.textContent = 'Akzeptieren';
         acceptBtn.addEventListener('click', () => {
             const isSuggested = !rejectBtn.classList.contains('hide-reject-btn');
+
+            if (!isSuggested && sideEventCount > 1) {
+                disableSideEvents();
+                return;
+            }
+            
             applyEventDelta(event, isSuggested);
-            deductCoins(simulatorData, event.cost)
+
+            if (isSuggested) {
+                deductCoins(simulatorData, event.cost);
+                sideEventCount = 0;
+            } else { 
+                paySideEvent(event.cost);
+                sideEventCount++;
+            }
         });
 
         const rejectBtn = document.createElement('button');

@@ -37,6 +37,7 @@ export function applyEventDelta(event, isSuggested, isRejected = false) {
     } else {
         shieldPoints = Math.min(shieldPoints + event.shieldValue, maxShieldPoints);
         monthlyHappinessDelta += event.happinessDelta * 0.5;
+        sideEventActions();
     }
 }
 
@@ -83,6 +84,16 @@ export function deductCoins(simulatorData, cost) {
     coins -= cost;
     showCoins(coins);
     nextCrisis(simulatorData);
+}
+
+export function paySideEvent(cost) {
+    if (coins - cost < 0) {
+        showToastNotification('Nicht genug Budget!', '#fddede', '#ef4444');
+        return;
+    }
+
+    coins -= cost;
+    showCoins(coins);
 }
 
 export function addMonthlyIncome() {
@@ -152,6 +163,18 @@ export function nextCrisis(simulatorData) {
         }
         loadCrises(simulatorData);
     }
+}
+
+function sideEventActions() {
+    console.log('Working!');
+}
+
+export function disableSideEvents() {
+    document.querySelectorAll('.accept-btn').forEach(btn => {
+        btn.classList.add('deactivate-accept-btn');
+        btn.disabled = true;
+        showToastNotification('Maximale Anzahl an Sideevents erreicht!', '#fddede', '#ef4444');
+    });
 }
 
 /*let mailQuestions = [];
