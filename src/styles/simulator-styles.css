@@ -378,6 +378,12 @@ footer {
   display: none;
 }
 
+.accept-btn:disabled,
+.deactivate-accept-btn {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
 /*---Mails---*/
 
 .life-evaluation-chart-container {
