@@ -1,5 +1,5 @@
 import { updateLifeEvaluationChart, nationComparisonChart, updateNationComparisonChart, updateNationComparisonPlayerData, updateChartYear } from './chart.js';
-import { showEventCards } from './event.js';
+import { showEventCards, resetSideEventCount } from './event.js';
 import { showMailCollection, resetUnreadMails } from './mail.js';
 
 const path = window.location.pathname;
@@ -37,7 +37,6 @@ export function applyEventDelta(event, isSuggested, isRejected = false) {
     } else {
         shieldPoints = Math.min(shieldPoints + event.shieldValue, maxShieldPoints);
         monthlyHappinessDelta += event.happinessDelta * 0.5;
-        sideEventActions();
     }
 }
 
@@ -155,6 +154,7 @@ export function nextCrisis(simulatorData) {
         if (crisisCount % 2 === 0) {
             addMonthlyIncome();
             applyMonthlyHappiness();
+            resetSideEventCount();
             showToastNotification('Neuer Monat!', '#d0f5f0', '#14b8a6');
         }
         if (crisisCount % 24 === 0) {
@@ -165,15 +165,10 @@ export function nextCrisis(simulatorData) {
     }
 }
 
-function sideEventActions() {
-    console.log('Working!');
-}
-
 export function disableSideEvents() {
     document.querySelectorAll('.accept-btn').forEach(btn => {
-        btn.classList.add('deactivate-accept-btn');
         btn.disabled = true;
-        showToastNotification('Maximale Anzahl an Sideevents erreicht!', '#fddede', '#ef4444');
+        showToastNotification('Maximale Anzahl an Nebenereignisse erreicht!', '#fddede', '#ef4444');
     });
 }
 

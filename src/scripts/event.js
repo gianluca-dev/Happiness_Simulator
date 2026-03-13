@@ -20,7 +20,23 @@ export function showEventCards(simulatorData) {
         infoIcon.loading = 'lazy';
         infoIcon.src = 'assets/icons/info.svg';
         infoIcon.alt = 'info-icon';
-        infoIcon.addEventListener('click', () => {console.log('Is working!');});
+        infoIcon.addEventListener('click', () => toggleInfoStats(infoStatsContainer));  // Mobile-Version
+        infoIcon.addEventListener('mouseover', () => toggleInfoStats(infoStatsContainer));  // Desktop-Version
+        infoIcon.addEventListener('mouseout', () => toggleInfoStats(infoStatsContainer));  // Desktop-Version
+
+        const infoStatsIcon = document.createElement('img');
+        infoStatsIcon.className = 'info-stats-icon';
+        infoStatsIcon.src = 'assets/icons/trend-up.svg';
+        infoStatsIcon.alt = 'info-stats-icon';
+
+        const infoStatsDelta = document.createElement('p');
+        infoStatsDelta.className = 'info-stats-delta';
+        infoStatsDelta.textContent = event.happinessDelta;
+
+        const infoStatsContainer = document.createElement('div');
+        infoStatsContainer.className = 'info-stats-container inactive';
+        infoStatsContainer.appendChild(infoStatsIcon);
+        infoStatsContainer.appendChild(infoStatsDelta);
 
         const eventImage = document.createElement('img');
         eventImage.className = 'event-image';
@@ -42,19 +58,16 @@ export function showEventCards(simulatorData) {
         acceptBtn.addEventListener('click', () => {
             const isSuggested = !rejectBtn.classList.contains('hide-reject-btn');
 
-            if (!isSuggested && sideEventCount > 1) {
-                disableSideEvents();
-                return;
-            }
-            
-            applyEventDelta(event, isSuggested);
-
             if (isSuggested) {
+                applyEventDelta(event, isSuggested);
                 deductCoins(simulatorData, event.cost);
-                sideEventCount = 0;
-            } else { 
-                paySideEvent(event.cost);
+            } else {
                 sideEventCount++;
+
+                if (sideEventCount > 1) disableSideEvents();
+
+                applyEventDelta(event, isSuggested);
+                paySideEvent(event.cost);
             }
         });
 
@@ -94,6 +107,7 @@ export function showEventCards(simulatorData) {
         eventCard.appendChild(eventCardHeader);
         eventCard.appendChild(eventCardContent);
         eventCard.appendChild(eventBtns);
+        eventCard.appendChild(infoStatsContainer);
 
         const eventContainer = document.getElementById(`event-container-${event.type}`);
         if (eventContainer) {
@@ -102,4 +116,12 @@ export function showEventCards(simulatorData) {
             console.error(`No container for type '${event.type}' found!`);
         }
     });
+}
+
+export function resetSideEventCount() {
+    sideEventCount = 0;
+}
+
+function toggleInfoStats(container) {
+    container.classList.toggle('inactive');
 }

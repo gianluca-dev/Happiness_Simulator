@@ -18,9 +18,13 @@ header {
   width: 100%;
   height: 75px;
   position: fixed;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 25px;
   background-color: var(--primary-component-bg-color);
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-  z-index: 50;
+  z-index: 100;
 }
 
 .navigation {
@@ -52,6 +56,19 @@ header {
   color: var(--default-text-color);
 }
 
+.logo-container {
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+}
+
+.logo-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.15);
+}
+
 main {
   width: 100%;
   height: calc(100vh - 75px);
@@ -73,7 +90,7 @@ footer {
 }
 
 .simulator-footer {
-  width: 100%;
+  width: calc(47% + 50px);
   height: 75px;
   position: absolute;
   bottom: 0px;
@@ -81,7 +98,7 @@ footer {
   justify-content: center;
   align-items: center;
   gap: 17px;
-  padding: 0px 25px;
+  margin: 0 0 0 50px;
   background-color: var(--default-white);
   z-index: 50;
 }
@@ -114,12 +131,13 @@ footer {
   justify-content: center;
   align-items: flex-start;
   gap: 5px;
-  margin: 25px 0px;
+  margin: 75px 0px;
 }
 
 .aspect-container {
   width: 50px;
   height: 50px;
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -132,6 +150,7 @@ footer {
     var(--primary-component-bg-color)
   );
   cursor: pointer;
+  z-index: 75;
 }
 
 .aspect-container-shifted {
@@ -152,7 +171,7 @@ footer {
   display: flex;
   flex-direction: column;
   background-color: var(--primary-component-bg-color);
-  z-index: 25;
+  z-index: 75;
 }
 
 .aspect-menu-title {
@@ -283,6 +302,7 @@ footer {
 .event-card {
   width: 250px;
   height: auto;
+  position: relative;
   padding: 5px 10px 10px 10px;
   border-radius: 13px;
   background-color: #eceff6;
@@ -378,22 +398,57 @@ footer {
   display: none;
 }
 
-.accept-btn:disabled,
-.deactivate-accept-btn {
+.accept-btn:disabled {
   opacity: 0.7;
   pointer-events: none;
 }
 
-/*---Mails---*/
-
-.life-evaluation-chart-container {
-  width: 500px;
-  height: auto;
+.info-stats-container {
+  width: 105px;
+  height: 35px;
   position: absolute;
-  top: 75px;
-  right: 0px;
-  margin: 25px 25px 25px 25px;
+  top: 0;
+  left: 105px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 10px;
+  border-radius: 7px;
+  border: 2px solid #7e7e7e95;
+  background-color: #959595;
+  opacity: 0.8;
+  z-index: 50;
 }
+
+.info-stats-container::before {
+  content: "";
+  position: absolute;
+  right: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 8px solid #959595;
+}
+
+.info-stats-container::after {
+  content: "";
+  position: absolute;
+  right: -11px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-top: 9px solid transparent;
+  border-bottom: 9px solid transparent;
+  border-left: 9px solid #959595;
+}
+
+.info-stats-container img {
+  width: 25px;
+  height: 25px;
+}
+
+/*---Mails---*/
 
 /*---Mail-App---*/
 
@@ -647,4 +702,66 @@ footer {
 
 .toast-notification-active {
   opacity: 1;
+}
+
+/*---Sections---*/
+
+.content-section {
+  width: 47%;
+  height: 65vh;
+  position: absolute;
+  top: 75px;
+  left: 50px;
+  margin: 25px 25px 25px 25px;
+  border-radius: 0 10px 10px 10px;
+  background-color: #f0f0f0;
+  z-index: 25;
+}
+
+.life-evaluation-section {
+  width: 42%;
+  height: 30vh;
+  position: absolute;
+  top: 75px;
+  right: 0;
+  margin: 25px;
+  border-radius: 13px;
+  border: 2px solid #f7f7f7;
+  background-color: #f7f7f7;
+}
+
+.life-evaluation-stats-section {
+  width: 42%;
+  height: 34vh;
+  position: absolute;
+  bottom: 60px;
+  right: 0;
+  margin: 25px 25px 25px 25px;
+  border-radius: 13px;
+  border: 2px solid #f7f7f7;
+  background-color: #f7f7f7;
+}
+
+.coin-wrapper {
+  width: 150px;
+  height: 75px;
+  position: fixed;
+  top: 75px;
+  left: 0;
+  border-radius: 13px;
+  background-color: #ffffff;
+  z-index: 55;
+}
+
+.app-icon-collection-container {
+  width: auto;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 13px;
+  border-radius: 35px;
+  padding: 7px;
+  margin: 0 0 15px 0;
+  background-color: #f0f0f0;
 }
