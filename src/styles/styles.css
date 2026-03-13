@@ -7,7 +7,7 @@
   --footer-bg-color: #181b21;
   --default-white: #ffffff;
   --default-text-color: #252525;
-  --footer-text-color: #ffffff; 
+  --footer-text-color: #ffffff;
 }
 
 * {
@@ -130,8 +130,6 @@ footer {
 .copyright-container {
   color: var(--footer-text-color);
 }
-
-
 
 .logo-container {
   width: 50px;

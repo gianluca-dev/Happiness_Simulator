@@ -9,11 +9,16 @@
 </head>
 <body>
     <header>
+        <div class="logo-container">
+            <img src="assets/happiness_simulator/happiness_simulator.svg" alt="happiness-simulator-logo">
+        </div>
         <div class="toast-notification" id="toast-notification"></div>
     </header>
     <main>
-        <div class="coins-container">
-            <p class="coin-element" id="coin-element">0.00 €</p>
+        <div class="coin-wrapper">
+            <div class="coins-container">
+                <p class="coin-element" id="coin-element">0.00 €</p>
+            </div> 
         </div>
         <aside class="aspect-menu-navigation" id="aspect-menu-navigation">
             <!--Aspect-Economic-->
@@ -64,10 +69,20 @@
                 </div>
             </section>
         </aside>
-
-        <div class="life-evaluation-chart-container">
-            <canvas id="life-evaluation-chart"></canvas>
-        </div>
+        <!--Content-Section-->    
+        <section class="content-section">
+            
+        </section>
+        <!--Life-Evaluation-Section-->    
+        <section class="life-evaluation-section">
+            <div class="life-evaluation-chart-container">
+                <canvas id="life-evaluation-chart"></canvas>
+            </div>
+        </section>
+        <!--Life-Evaluation-Stats-Section-->    
+        <section class="life-evaluation-stats-section">
+            
+        </section>
 
         <div class="nation-comparison-wrapper nation-comparison-wrapper-inactive" id="nation-comparison-wrapper">
             <div class="nation-comparison-header">
@@ -114,23 +129,24 @@
             </div>
             
         </div>
-        <div class="mail-container" id="mail-container"></div>
     </main>
     <footer class="simulator-footer">
-        <!--App-Icon-Emails-->
-        <div class="footer-app-icon-wrapper">
-            <div class="mail-notification mail-notification-inactive" id="mail-notification"></div>
-            <div class="footer-app-icon" id="mails-app-container">
-                <img src="assets/icons/envelope.svg" loading="eager" alt="mail-icon">
+        <div class="app-icon-collection-container">
+            <!--App-Icon-Emails-->
+            <div class="footer-app-icon-wrapper">
+                <div class="mail-notification mail-notification-inactive" id="mail-notification"></div>
+                <div class="footer-app-icon" id="mails-app-container">
+                    <img src="assets/icons/envelope.svg" loading="eager" alt="mail-icon">
+                </div>
             </div>
-        </div>
-        <!--App-Icon-Nation-Comparison-->
-        <div class="footer-app-icon" id="nation-comparison-app-container">
-            <img src="assets/icons/globe.svg" loading="eager" alt="nation-comparison-icon">
-        </div>
-        <!--App-Icon-Tips-->
-        <div class="footer-app-icon" id="tips-app-container" title="Öffne das Tutorial für hilfreiche Tipps">
-            <img src="assets/icons/info.svg" loading="eager" alt="tutorial-icon">
+            <!--App-Icon-Nation-Comparison-->
+            <div class="footer-app-icon" id="nation-comparison-app-container">
+                <img src="assets/icons/globe.svg" loading="eager" alt="nation-comparison-icon">
+            </div>
+            <!--App-Icon-Tips-->
+            <div class="footer-app-icon" id="tips-app-container" title="Öffne das Tutorial für hilfreiche Tipps">
+                <img src="assets/icons/info.svg" loading="eager" alt="tutorial-icon">
+            </div>
         </div>
     </footer>
 </body>
