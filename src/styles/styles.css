@@ -19,6 +19,13 @@
   --default-text-color: #f7f7f7;
   --footer-text-color: #f7f7f7; 
 }
+.darkmode .logo-container img:first-child ,.socials-container img:first-child {
+  display: none;
+}
+.darkimode .logo-container img:last-child, .darkmode .socials-container img:last-child {
+  display: block;
+}
+
 
 
 
@@ -84,7 +91,7 @@ main {
   background-color: var(--primary-component-bg-color);
   color: var(--default-text-color);
   width: 100%;
-  height: calc(100vh - 75px - 75px);
+  height: calc(100% - 75px);
   position: relative;
   padding: 75px 0px 75px 0px;
   justify-content: center;

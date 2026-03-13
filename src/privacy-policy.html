@@ -8,13 +8,14 @@
     <link rel="shortcut icon" href="assets/happiness_simulator/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="styles/styles.css">
 </head>
-<body class="darkmode">
+<body >
     <header>
         <nav class="navigation">
             <div class="start-navigation-wrapper">
                 <!--Logo-->
                 <div class="logo-container">
-                    <img src="assets/happiness_simulator/happiness_simulator_dark.svg" alt="happiness-simulator-logo">
+                    <img id="dark" src="assets/happiness_simulator/happiness_simulator_dark.svg" alt="happiness-simulator-logo">
+                    <img id="light" src="assets/happiness_simulator/happiness_simulator_light.svg" alt="happiness-simulator-logo">
                 </div>
                 <!--Navigation-->
                 <div class="navigation-container">
@@ -46,7 +47,7 @@
             <br>
             <p>Die Verarbeitung personenbezogener Daten erfolgt gemäß den geltenden Datenschutzbestimmungen, insbesondere der Datenschutz-Grundverordnung (DSGVO).</p>
             <br>
-            <h2>2. Verantwortlihe Stelle</h2>
+            <h2>2. Verantwortliche Stelle</h2>
             <p>Verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:</p>
             <br>
             <p>Happiness Simulator<br>
@@ -142,9 +143,11 @@
                 </div>
             </div>
             <div class="socials-container">
-                <a href="https://www.instagram.com/happiness_simulator/"><img src="assets/socials/Instagram_Glyph_Black.svg" loading="lazy" alt="instagram-logo" style="scale: 2;"></a>
+                <a href="https://www.instagram.com/happiness_simulator/"><img id="dark" src="assets/socials/Instagram_Glyph_Black.svg" loading="lazy" alt="instagram-logo" style="scale: 2;">
+                <img id="light" src="assets/socials/Instagram_Glyph_White.svg" loading="lazy" alt="tiktok-logo" style="scale: 1.5;"></a>
             </div>
         </div>
     </footer>
 </body>
+<script src="scripts/darkmode.js"></script>
 </html>
