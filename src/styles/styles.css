@@ -19,21 +19,51 @@
   --default-text-color: #f7f7f7;
   --footer-text-color: #f7f7f7; 
 }
-.darkmode .logo-container img:first-child ,.socials-container img:first-child {
+
+.darkmode .logo-container img:first-child ,.socials-container img:first-child , .darkmode-toggle img:first-child {
   display: none;
 }
-.darkimode .logo-container img:last-child, .darkmode .socials-container img:last-child {
+
+.darkmode .logo-container img:last-child, .darkmode .socials-container img:last-child, .darkmode-toggle img:last-child {
   display: block;
 }
+.darkmode .darkmode-toggle svg:first-child {
+  display: block;
+}
+.darkmode .darkmode-toggle svg:last-child {
+  display: none;
+}
+.darkmode-toggle svg:first-child {
+  display: none;
+}
 
+.darkmode-toggle-container {
+  width: 25px;
+  height: 25px;
+  display: flex;
+  position :fixed;
+  justify-content:center;
+  right: 50px;
+  
+}
 
+.darkmode-toggle svg{
+ fill:var(--default-text-color);
+}
 
+.darkmode-toggle button {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: var(--primary-component-bg-color);
+}
 
 * {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
   font-family: "Roboto";
+  background-color:var(--primary-component-bg-color);
 }
 
 header {
@@ -87,6 +117,7 @@ header {
   transform: scale(1.15);
 }
 
+
 main {
   background-color: var(--primary-component-bg-color);
   color: var(--default-text-color);
@@ -97,7 +128,12 @@ main {
   justify-content: center;
 }
 
-a {
+.content-container ol, .content-container ul {
+  margin-left: 25px;
+  margin-bottom: 25px;
+}
+
+.content-container a {
   text-decoration: none;
   color: var(--default-text-color);
 }
@@ -111,6 +147,16 @@ a {
   justify-content: center;
   align-items: center;
   gap: 25px;
+}
+
+.start-btn-container button {
+
+  height: auto;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border: none
+  
 }
 
 footer {
@@ -132,6 +178,7 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: var(--footer-bg-color);
 }
 
 .legals-container {
@@ -141,6 +188,7 @@ footer {
   justify-content: flex-start;
   align-items: center;
   gap: 75px;
+  background-color: var(--footer-bg-color);
 }
 
 .policy-container {
@@ -150,21 +198,21 @@ footer {
   justify-content: space-between;
   align-items: center;
   gap: 17px;
+  background-color: var(--footer-bg-color);
 }
 
 .policy-container a {
   color: var(--footer-text-color);
+  background-color: var(--footer-bg-color);
 }
 
 .socials-container img {
   width: 25px;
   height: 25px;
+  background-color: var(--footer-bg-color);
 }
 
 .copyright-container {
   color: var(--footer-text-color);
+  background-color: var(--footer-bg-color);
 }
-
-
-
-
