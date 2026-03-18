@@ -63,7 +63,7 @@
   padding: 0px;
   box-sizing: border-box;
   font-family: "Roboto";
-  background-color:var(--primary-component-bg-color);
+  
 }
 
 header {
@@ -178,7 +178,7 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--footer-bg-color);
+  
 }
 
 .legals-container {
@@ -188,7 +188,7 @@ footer {
   justify-content: flex-start;
   align-items: center;
   gap: 75px;
-  background-color: var(--footer-bg-color);
+  
 }
 
 .policy-container {
@@ -198,21 +198,21 @@ footer {
   justify-content: space-between;
   align-items: center;
   gap: 17px;
-  background-color: var(--footer-bg-color);
+  
 }
 
 .policy-container a {
   color: var(--footer-text-color);
-  background-color: var(--footer-bg-color);
+  
 }
 
 .socials-container img {
   width: 25px;
   height: 25px;
-  background-color: var(--footer-bg-color);
+  
 }
 
 .copyright-container {
   color: var(--footer-text-color);
-  background-color: var(--footer-bg-color);
+  
 }
