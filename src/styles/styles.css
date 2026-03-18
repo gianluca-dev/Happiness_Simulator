@@ -20,13 +20,50 @@
   --footer-text-color: #f7f7f7; 
 }
 
+.darkmode .logo-container img:first-child ,.socials-container img:first-child , .darkmode-toggle img:first-child {
+  display: none;
+}
 
+.darkmode .logo-container img:last-child, .darkmode .socials-container img:last-child, .darkmode-toggle img:last-child {
+  display: block;
+}
+.darkmode .darkmode-toggle svg:first-child {
+  display: block;
+}
+.darkmode .darkmode-toggle svg:last-child {
+  display: none;
+}
+.darkmode-toggle svg:first-child {
+  display: none;
+}
+
+.darkmode-toggle-container {
+  width: 25px;
+  height: 25px;
+  display: flex;
+  position :fixed;
+  justify-content:center;
+  right: 50px;
+  
+}
+
+.darkmode-toggle svg{
+ fill:var(--default-text-color);
+}
+
+.darkmode-toggle button {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: var(--primary-component-bg-color);
+}
 
 * {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
   font-family: "Roboto";
+  
 }
 
 header {
@@ -80,17 +117,23 @@ header {
   transform: scale(1.15);
 }
 
+
 main {
   background-color: var(--primary-component-bg-color);
   color: var(--default-text-color);
   width: 100%;
-  height: calc(100vh - 75px - 75px);
+  height: calc(100% - 75px);
   position: relative;
   padding: 75px 0px 75px 0px;
   justify-content: center;
 }
 
-a {
+.content-container ol, .content-container ul {
+  margin-left: 25px;
+  margin-bottom: 25px;
+}
+
+.content-container a {
   text-decoration: none;
   color: var(--default-text-color);
 }
@@ -104,6 +147,16 @@ a {
   justify-content: center;
   align-items: center;
   gap: 25px;
+}
+
+.start-btn-container button {
+
+  height: auto;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border: none
+  
 }
 
 footer {
@@ -125,6 +178,7 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  
 }
 
 .legals-container {
@@ -134,6 +188,7 @@ footer {
   justify-content: flex-start;
   align-items: center;
   gap: 75px;
+  
 }
 
 .policy-container {
@@ -143,15 +198,18 @@ footer {
   justify-content: space-between;
   align-items: center;
   gap: 17px;
+  
 }
 
 .policy-container a {
   color: var(--footer-text-color);
+  
 }
 
 .socials-container img {
   width: 25px;
   height: 25px;
+  
 }
 
 .copyright-container {
