@@ -7,7 +7,7 @@
   --footer-bg-color: #ffd23de8;
   --default-white: #ffffff;
   --default-text-color: #252525;
-  --footer-text-color: #ffffff;
+  --footer-text-color: #000000;
 }
 
 .darkmode {
@@ -20,11 +20,11 @@
   --footer-text-color: #f7f7f7; 
 }
 
-.darkmode .logo-container img:first-child ,.socials-container img:first-child , .darkmode-toggle img:first-child {
+.darkmode .logo-container img:first-child {
   display: none;
 }
 
-.darkmode .logo-container img:last-child, .darkmode .socials-container img:last-child, .darkmode-toggle img:last-child {
+.darkmode .logo-container img:last-child {
   display: block;
 }
 .darkmode .darkmode-toggle svg:first-child {
@@ -35,6 +35,12 @@
 }
 .darkmode-toggle svg:first-child {
   display: none;
+}
+.socials-container img {
+  filter: invert(100%);
+}
+.darkmode .socials-container img {
+  filter: invert(0%);
 }
 
 .darkmode-toggle-container {
@@ -222,3 +228,40 @@ footer {
   overflow: hidden;
 }
 
+.content-startscreen-logo  {
+  background-color: #f7f7f7;
+  margin-top: 10%;
+  margin-bottom: 15%;
+  margin-left: 28%;
+  width: 50%;
+  height: auto;
+  font-family: "sour gummy";
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+.startscreen-content h2 {
+  margin-left: 30%;
+  display: flex;
+  font-size: 3rem;
+  text-align: center;
+  padding-bottom: 1%;
+}
+.startscreen-content p {
+  margin-left: 20%;
+  display: flex;
+  font-size: 2rem;
+  text-align: center;
+}
+.startscreen-content button {
+  display: block;
+  margin:auto;
+  width: 50%;
+  height: 50px;
+  margin-top: 5%;
+  font-size: 1.25rem;
+  font-weight: bold;
+  background-color: var(--secondary-component-bg-color);
+  border-radius: 15px;
+  cursor: pointer;
+}
