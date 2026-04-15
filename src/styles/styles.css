@@ -11,22 +11,15 @@
 }
 
 .darkmode {
-  --primary-component-bg-color: #252525;
-  --secondary-component-bg-color: #333333;
+  --primary-component-bg-color: #363636;
+  --secondary-component-bg-color: #221f1f;
   --primary-border-color: #444444;
-  --footer-bg-color: #252525;
+  --footer-bg-color: #221f1f;
   --default-white: #ffffff;
   --default-text-color: #f7f7f7;
   --footer-text-color: #f7f7f7; 
 }
 
-.darkmode .logo-container img:first-child {
-  display: none;
-}
-
-.darkmode .logo-container img:last-child {
-  display: block;
-}
 .darkmode .darkmode-toggle svg:first-child {
   display: block;
 }
@@ -53,11 +46,11 @@
   
 }
 
-.darkmode-toggle svg{
+.darkmode-toggle-container svg{
  fill:var(--default-text-color);
 }
 
-.darkmode-toggle button {
+.darkmode-toggle-container button {
   width: 100%;
   height: 100%;
   border: none;
@@ -229,16 +222,13 @@ footer {
 }
 
 .content-startscreen-logo  {
-  background-color: #f7f7f7;
   margin-top: 10%;
   margin-bottom: 15%;
   margin-left: 28%;
   width: 50%;
   height: auto;
-  font-family: "sour gummy";
   display: flex;
   justify-content: center;
-  text-align: center;
 }
 .startscreen-content h2 {
   margin-left: 30%;
@@ -261,7 +251,21 @@ footer {
   margin-top: 5%;
   font-size: 1.25rem;
   font-weight: bold;
-  background-color: var(--secondary-component-bg-color);
+  color: var(--default-text-color);
+  background-color: var(--footer-bg-color);
   border-radius: 15px;
   cursor: pointer;
+}
+
+#content-startscreen-Wissenschaftlich {
+  margin-left: 40%;
+  display: flex;
+  background-color: var(--footer-bg-color);
+  text-align:right;
+  width: 20%;
+  padding: 15px;
+  font-size: 1rem;
+  text-align: center;
+  border-radius: 15px;
+  margin-bottom: 150px;
 }
