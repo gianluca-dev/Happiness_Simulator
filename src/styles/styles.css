@@ -36,6 +36,12 @@
 .darkmode-toggle svg:first-child {
   display: none;
 }
+.socials-container img {
+  filter: invert(100%);
+}
+.darkmode .socials-container img {
+  filter: invert(0%);
+}
 
 .socials-container img {
   filter: invert(100%);
@@ -212,7 +218,7 @@ footer {
   overflow: hidden;
 }
 
-.content-startscreen-logo {
+.content-startscreen-logo  {
   background-color: #f7f7f7;
   margin-top: 10%;
   margin-bottom: 15%;
@@ -239,7 +245,7 @@ footer {
 }
 .startscreen-content button {
   display: block;
-  margin: auto;
+  margin:auto;
   width: 50%;
   height: 50px;
   margin-top: 5%;
@@ -248,74 +254,4 @@ footer {
   background-color: var(--secondary-component-bg-color);
   border-radius: 15px;
   cursor: pointer;
-}
-
-.hero-btns-wrapper {
-  width: 350px;
-  height: 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 25px;
-  margin: 15px 0 0 0;
-}
-
-.start-btn {
-  width: 155px;
-  height: 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-radius: 13px;
-  border: none;
-  padding: 5px 7px 5px 20px;
-  background-color: var(--default-text-color);
-  color: var(--default-white);
-  font-size: 16px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.start-btn img {
-  width: 25px;
-  height: 25px;
-  padding: 2px;
-  border-radius: 9px;
-  background-color: var(--default-white);
-}
-
-.start-btn:hover {
-  background-color: var(--default-text-color);
-}
-
-.restart-btn {
-  width: 155px;
-  height: 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-radius: 13px;
-  border: 2px solid var(--default-b-color);
-  padding: 5px 7px 5px 20px;
-  background-color: transparent;
-  color: var(--default-text-color);
-  font-size: 16px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.restart-btn img {
-  width: 25px;
-  height: 25px;
-  padding: 2px;
-  border-radius: 9px;
-  background-color: var(--default-white);
-}
-
-.restart-btn:hover {
-  background-color: var(--default-text-color);
 }
