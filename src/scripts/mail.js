@@ -1,138 +1,220 @@
 import { openAspectMenu } from './main.js';
+import { setAsMainEvent } from './event.js';
 
-let allMails = [];
-let unreadMails = 0;
+const mailState = {
+    allMails: [],
+    unreadMails: 0
+}
 
-export function showMailCollection(suggestedMail) {
-    allMails.unshift(suggestedMail);
+export function showAllMails(suggestedMail, date) {
+    if (!suggestedMail) return;
+
+    suggestedMail.date = date;
+    mailState.allMails.unshift(suggestedMail);
     showMailNotification();
 
-    const mailCollectionContainer = document.getElementById('mail-collection-container');
-    mailCollectionContainer.innerHTML = '';
+    const allMailsContainer = document.getElementById('mails-collection-container');
+    allMailsContainer.innerHTML = '';
 
-    allMails.forEach(mail => {
-        const mailCollectionEl = document.createElement('div');
-        mailCollectionEl.className = 'mail-collection-element';
-        mailCollectionEl.addEventListener('click', () => showMail(suggestedMail));
+    mailState.allMails.forEach(mail => {
+        const mailCheck = document.createElement('input');
+        mailCheck.className = 'mail-check';
+        mailCheck.type = 'checkbox';
 
-        const mailCollectionSenderContainer = document.createElement('div');
-        mailCollectionSenderContainer.className = 'mail-collection-sender-container';
+        const mailSenderImage = document.createElement('img');
+        mailSenderImage.className = 'mail-sender-image';
+        mailSenderImage.loading = 'eager';
+        mailSenderImage.src = mail.senderInformation.profileImage.src;
+        mailSenderImage.alt = mail.senderInformation.profileImage.alt;
+    
+        const mailSender = document.createElement('p');
+        mailSender.clasName = 'mail-sender';
+        mailSender.textContent = mail.senderInformation.sender;
 
-        const mailCollectionProfileImage = document.createElement('img');
-        mailCollectionProfileImage.className = 'mail-collection-profile-image';
-        mailCollectionProfileImage.src = mail.senderInformation.profileImage.src;
-        mailCollectionProfileImage.alt = mail.senderInformation.profileImage.alt;
+        const  mailSenderContainer = document.createElement('div');
+        mailSenderContainer.className = 'mail-sender-container';
+        mailSenderContainer.appendChild(mailSenderImage);
+        mailSenderContainer.appendChild(mailSender);
 
-        const mailCollectionSender = document.createElement('p');
-        mailCollectionSender.className = 'mail-collection-sender';
-        mailCollectionSender.textContent = mail.senderInformation.sender;
+        const mailStart = document.createElement('div');
+        mailStart.className = 'mail-start';
+        mailStart.appendChild(mailCheck);
+        mailStart.appendChild(mailSenderContainer);
 
-        const mailCollectionContentContainer = document.createElement('div');
-        mailCollectionContentContainer.className = 'mail-collection-content-container';
+        const mailSubject = document.createElement('p');
+        mailSubject.className = 'mails-subject';
+        mailSubject.textContent = mail.subject;
 
-        const mailCollectionContent = document.createElement('p');
-        mailCollectionContent.className = 'mail-collection-content';
-        mailCollectionContent.textContent = mail.information;
+        const mailDate = document.createElement('p');
+        mailDate.className = 'mail-date';
+        mailDate.textContent = mail.date;
 
-        const mailCollectionDate = document.createElement('p');
-        mailCollectionDate.className = 'mail-collection-date';
-        mailCollectionDate.textContent = '05.01';
+        const mailStar = document.createElement('img');
+        mailStar.className = 'mail-star';
+        mailStar.loading = 'eager';
+        mailStar.src = 'assets/simulator_icons/star.svg';
+        mailStar.alt = 'star-icon';
 
-        mailCollectionSenderContainer.appendChild(mailCollectionProfileImage);
-        mailCollectionSenderContainer.appendChild(mailCollectionSender);
+        const mailEnd = document.createElement('div');
+        mailEnd.className = 'mail-end';
+        mailEnd.appendChild(mailDate);
+        mailEnd.appendChild(mailStar);
 
-        mailCollectionEl.appendChild(mailCollectionSenderContainer);
-        mailCollectionContentContainer.appendChild(mailCollectionContent);
-        mailCollectionEl.appendChild(mailCollectionContentContainer);
-        mailCollectionEl.appendChild(mailCollectionDate);
-        mailCollectionContainer.appendChild(mailCollectionEl);
+        const mailElement = document.createElement('div');
+        mailElement.className = 'mail-element';
+        mailElement.addEventListener('click', () => showMail(mail, mail.date));
+        mailElement.appendChild(mailStart);
+        mailElement.appendChild(mailSubject);
+        mailElement.appendChild(mailEnd);
+
+        allMailsContainer.appendChild(mailElement);
     });
 }
 
-function showMail(suggestedMail) {
-    const mailCollectionContainer = document.getElementById('mail-collection-container');
-    mailCollectionContainer.classList.add('inactive');
+function showMail(mail, date) {
+    document.getElementById('mails-collection-section').classList.add('inactive');
+    document.getElementById('mails-section').classList.remove('inactive');
 
-    const mailContainer = document.getElementById('mail-container');
-    mailContainer.classList.remove('inactive');
-    mailContainer.innerHTML = '';
-
-    const mailEl = document.createElement('div');
-    mailEl.className = 'mail-element';
-        
-    const mailReturn = document.createElement('img');
-    mailReturn.className = 'mail-return';
-    mailReturn.src = 'assets/icons/arrow-left.svg';
-    mailReturn.alt = 'return-icon';
-    mailReturn.addEventListener('click', () => {
-        mailContainer.classList.add('inactive');
-        mailCollectionContainer.classList.remove('inactive');
+    const mailUtilityExit = document.createElement('img');
+    mailUtilityExit.className = 'mail-utility-exit';
+    mailUtilityExit.loading = 'eager';
+    mailUtilityExit.src = 'assets/simulator_icons/arrow.svg';
+    mailUtilityExit.alt = 'exit-icon';
+    mailUtilityExit.addEventListener('click', () => {
+        document.getElementById('mails-section').classList.add('inactive');
+        document.getElementById('mails-collection-section').classList.remove('inactive');
     });
 
-    const mailTrash = document.createElement('img');
-    mailTrash.src = 'assets/icons/trash.svg';
-    mailTrash.alt = 'trash-icon';
+    const mailUtilityArchive = document.createElement('img');
+    mailUtilityArchive.className = 'mail-utility-archive';
+    mailUtilityArchive.loading = 'eager';
+    mailUtilityArchive.src = 'assets/simulator_icons/archive.svg';
+    mailUtilityArchive.alt = 'archive-icon';
 
-    const utilityContainer = document.createElement('div');
-    utilityContainer.className = 'utility-container';
-    utilityContainer.appendChild(mailReturn);
-    utilityContainer.appendChild(mailTrash);
+    const mailUtilityWarning = document.createElement('img');
+    mailUtilityWarning.className = 'mail-utility-warning';
+    mailUtilityWarning.loading = 'eager';
+    mailUtilityWarning.src = 'assets/simulator_icons/warning.svg';
+    mailUtilityWarning.alt = 'warning-icon';
 
-    const mailSubject = document.createElement('p');
-    mailSubject.className = 'mail-subject';
-    mailSubject.textContent = `Betreff: ${suggestedMail.subject}`;
+    const mailUtilityTrash = document.createElement('img');
+    mailUtilityTrash.className = 'mail-utility-trash';
+    mailUtilityTrash.loading = 'eager';
+    mailUtilityTrash.src = 'assets/simulator_icons/trash.svg';
+    mailUtilityTrash.alt = 'trash-icon';
+
+    const mailUtilityMenu = document.createElement('img');
+    mailUtilityMenu.className = 'mail-utility-menu';
+    mailUtilityMenu.loading = 'eager';
+    mailUtilityMenu.src = 'assets/simulator_icons/menu.svg';
+    mailUtilityMenu.alt = 'menu-icon';
+
+    const mailUtilityContainerStart = document.createElement('div');
+    mailUtilityContainerStart.className = 'mail-utility-container-start';
+    mailUtilityContainerStart.appendChild(mailUtilityExit);
+    mailUtilityContainerStart.appendChild(mailUtilityArchive);
+    mailUtilityContainerStart.appendChild(mailUtilityWarning);
+    mailUtilityContainerStart.appendChild(mailUtilityTrash);
+    mailUtilityContainerStart.appendChild(mailUtilityMenu);
+
+    const mailUtilityPrevious = document.createElement('img');
+    mailUtilityPrevious.className = 'mail-utility-previous';
+    mailUtilityPrevious.loading = 'eager';
+    mailUtilityPrevious.src = 'assets/simulator_icons/caret-left.svg';
+    mailUtilityPrevious.alt = 'caret-left-icon';
+    
+    const mailUtilityNext = document.createElement('img');
+    mailUtilityNext.className = 'mail-utility-next';
+    mailUtilityNext.loading = 'eager';
+    mailUtilityNext.src = 'assets/simulator_icons/caret-right.svg';
+    mailUtilityNext.alt = 'caret-right-icon';
+
+    const mailUtilityContainerEnd = document.createElement('div');
+    mailUtilityContainerEnd.className = 'mail-utility-container-end';
+    mailUtilityContainerEnd.appendChild(mailUtilityPrevious);
+    mailUtilityContainerEnd.appendChild(mailUtilityNext);
+
+    const mailUtilityContainer = document.createElement('div');
+    mailUtilityContainer.className = 'mail-utility-nav';
+    mailUtilityContainer.appendChild(mailUtilityContainerStart);
+    mailUtilityContainer.appendChild(mailUtilityContainerEnd);
+
+    const mailSenderImage = document.createElement('img');
+    mailSenderImage.className = 'mail-sender-image';
+    mailSenderImage.loading = 'eager';
+    mailSenderImage.src = mail.senderInformation.profileImage.src;
+    mailSenderImage.alt = mail.senderInformation.profileImage.alt;
 
     const mailSender = document.createElement('p');
     mailSender.className = 'mail-sender';
-    mailSender.textContent = `Absender: ${suggestedMail.senderInformation.sender}`;
+    mailSender.textContent = mail.senderInformation.sender;
 
-    const mailInformation = document.createElement('p');
-    mailInformation.className = 'mail-information';
-    mailInformation.textContent = suggestedMail.information;
+    const mailRecipient = document.createElement('p');
+    mailRecipient.className = 'mail-recipient';
+    mailRecipient.textContent = 'an Happinessmanager';
 
-    const eventSuggestion = document.createElement('span');
-    eventSuggestion.className = 'event-suggestion';
-    eventSuggestion.textContent = `Ich rate ihnen: ${suggestedMail.eventSuggestion.title}`;
-    eventSuggestion.addEventListener('click', () => {
-        openAspectMenu(suggestedMail.eventSuggestion.type);
-        setTimeout(() => {
-            const targetEvent = document.getElementById(suggestedMail.eventSuggestion.id);
-            if (targetEvent) {
-                const targetEventRejectBtn = targetEvent.querySelector('.reject-btn');
-                
-                targetEvent.scrollIntoView({behavior: 'smooth', block: 'start'});
-                targetEvent.classList.add('event-card-highlighted');
-                // Reveals the reject-btn for the highlighted event
-                targetEventRejectBtn.classList.remove('hide-reject-btn');
-            } 
-        }, 50);
-    });
+    const mailSenderText = document.createElement('div');
+    mailSenderText.className = 'mail-sender-text';
+    mailSenderText.appendChild(mailSender);
+    mailSenderText.appendChild(mailRecipient);
+
+    const mailSenderInformation = document.createElement('div');
+    mailSenderInformation.className = 'mail-sender-information';
+    mailSenderInformation.appendChild(mailSenderImage);
+    mailSenderInformation.appendChild(mailSenderText);
+
+    const mailHeaderDate = document.createElement('div');
+    mailHeaderDate.className = 'mail-header-date';
+    mailHeaderDate.textContent = date;
 
     const mailHeader = document.createElement('div');
     mailHeader.className = 'mail-header';
-    mailHeader.appendChild(utilityContainer);
-    mailHeader.appendChild(mailSubject);
-    mailHeader.appendChild(mailSender);
+    mailHeader.appendChild(mailSenderInformation);
+    mailHeader.appendChild(mailHeaderDate);
 
-    const mailContent = document.createElement('div');
-    mailContent.className = 'mail-content';
-    mailContent.appendChild(mailInformation);
-    mailContent.appendChild(eventSuggestion);
+    const mailSubject = document.createElement('p');
+    mailSubject.className = 'mail-subject';
+    mailSubject.textContent = `Warnung! Rückgang der Zufriedenheit durch ${mail.subject}`;
 
-    mailEl.appendChild(mailHeader);
-    mailEl.appendChild(mailContent);
-    mailContainer.appendChild(mailEl);
-}
+    const mailText = document.createElement('p');
+    mailText.className = 'mail-text';
+    mailText.textContent = mail.information;
+
+    const mailContentContainer = document.createElement('div');
+    mailContentContainer.className = 'mail-content-container';
+    mailContentContainer.appendChild(mailSubject);
+    mailContentContainer.appendChild(mailText);
+
+    const mailEventSuggestion = document.createElement('span');
+    mailEventSuggestion.className = 'mail-event-suggestion';
+    mailEventSuggestion.textContent = `Handlungsempfehlung: ${mail.eventSuggestion.title}`;
+    mailEventSuggestion.addEventListener('click', () => {
+        openAspectMenu(mail.eventSuggestion.type);
+        setAsMainEvent(mail.eventSuggestion.id);
+    });
+
+    const mailElement = document.createElement('div');
+    mailElement.className = 'mail-element';
+    mailElement.appendChild(mailUtilityContainer);
+    mailElement.appendChild(mailHeader);
+    mailElement.appendChild(mailContentContainer);
+    mailElement.appendChild(mailEventSuggestion);
+
+    const mailContainer = document.getElementById('mails-container');
+    mailContainer.innerHTML = '';
+
+    mailContainer.appendChild(mailElement);
+}   
 
 function showMailNotification() {
-    unreadMails++;
+    mailState.unreadMails++;
     const mailNotification = document.getElementById('mail-notification');
-    mailNotification.textContent = unreadMails;
+    mailNotification.textContent = mailState.unreadMails;
 
-    mailNotification.classList.remove('mail-notification-inactive');
+    mailNotification.classList.remove('inactive');
 }
 
 export function resetUnreadMails() {
-    unreadMails = 0;
-    document.getElementById('mail-notification').classList.add('mail-notification-inactive');
+    mailState.unreadMails = 0;
+    document.getElementById('mail-notification').classList.add('inactive');
 }

@@ -1,115 +1,122 @@
-import { resetUnreadMails } from './mail.js';
-import { applyEventDelta, deductCoins, paySideEvent, nextCrisis, disableSideEvents } from './main.js';
+import { subtractCosts, applyEventDelta, nextCrisis, showToastNotification } from './main.js';
 
-let sideEventCount = 0;
+const eventState = {
+    sideEventCount: 0
+}
 
-export function showEventCards(simulatorData) {
-    const events = simulatorData.events;
-
-    events.forEach(event => {
-        const eventCard = document.createElement('div');
-        eventCard.className = 'event-card';
-        eventCard.id = event.id;
-        
+export function showEventCards(simData) {
+    const allEvents = simData.events;
+    
+    allEvents.forEach(event => {
+        //---------- Event-Header ----------//
         const eventTitle = document.createElement('p');
         eventTitle.className = 'event-title';
         eventTitle.textContent = event.title;
 
-        const infoIcon = document.createElement('img');
-        infoIcon.className = 'info-icon';
-        infoIcon.loading = 'lazy';
-        infoIcon.src = 'assets/icons/info.svg';
-        infoIcon.alt = 'info-icon';
-        infoIcon.addEventListener('click', () => toggleInfoStats(infoStatsContainer));  // Mobile-Version
-        infoIcon.addEventListener('mouseover', () => toggleInfoStats(infoStatsContainer));  // Desktop-Version
-        infoIcon.addEventListener('mouseout', () => toggleInfoStats(infoStatsContainer));  // Desktop-Version
+        const eventInfo = document.createElement('img');
+        eventInfo.className = 'event-info';
+        eventInfo.loading = 'eager';
+        eventInfo.src = 'assets/simulator_icons/info.svg';
+        eventInfo.alt = 'info-icon';
 
-        const infoStatsIcon = document.createElement('img');
-        infoStatsIcon.className = 'info-stats-icon';
-        infoStatsIcon.src = 'assets/icons/trend-up.svg';
-        infoStatsIcon.alt = 'info-stats-icon';
-
-        const infoStatsDelta = document.createElement('p');
-        infoStatsDelta.className = 'info-stats-delta';
-        infoStatsDelta.textContent = event.happinessDelta;
-
-        const infoStatsContainer = document.createElement('div');
-        infoStatsContainer.className = 'info-stats-container inactive';
-        infoStatsContainer.appendChild(infoStatsIcon);
-        infoStatsContainer.appendChild(infoStatsDelta);
-
-        const eventImage = document.createElement('img');
-        eventImage.className = 'event-image';
-        eventImage.loading = 'lazy';
-        eventImage.src = event.image.src;
-        eventImage.alt = event.image.alt;
-
-        const eventDescription = document.createElement('p');
-        eventDescription.className = 'event-description';
-        eventDescription.textContent = event.description;
-
-        const eventCosts = document.createElement('span');
-        eventCosts.className = 'event-costs';
-        eventCosts.textContent = `${event.cost.toLocaleString('de-DE')} €`;
-
-        const acceptBtn = document.createElement('button');
-        acceptBtn.className = 'accept-btn';
-        acceptBtn.textContent = 'Akzeptieren';
-        acceptBtn.addEventListener('click', () => {
-            const isSuggested = !rejectBtn.classList.contains('hide-reject-btn');
-
-            if (isSuggested) {
-                applyEventDelta(event, isSuggested);
-                deductCoins(simulatorData, event.cost);
-            } else {
-                sideEventCount++;
-
-                if (sideEventCount > 1) disableSideEvents();
-
-                applyEventDelta(event, isSuggested);
-                paySideEvent(event.cost);
-            }
+        const eventExtend = document.createElement('img');
+        eventExtend.className = 'event-extend';
+        eventExtend.loading = 'eager';
+        eventExtend.src = 'assets/simulator_icons/caret-circle-right.svg';
+        eventExtend.alt = 'caret-right-icon';
+        eventExtend.addEventListener('click', () => {
+            eventCardMain.classList.toggle('inactive');
+            eventCard.classList.toggle('extended');
         });
 
-        const rejectBtn = document.createElement('button');
-        rejectBtn.className = 'reject-btn hide-reject-btn';
-        rejectBtn.textContent = 'Ablehnen';
-        rejectBtn.addEventListener('click', () => {
-            applyEventDelta(event, true, true);
-            nextCrisis(simulatorData);
-        });
+        const eventHeaderIconContainer = document.createElement('div');
+        eventHeaderIconContainer.className = 'event-header-icon-container';
+        eventHeaderIconContainer.appendChild(eventInfo);
+        eventHeaderIconContainer.appendChild(eventExtend);
 
         const eventCardHeader = document.createElement('div');
         eventCardHeader.className = 'event-card-header';
         eventCardHeader.appendChild(eventTitle);
-        eventCardHeader.appendChild(infoIcon);
+        eventCardHeader.appendChild(eventHeaderIconContainer);
 
-        const eventCardContent = document.createElement('div');
-        eventCardContent.className = 'event-card-content';
+        //---------- Event-Btns ----------//
+        const acceptBtn = document.createElement('button');
+        acceptBtn.className = 'accept-btn';
+        acceptBtn.textContent = 'Akzeptieren';
+        acceptBtn.addEventListener('click', () => {
+            const isMainEvent = !rejectBtn.classList.contains('inactive');
+            handleAccept(simData, event, isMainEvent, event.costs);
+        });
 
-        const eventCardStart = document.createElement('div');
-        eventCardStart.className = 'event-card-start';
-        eventCardStart.appendChild(eventImage);
+        const rejectBtn = document.createElement('button');
+        rejectBtn.className = 'reject-btn inactive';
+        rejectBtn.textContent = 'Ablehnen';
+        rejectBtn.addEventListener('click', () => {
+            applyEventDelta(event, true, false);
+            nextCrisis(simData);
+        });
 
-        const eventCardEnd = document.createElement('div');
-        eventCardEnd.className = 'event-card-end';
-        eventCardEnd.appendChild(eventDescription);
-        eventCardEnd.appendChild(eventCosts);
+        const eventCardBtns = document.createElement('div');
+        eventCardBtns.className = 'event-card-btns';
+        eventCardBtns.appendChild(acceptBtn);
+        eventCardBtns.appendChild(rejectBtn);
 
-        const eventBtns = document.createElement('div');
-        eventBtns.className = 'event-btns';
-        eventBtns.appendChild(acceptBtn);
-        eventBtns.appendChild(rejectBtn);
+        //---------- Event-Main ----------//
+        const happinessDeltaIcon = document.createElement('img');
+        happinessDeltaIcon.className = 'happiness-delta-icon';
+        happinessDeltaIcon.loading = 'eager';
+        happinessDeltaIcon.src = 'assets/simulator_icons/shield.svg';
+        happinessDeltaIcon.alt = 'smiley-icon';
 
-        eventCardContent.appendChild(eventCardStart);
-        eventCardContent.appendChild(eventCardEnd);
+        const happinessDelta = document.createElement('p');
+        happinessDelta.className = 'happiness-delta';
+        happinessDelta.textContent = event.happinessDelta;
 
+        const happinessDeltaContainer = document.createElement('div');
+        happinessDeltaContainer.className = 'happiness-delta-container';
+        happinessDeltaContainer.appendChild(happinessDeltaIcon);
+        happinessDeltaContainer.appendChild(happinessDelta);
+
+        const shieldValueIcon = document.createElement('img');
+        shieldValueIcon.className = 'shield-value-icon';
+        shieldValueIcon.loading = 'eager';
+        shieldValueIcon.src = 'assets/simulator_icons/shield.svg';
+        shieldValueIcon.alt = 'shield-icon';
+
+        const shieldValue = document.createElement('p');
+        shieldValue.className = 'shield-value';
+        shieldValue.textContent = event.shieldValue;
+
+        const shieldValueContainer = document.createElement('div');
+        shieldValueContainer.className = 'shield-value-container';
+        shieldValueContainer.appendChild(shieldValueIcon);
+        shieldValueContainer.appendChild(shieldValue);
+
+        const eventCosts = document.createElement('p');
+        eventCosts.className = 'event-costs';
+        eventCosts.textContent = `${event.costs.toLocaleString('de-DE')} €`;
+
+        const eventCardDetails = document.createElement('div');
+        eventCardDetails.className = 'event-card-details';
+        //eventCardDetails.appendChild(happinessDeltaContainer);
+        //eventCardDetails.appendChild(shieldValueContainer);
+        eventCardDetails.appendChild(eventCosts);
+
+        const eventCardMain = document.createElement('div');
+        eventCardMain.className = 'event-card-main inactive';
+        eventCardMain.appendChild(eventCardDetails)
+        eventCardMain.appendChild(eventCardBtns);
+
+        //---------- Event-Card ----------//
+        const eventCard = document.createElement('div');
+        eventCard.className = 'event-card';
+        eventCard.id = event.id;
+        eventCard.dataset.eventType = event.type;
         eventCard.appendChild(eventCardHeader);
-        eventCard.appendChild(eventCardContent);
-        eventCard.appendChild(eventBtns);
-        eventCard.appendChild(infoStatsContainer);
+        eventCard.appendChild(eventCardMain);
 
         const eventContainer = document.getElementById(`event-container-${event.type}`);
+        
         if (eventContainer) {
             eventContainer.appendChild(eventCard);
         } else {
@@ -118,10 +125,45 @@ export function showEventCards(simulatorData) {
     });
 }
 
-export function resetSideEventCount() {
-    sideEventCount = 0;
+export function setAsMainEvent(eventId) {
+    const eventCard = document.getElementById(eventId);
+    const rejectBtn = eventCard.querySelector('.reject-btn');
+    const eventContainer = document.getElementById(`event-container-${eventCard.dataset.eventType}`);
+
+    if (rejectBtn) {
+        rejectBtn.classList.remove('inactive');
+
+        eventCard.classList.add('event-card-highlighted');
+        eventContainer.scrollTo({top: eventCard.offsetTop - eventContainer.offsetTop, behavior: 'smooth'});
+
+        if (eventState.sideEventCount > 1) document.getElementById(eventId).querySelector('.accept-btn').disabled = false;
+    }
 }
 
-function toggleInfoStats(container) {
-    container.classList.toggle('inactive');
+function handleAccept(simData, event, isMainEvent, costs) {
+    if (isMainEvent) {
+        eventState.sideEventCount = 0;
+        disableSideEvents(false);
+    } else {
+        eventState.sideEventCount++;
+        if (eventState.sideEventCount > 1) {
+            disableSideEvents(true);
+            enableMainEvents();
+            // Show notification that max side events have been reached
+            showToastNotification('Maximale Anzahl an Nebenereignissen erreicht!', '#fddede', '#ef4444');
+        }
+    }
+    applyEventDelta(event, isMainEvent, true);
+    subtractCosts(simData, isMainEvent, costs);
+}
+
+function disableSideEvents(disabled) {
+    document.querySelectorAll('.accept-btn').forEach(btn => {btn.disabled = disabled;});
+}
+
+function enableMainEvents() {
+    document.querySelectorAll('.event-card').forEach(card => {
+        const rejectBtn = card.querySelector('.reject-btn');
+        if (rejectBtn && !rejectBtn.classList.contains('inactive')) card.querySelector('.accept-btn').disabled = false;
+    });
 }

@@ -1,88 +1,33 @@
-let lifeEvalChart = null;
-export let nationComparisonChart = null;
+let lifeEvalChart = null; 
+let nationCompChart = null;
 
-export function updateLifeEvaluationChart(lifeEvalScores) {
-    const canvas = document.getElementById('life-evaluation-chart');
-    if (!canvas) {
-        console.error('Canvas Element was not found!');
-        return;
-    }
+const monthNames = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
 
-    const ctx = canvas.getContext('2d');
+export function initLifeEvalChart(simState, currentYear) {
+    const ctx = document.getElementById('life-eval-chart-canvas');
 
     if (!lifeEvalChart) {
         lifeEvalChart = new Chart(ctx, {
             type: 'line',
             data: {
                 labels: ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
-                datasets: [{
-                    label: 'Life Evaluation',
-                    data: [],
-                    borderColor: '#36a2eb',
-                    backgroundColor: 'rgba(54, 162, 235, 0.15)',
-                    tension: 0.3,
-                    fill: true,
-                }]
-            }, 
-            options: {
-                responsive: true,
-                maintainAspectRation: false,
-                scales: {
-                    y: {
-                        main: 0,
-                        max: 10,
-                        beginAtZero: true,
-                        ticks: {
-                            stepSize: 1
-                        },
-                        title: {
-                            display: true,
-                            text: 'Life Evaluation'
-                        }
-                    },
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Monate 2019'
-                        }
+                datasets: [
+                    {
+                        label: 'Lebenszufriedenheit',
+                        data: [],
+                        borderColor: '#36a2eb',
+                        backgroundColor: 'rgba(54, 162, 235, 0.15)',
+                        tension: 0.3,
+                        fill: true,
                     }
-                },
-                plugins: {
-                    legend: {
-                        display: true,
-                        position: 'top'
-                    }
-                }
-            }
-        });
-    }
-
-    lifeEvalChart.data.datasets[0].data = lifeEvalScores;
-    lifeEvalChart.update();
-}
-
-export function updateNationComparisonChart(nationCompData, lifeEvalScores) {
-    const canvas = document.getElementById('nation-comparison-chart');
-    if (!canvas) {
-        console.error('Canvas Element was not found!');
-        return;
-    }
-
-    const ctx = canvas.getContext('2d');
-
-    if (!nationComparisonChart) {
-        nationComparisonChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
-                datasets: []
+                ]
             },
             options: {
                 responsive: true,
-                maintainAspectRation: false,
+                maintainAspectRatio: true,
                 scales: {
                     y: {
-                        min: 5,
+                        min: 0,
                         max: 10,
                         beginAtZero: true,
                         ticks: {
@@ -90,7 +35,7 @@ export function updateNationComparisonChart(nationCompData, lifeEvalScores) {
                         },
                         title: {
                             display: true,
-                            text: 'Life Evaluation'
+                            text: 'Lebenszufriedenheit'
                         }
                     },
                     x: {
@@ -104,42 +49,89 @@ export function updateNationComparisonChart(nationCompData, lifeEvalScores) {
                     legend: {
                         display: true,
                         position: 'top'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: (items) => `Deutschland (${monthNames[items[0].dataIndex]} ${currentYear})`,
+                            label: (item) => `Lebenszufriedenheit: ${item.raw.toLocaleString('de-DE')}`
+                        }
                     }
                 }
             }
         });
     }
 
-    nationComparisonChart.data.datasets.push({
-        label: 'Deutschland',
-        data: lifeEvalScores,
-        borderColor: '#36a2eb',
-        backgroundColor: 'rgba(54, 162, 235, 0.15)',
-        tension: 0.3,
-    });
+    lifeEvalChart.data.datasets[0].data = simState.lifeEvalScores[currentYear];
+    lifeEvalChart.update();
+}
 
-    for (let i = 0; i < nationCompData.length; i++) {
-        nationComparisonChart.data.datasets.push({
-            label: nationCompData[i].nation,
-            data: nationCompData[i].lifeEvaluation,
-            borderColor: nationCompData[i].border,
-            backgroundColor: nationCompData[i].background,
-            tension: 0.3,
+export function initNationCompChart(nationCompState, currentYear) {
+    const ctx = document.getElementById('nation-comp-chart-canvas');
+
+    if (!nationCompChart) {
+        nationCompChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
+                datasets: [],
+                tension: 0.3,
+                fill: true,
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        min: 0,
+                        max: 10,
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1
+                        },
+                        title: {
+                            display: true,
+                            text: 'Lebenszufriedenheit'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Monate 2019'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: (items) => `${items[0].dataset.label} (${monthNames[items[0].dataIndex]} ${currentYear})`,
+                            label: (item) => `Lebenszufriedenheit: ${item.raw.toLocaleString('de-DE')}`
+                        }
+                    }
+                }
+            }
         });
     }
 
-    nationComparisonChart.update();
+    nationCompChart.data.datasets = [];
+
+    nationCompState.forEach(nation => {
+        nationCompChart.data.datasets.push({
+            label: nation.nation,
+            data: nation.lifeEvalScores[currentYear],
+        });
+    });
+
+    nationCompChart.update();
 }
 
-export function updateChartYear(year) {
-    lifeEvalChart.options.scales.x.title.text = `Monate ${year}`;
+export function updateChartYear(currentYear) {
+    lifeEvalChart.options.scales.x.title.text = `Monate ${currentYear}`;
     lifeEvalChart.update();
 
-    nationComparisonChart.options.scales.x.title.text = `Monate ${year}`;
-    nationComparisonChart.update();
-}
-
-export function updateNationComparisonPlayerData(lifeEvalScores) {
-    nationComparisonChart.data.datasets[0].data = lifeEvalScores;
-    nationComparisonChart.update();
+    nationCompChart.options.scales.x.title.text = `Monate ${currentYear}`;
+    nationCompChart.update();
 }
