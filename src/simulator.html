@@ -3,156 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happiness Simulator - Simulator</title>
     <link rel="shortcut icon" href="assets/happiness_simulator/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="styles/simulator-styles.css">
+    <title>Happiness Simulator - Simulator</title>
 </head>
 <body>
     <header>
-        <div class="logo-container">
-            <a href="index.html"><img src="assets/happiness_simulator/happiness_simulator_dark.svg" alt="happiness-simulator-logo"></a>
+        <div class="sim-logo-container">
+            <a href="index.html"><img src="assets/happiness_simulator/happiness_simulator_dark.svg" loading="eager" alt="happiness-simulator-logo"></a>
         </div>
-        <div class="toast-notification" id="toast-notification"></div>
+        <!--Toast-Notification-->
+        <div class="toast-container" id="toast-container"></div>
+        <!--Date-Container-->
+        <div class="date-container">
+            <p id="date-element">00.00.0000</p>
+        </div>
     </header>
-    <main>
-        <div class="coin-wrapper">
-            <div class="coins-container">
-                <p class="coin-element" id="coin-element">0.00 €</p>
-            </div> 
-        </div>
-        <aside class="aspect-menu-navigation" id="aspect-menu-navigation">
-            <!--Aspect-Economic-->
+    <!--Aspect-menu-Navigation-->
+    <aside class="aspect-menu-nav" id="aspect-menu-nav">
+        <div class="aspect-container-wrapper">
+            <!--Aspect-Container-Economic-->
             <div class="aspect-wrapper">
                 <div class="aspect-container" id="economic">
-                    <img src="assets/icons/economic.svg" loading="eager" alt="aspect-economic-icon">
+                    <img src="assets/simulator_icons/coins.svg" loading="eager" alt="aspect-icon">
                 </div>
             </div>
-            <!--Aspect-Political-->
+            <!--Aspect-Container-Political-->
             <div class="aspect-wrapper">
                 <div class="aspect-container" id="political">
-                    <img src="assets/icons/political.svg" loading="eager" alt="aspect-political-icon">
+                    <img src="assets/simulator_icons/political.svg" loading="eager" alt="aspect-icon">
                 </div>
             </div>
-            <!--Aspect-Social-->
+            <!--Aspect-Container-Social-->
             <div class="aspect-wrapper">
                 <div class="aspect-container" id="social">
-                    <img src="assets/icons/social.svg" loading="eager" alt="aspect-social-icon">
+                    <img src="assets/simulator_icons/social.svg" loading="eager" alt="aspect-icon">
                 </div>
             </div>
-            <!--Aspect-Health-->
+            <!--Aspect-Container-Health-->
             <div class="aspect-wrapper">
                 <div class="aspect-container" id="health">
-                    <img src="assets/icons/health.svg" loading="eager" alt="aspect-health-icon">
+                    <img src="assets/simulator_icons/health.svg" loading="eager" alt="aspect-icon">
                 </div>
-            </div>
-            <!--Aspect-Menu-Section-->
-            <section class="aspect-menu-section">
-                <!--Aspect-Menu-Economic-->
-                <div class="aspect-menu" id="aspect-menu-economic">
-                    <p class="aspect-menu-title">Ökonomische Ereignisse</p>
-                    <div class="event-container" id="event-container-economic"></div>
-                </div>
-                <!--Aspect-Menu-Political-->
-                <div class="aspect-menu" id="aspect-menu-political">
-                    <p class="aspect-menu-title">Politische Ereignisse</p>
-                    <div class="event-container" id="event-container-political"></div>
-                </div>
-                <!--Aspect-Menu-Social-->
-                <div class="aspect-menu" id="aspect-menu-social">
-                    <p class="aspect-menu-title">Soziale Ereignisse</p>
-                    <div class="event-container" id="event-container-social"></div>
-                </div>
-                <!--Aspect-Menu-Health-->
-                <div class="aspect-menu" id="aspect-menu-health">
-                    <p class="aspect-menu-title">Gesundheitliche Ereignisse</p>
-                    <div class="event-container" id="event-container-health"></div>
-                </div>
-            </section>
-        </aside>
-        <!--Content-Section-->    
-        <section class="content-section">
-            
-        </section>
-        <!--Life-Evaluation-Section-->    
-        <section class="life-evaluation-section">
-            <div class="life-evaluation-chart-container">
-                <canvas id="life-evaluation-chart"></canvas>
-            </div>
-        </section>
-        <!--Life-Evaluation-Stats-Section-->    
-        <section class="life-evaluation-stats-section">
-            
-        </section>
-
-        <div class="nation-comparison-wrapper nation-comparison-wrapper-inactive" id="nation-comparison-wrapper">
-            <div class="nation-comparison-header">
-                <p>Nationenvergleich</p>
-                <div class="nation-comparison-exit-container" id="nation-comparison-exit-container">
-                    <img src="assets/icons/exit.svg" loading="eager" alt="exit-icon">
-                </div>
-            </div>
-            <div class="nation-comparison-container">
-                <div class="nation-comparison-chart-container">
-                    <canvas id="nation-comparison-chart"></canvas>
-                </div>
-                <!--Nation-Buttons-->
-                <div class="nation-btn-wrapper" id="nation-btn-wrapper"></div>
             </div>
         </div>
-        <div class="mail-wrapper mail-wrapper-inactive" id="mail-wrapper">
-            <div class="mail-app-header">
+        <!--Aspect-Menu-Section-->
+        <section class="aspect-menu-section">
+            <!--Aspect-Menu-Economic-->
+            <div class="aspect-menu" id="aspect-menu-economic">
+                <p class="aspect-menu-title">Ökonomische Ereignisse</p>
+                <div class="event-container" id="event-container-economic"></div>
+            </div>
+            <!--Aspect-Menu-Political-->
+            <div class="aspect-menu" id="aspect-menu-political">
+                <p class="aspect-menu-title">Politische Ereignisse</p>
+                <div class="event-container" id="event-container-political"></div>
+            </div>
+            <!--Aspect-Menu-Social-->
+            <div class="aspect-menu" id="aspect-menu-social">
+                <p class="aspect-menu-title">Soziale Ereignisse</p>
+                <div class="event-container" id="event-container-social"></div>
+            </div>
+            <!--Aspect-Menu-Health-->
+            <div class="aspect-menu" id="aspect-menu-health">
+                <p class="aspect-menu-title">Gesundheitliche Ereignisse</p>
+                <div class="event-container" id="event-container-health"></div>
+            </div>
+        </section>
+    </aside>
+    <main>
+        <!--Coin-Container-->
+        <div class="coin-wrapper">
+            <div class="coin-container">
+                <p id="coin-element">0.00 €</p>
+            </div>
+        </div>
+        <section class="content-section"></section>
+        <!--Life-Evaluation-Section-->
+        <section class="life-eval-section">
+            <div class="life-eval-chart-container">
+                <canvas class="life-eval-chart-canvas" id="life-eval-chart-canvas">
+                    <p>Browser unterstützt kein Canvas!</p>
+                </canvas>
+            </div>
+        </section>
+        <!--Life-Evaluation-Statistics-Section-->
+        <section class="life-eval-stats-section"></section>
+        <!--Mails-Section-->
+        <section class="app-mails-section inactive" id="app-mails-section">
+            <header class="mails-header">
                 <p>Emails</p>
-                <div class="mail-exit-container" id="mail-exit-container">
-                    <img src="assets/icons/exit.svg" loading="eager" alt="exit-icon">
+                <!--Mail-Search-->
+                <div class="mail-search-container">
+                    <i class="mail-search-icon">
+                        <img src="assets/simulator_icons/search.svg" loading="eager" alt="search-icon">
+                    </i>
+                    <input type="text" class="mail-search-input" placeholder="Suche...">
                 </div>
-            </div>
-            <div>
-                <aside class="mail-navbar-container">
-                    <nav class="mail-navbar">
-                        <div class="mail-collection-option write-mail-option">
-                            <img src="assets/icons/pencil.svg" loading="eager" alt="pencil-icon">
-                        </div>
-                        <div class="border-container"></div>
-                        <div class="mail-collection-option option-active">
-                            <img src="assets/icons/envelope.svg" loading="eager" alt="mail-icon">
-                        </div>
-                        <div class="mail-collection-option">
-                            <img src="assets/icons/trash.svg" loading="eager" alt="trash-icon">
-                        </div>
-                    </nav>
-                </aside>
-                <!--Mail-Collection-Section-->
-                <section class="mail-collection-section">
-                    <div class="mail-collection-container" id="mail-collection-container"></div>
-                    <div class="mail-container inactive" id="mail-container"></div>
+                <!--Mail-Exit-->
+                <div class="exit-container" id="app-mails-exit">
+                    <img src="assets/simulator_icons/exit.svg" loading="eager" alt="exit-icon">
+                </div>
+            </header>
+            <aside class="mail-nav">
+                <!--Mail-Nav-Start-->
+                <div class="mail-nav-start">
+                    <div class="mail-nav-option">
+                        <img src="assets/simulator_icons/inbox.svg" loading="eager" alt="inbox-icon">
+                    </div>
+                    <div class="line"></div>
+                    <div class="mail-nav-option">
+                        <img src="assets/simulator_icons/paper-plane.svg" loading="eager" alt="paper-plane-icon">
+                    </div>
+                    <div class="mail-nav-option">
+                        <img src="assets/simulator_icons/pencil-line.svg" loading="eager" alt="pencil-line-icon">
+                    </div>
+                    <div class="mail-nav-option">
+                        <img src="assets/simulator_icons/warning.svg" loading="eager" alt="warning-icon">
+                    </div>
+                    <div class="mail-nav-option">
+                        <img src="assets/simulator_icons/trash.svg" loading="eager" alt="trash-icon">
+                    </div>
+                </div>
+                <!--Mail-Nav-End-->
+                <div class="mail-nav-end">
+                    <div class="mail-nav-option">
+                        <img src="assets/simulator_icons/gear.svg" loading="eager" alt="gear-icon">
+                    </div>
+                </div>
+            </aside>
+            <main class="mails-main">
+                <!--Mails-Collection-Section-->
+                <section class="mails-collection-section" id="mails-collection-section">
+                    <div class="mails-collection-container" id="mails-collection-container"></div>
                 </section>
+                <!--Mails-Section-->
+                <section class="mails-section inactive" id="mails-section">
+                    <div class="mails-container" id="mails-container"></div>
+                </section>
+            </main>
+        </section>
+        <!--Nation-Comparison-Section-->
+        <section class="app-nation-comp-section inactive" id="app-nation-comp-section">
+            <header class="nation-comp-header">
+                <p>Nationenvergleich</p>
+                <!--Nation-Comparison-Exit-->
+                <div class="exit-container" id="app-nation-comp-exit">
+                    <img src="assets/simulator_icons/exit.svg" loading="eager" alt="exit-icon">
+                </div>
+            </header>
+            <div class="nation-comp-chart-container">
+                <canvas class="nation-comp-chart-canvas" id="nation-comp-chart-canvas">
+                    <p>Browser unterstützt kein Canvas!</p>
+                </canvas>
             </div>
-            
-        </div>
+        </section>
     </main>
-    <footer class="simulator-footer">
-        <div class="app-icon-collection-container">
-            <!--App-Icon-Emails-->
+    <footer>
+        <nav class="app-icon-navigation">
+            <!--App-Icon-Mails-->
             <div class="footer-app-icon-wrapper">
-                <div class="mail-notification mail-notification-inactive" id="mail-notification"></div>
-                <div class="footer-app-icon" id="mails-app-container">
-                    <img src="assets/icons/envelope.svg" loading="eager" alt="mail-icon">
+                <div class="mail-notification inactive" id="mail-notification"></div>
+                <div class="footer-app-icon" id="app-icon-mails">
+                    <img src="assets/simulator_icons/envelope.svg" loading="eager" alt="mail-icon">
                 </div>
             </div>
             <!--App-Icon-Nation-Comparison-->
-            <div class="footer-app-icon" id="nation-comparison-app-container">
-                <img src="assets/icons/globe.svg" loading="eager" alt="nation-comparison-icon">
+            <div class="footer-app-icon" id="app-icon-nation-comp">
+                <img src="assets/simulator_icons/globe.svg" loading="eager" alt="globe-icon">
             </div>
             <!--App-Icon-Tips-->
-            <div class="footer-app-icon" id="tips-app-container" title="Öffne das Tutorial für hilfreiche Tipps">
-                <img src="assets/icons/info.svg" loading="eager" alt="tutorial-icon">
+            <div class="footer-app-icon" id="app-icon-tips">
+                <img src="assets/simulator_icons/info.svg" loading="eager" alt="info-icon">
             </div>
-        </div>
+        </nav>
     </footer>
 </body>
     <script type="module" src="scripts/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!--Alles unterhalb ist optional, sollte in den Modulen importiert werden!-->
-    <script type="module" src="scripts/mail.js"></script>
-    <script type="module" src="scripts/event.js"></script>
 </html>
