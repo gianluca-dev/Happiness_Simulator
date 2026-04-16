@@ -1,0 +1,114 @@
+{
+    "events": [
+        {
+            "id": 0,
+            "type": "economic",
+            "title": "Steuersenkung",
+            "description": "Mehrwertsteuer von 19% auf 7% gesenkt.",
+            "costs": 500000,
+            "happinessDelta": 0.15,
+            "shieldValue": 0,
+            "image": {
+                "src": "assets/simulator_icons/coins.svg",
+                "alt": "aspect-economic-icon"
+            }
+        },
+        {
+            "id": 4,
+            "type": "economic",
+            "title": "Steuersenkung",
+            "description": "Mehrwertsteuer von 19% auf 7% gesenkt.",
+            "costs": 500000,
+            "happinessDelta": 0.15,
+            "shieldValue": 0,
+            "image": {
+                "src": "assets/simulator_icons/coins.svg",
+                "alt": "aspect-economic-icon"
+            }
+        },
+        {
+            "id": 1,
+            "type": "health",
+            "title": "Impfkampagne",
+            "description": "Es wird eine Impfkampagne gestartet.",
+            "costs": 1500000,
+            "happinessDelta": 0.25,
+            "shieldValue": 1,
+            "image": {
+                "src": "assets/simulator_icons/health.svg",
+                "alt": "aspect-health-icon"
+            }
+        },
+        {
+            "id": 2,
+            "type": "political",
+            "title": "Neuwahlen",
+            "description": "Es werden Neuwahlen angesetzt.",
+            "costs": 2500000,
+            "happinessDelta": 0.50,
+            "shieldValue": 2,
+            "image": {
+                "src": "assets/simulator_icons/political.svg",
+                "alt": "aspect-political-icon"
+            }
+        }
+    ],
+    "crises": [
+        {
+            "id": 0,
+            "type": "mild",
+            "title": "Steuern",
+            "happinessDelta": -0.15,
+            "mailSuggestion": {
+                "id": 0
+            }
+        },
+        {
+            "id": 1,
+            "type": "moderate",
+            "title": "Virusmutation",
+            "happinessDelta": -0.35,
+            "mailSuggestion": {
+                "id": 1
+            }
+        }
+    ],
+    "mails": [
+        {
+            "id": 0,
+            "type": "economic",
+            "subject": "Steuern",
+            "information": "Die Zufriedenheit der Bürger sinkt durch zu hohe Steuern.",
+            "senderInformation": {
+                "sender": "Wirtschaftsminister",
+                "profileImage": {
+                    "src": "assets/images/Copilot_20260306_205712.avif",
+                    "alt": "Wirtschaftsminister"
+                }
+            },
+            "eventSuggestion": {
+                "id": 0,
+                "type": "economic",
+                "title": "Steuersenkung"
+            }
+        },
+        {
+            "id": 1,
+            "type": "health",
+            "subject": "Virusmutation",
+            "information": "Die Zufriedenheit der Bürger sinkt durch eine weitere Virusmutation.",
+            "senderInformation": {
+                "sender": "Gesundheitsminister",
+                "profileImage": {
+                    "src": "assets/images/Copilot_20260306_205712.avif",
+                    "alt": "Gesundheitsminister"
+                }
+            },
+            "eventSuggestion": {
+                "id": 1,
+                "type": "health",
+                "title": "Impfkampagne"
+            }
+        }
+    ]
+}

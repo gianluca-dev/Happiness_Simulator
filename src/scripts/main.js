@@ -1,6 +1,6 @@
-import { updateLifeEvaluationChart, nationComparisonChart, updateNationComparisonChart, updateNationComparisonPlayerData, updateChartYear } from './chart.js';
-import { showEventCards, resetSideEventCount } from './event.js';
-import { showMailCollection, resetUnreadMails } from './mail.js';
+import { showEventCards } from './event.js';
+import { showAllMails, resetUnreadMails } from './mail.js';
+import { initLifeEvalChart, initNationCompChart, updateChartYear } from './chart.js';
 
 const path = window.location.pathname;
 // Enabling EventListener for start on index.html
@@ -8,387 +8,379 @@ if (path.includes('index.html') || path.endsWith('/')) {
     document.getElementById('start-btn').addEventListener('click', () => {
         window.location.href = 'simulator.html';
     });
+
+    document.getElementById('restart-btn').addEventListener('click', () => {
+        deleteSimData();
+        window.location.href = 'simulator.html';
+    });
 } else if (path.includes('simulator.html')) {
-        // Managing clicks & data for nation-comparison
     document.addEventListener('DOMContentLoaded', async () => {
         try {
-            const nationComparisonData = await loadSimulatorData();
-            updateNationComparisonChart(nationComparisonData.nationComparisonData, lifeEvalScores);
-            createNationBtn(nationComparisonData);
+            const simData = await loadSimData();
+            loadSavedData();
+            loadCrisis(simData);
+            showEventCards(simData);
         } catch (error) {
             console.error(error);
         }
-
         initEventListeners();
-        updateLifeEvaluationChart(lifeEvalScores);
+        showCoins();
+
+        initLifeEvalChart(simState, currentYear);
+        initNationCompChart(nationCompState, currentYear);
     });
 }
 
-let lifeEvalScores = [7.406];
-let monthlyHappinessDelta = 0;
-let shieldPoints = 0;
-const maxShieldPoints = 2;
-
-export function applyEventDelta(event, isSuggested, isRejected = false) {
-    if (isSuggested && !isRejected) {
-        monthlyHappinessDelta += event.happinessDelta;
-    } else if (isSuggested && isRejected) {
-        monthlyHappinessDelta -= event.happinessDelta;
-    } else {
-        shieldPoints = Math.min(shieldPoints + event.shieldValue, maxShieldPoints);
-        monthlyHappinessDelta += event.happinessDelta * 0.5;
+const simState = {
+    coins: 10000000,
+    shieldValue: 0,
+    happinessDelta: 0,
+    lifeEvalScores: {
+        2019: [7.406],
+        2020: [],
+        2021: [],
+        2022: [],
+        2023: []
     }
 }
 
-export function applyCrisisDelta(crisis) {
-    let delta = crisis.happinessDelta;
-    if (shieldPoints > 0) {
-        delta = delta / 2;
-        shieldPoints--;
-    }
-
-    monthlyHappinessDelta += delta;
+const crisisState = {
+    crisisCount: 0,
+    lastCrisisIndex: -1,
+    currentCrisis: null,
+    currentDate: null
 }
 
-function applyMonthlyHappiness() {
-    const current = lifeEvalScores[lifeEvalScores.length - 1];
-    const newValue = Math.max(0, Math.min(current + monthlyHappinessDelta, 10));
+const nationCompState = [
+    { nation: 'Deutschland', lifeEvalScores: simState.lifeEvalScores},
+    { nation: 'Finnland', lifeEvalScores: {
+        2019: [7.809],
+        2020: [7.842],
+        2021: [7.821],
+        2022: [7.804],
+        2023: [7.741]
+    }},
+    { nation: 'Dänemark', lifeEvalScores: {
+        2019: [7.646],
+        2020: [7.620],
+        2021: [7.636],
+        2022: [7.586],
+        2023: [7.583]
+    }},
+    { nation: 'Norwegen', lifeEvalScores: {
+        2019: [7.488],
+        2020: [7.392],
+        2021: [7.365],
+        2022: [7.315],
+        2023: [7.302]
+    }},
+    { nation: 'Schweden', lifeEvalScores: {
+        2019: [7.353],
+        2020: [7.363],
+        2021: [7.384],
+        2022: [7.395],
+        2023: [7.344]
+    }},
+    { nation: 'Island', lifeEvalScores: {
+        2019: [7.504],
+        2020: [7.554],
+        2021: [7.557],
+        2022: [7.530],
+        2023: [7.525]
+    }},
+    { nation: 'Niederlande', lifeEvalScores: {
+        2019: [7.449],
+        2020: [7.464],
+        2021: [7.415],
+        2022: [7.403],
+        2023: [7.319]
+    }},
+];
 
-    lifeEvalScores.push(newValue);
-    monthlyHappinessDelta = 0;
-    updateLifeEvaluationChart(lifeEvalScores);
-    updateNationComparisonPlayerData(lifeEvalScores)
-}
+let currentYear = 2019;
 
-// ---------- Loading simulator data ---------- //
-
-export async function loadSimulatorData() {
+export async function loadSimData() {
     try {
-        const response = await fetch('simulator-data.json');
+        const response = await fetch('simData.json');
         return await response.json();
     } catch (error) {
         console.error(error);
     }
 }
 
-let coins = 10000000;
-const monthlyIncome = 1000000;
+function saveSimData() {
+    const saveDataState = {
+        simState,
+        crisisState,
+        nationCompState,
+        currentYear
+    };
 
-export function deductCoins(simulatorData, cost) {
-    if (coins - cost < 0) {
-        showToastNotification('Nicht genug Budget!', '#fddede', '#ef4444');
-        return;
-    }
-
-    coins -= cost;
-    showCoins(coins);
-    nextCrisis(simulatorData);
+    localStorage.setItem('Happiness-Simulator', JSON.stringify(saveDataState));
 }
 
-export function paySideEvent(cost) {
-    if (coins - cost < 0) {
-        showToastNotification('Nicht genug Budget!', '#fddede', '#ef4444');
-        return;
-    }
+function loadSavedData() {
+    const savedData = localStorage.getItem('Happiness-Simulator');
+    if (!savedData) return;
 
-    coins -= cost;
-    showCoins(coins);
-}
-
-export function addMonthlyIncome() {
-    coins += monthlyIncome;
-    showCoins(coins);
-}
-
-function showCoins(coins) {
-    const coinEl = document.getElementById('coin-element');
-    coinEl.innerText = `${coins.toLocaleString('de-DE')} €`;
-}
-
-showCoins(10000000);
-
-// ---------- Processing crises ---------- //
-
-document.addEventListener('DOMContentLoaded', async () => {
-    const simulatorData = await loadSimulatorData();
-    loadCrises(simulatorData);
-    showEventCards(simulatorData);
-});
-
-function loadCrises(simulatorData) {
-    document.querySelectorAll('.event-card-highlighted').forEach(card => {
-        card.classList.remove('event-card-highlighted');
-        card.querySelector('.reject-btn').classList.add('hide-reject-btn');
-    });
-
-    const crises = simulatorData.crises;
-    const randomIndex = getRandomCrisisIndex(crises);
-
-    let currentCrisis = crises[randomIndex];
-    
-    applyCrisisDelta(currentCrisis);
-
-    const suggestedMail = simulatorData.mails[currentCrisis.mailSuggestion.id];
-    showMailCollection(suggestedMail);
-}
-
-let lastCrisisIndex = null;
-
-function getRandomCrisisIndex(crises) {
-    let randomIndex;
-
-    do {
-        randomIndex = Math.floor(Math.random() * crises.length);
-    } while (randomIndex === lastCrisisIndex);
-
-    lastCrisisIndex = randomIndex;
-    return randomIndex;
-}
-
-let crisisCount = 0;
-let currentYear = 2019;
-
-export function nextCrisis(simulatorData) {
-    if (simulatorData) {
-        crisisCount++;
-        if (crisisCount % 2 === 0) {
-            addMonthlyIncome();
-            applyMonthlyHappiness();
-            resetSideEventCount();
-            showToastNotification('Neuer Monat!', '#d0f5f0', '#14b8a6');
-        }
-        if (crisisCount % 24 === 0) {
-            currentYear++;
-            updateChartYear(currentYear);
-        }
-        loadCrises(simulatorData);
-    }
-}
-
-export function disableSideEvents() {
-    document.querySelectorAll('.accept-btn').forEach(btn => {
-        btn.disabled = true;
-        showToastNotification('Maximale Anzahl an Nebenereignisse erreicht!', '#fddede', '#ef4444');
-    });
-}
-
-/*let mailQuestions = [];
-let wellbeingHistory = [7.076];
-// Loading Questions from JSON file
-async function loadQuestions() {
     try {
-        const response = await fetch('../questions.json');
-        mailQuestions = await response.json();
-        updateWellbeingChart(wellbeingHistory);
-        showNextQuestion();
+        const parsedData = JSON.parse(savedData);
+
+        Object.assign(simState, parsedData.simState);
+        Object.assign(crisisState, parsedData.crisisState);
+
+        nationCompState.splice(0, nationCompState.length, ...parsedData.nationCompState);
+        nationCompState[0].lifeEvalScores = simState.lifeEvalScores;
+
+        currentYear = parsedData.currentYear;
     } catch (error) {
         console.error(error);
     }
 }
 
-loadQuestions();
-
-let currentIndex = 0;
-
-function showNextQuestion() {
-    if (currentIndex > mailQuestions.length - 1) {
-        console.log('No more questions available!');                                                           // console.log
-        return;
-    }
-
-    const questionElement = document.createElement('p');
-    questionElement.textContent = mailQuestions[currentIndex].question;
-    
-    const mailContainer = document.getElementById('mail-container');
-    mailContainer.innerHTML = '';
-    mailContainer.appendChild(questionElement);
-
-    mailQuestions[currentIndex].options.forEach(option => {
-        createOptionBtn(option.text, option.value);
-    });
+function deleteSimData() {
+    localStorage.removeItem('Happiness-Simulator');
 }
-
-function createOptionBtn(text, optionValue) {
-    const optionElement = document.createElement('button');
-    optionElement.className = 'option-btn';
-    optionElement.textContent = text;
-    optionElement.addEventListener('click', () => {
-        chooseOption(optionValue);
-        currentIndex++;
-        showNextQuestion();
-    });
-    const mailContainer = document.getElementById('mail-container');
-    mailContainer.appendChild(optionElement);
-}
-
-function chooseOption(option) {
-    let delta;
-    let message;
-    switch(option) {
-        case 1: 
-            message = 'Not at all';
-            delta = mailQuestions[currentIndex].options[0].wellbeingDelta;
-        break;
-        case 2: 
-            message = 'Somewhat satisfied';
-            delta = mailQuestions[currentIndex].options[1].wellbeingDelta;
-        break;
-        case 3: 
-            message = 'Very satisfied';
-            delta = mailQuestions[currentIndex].options[2].wellbeingDelta;
-        break;
-        default:
-            console.error('Invalid option selected');
-        break;
-    }
-
-    console.log(message);                                                                                   // console.log()
-    applyWellbeingDelta(delta);
-}
-
-let deltaSum = 0;
-
-function applyWellbeingDelta(delta) {
-    if (!wellbeingHistory.length) return;
-
-    const current = wellbeingHistory[wellbeingHistory.length - 1];
-    const newValue = current + (deltaSum += delta);
-
-    if ((currentIndex + 1) % 3 === 0) {
-        console.log('Chart updated!');                                                                     // console.log()
-        wellbeingHistory.push(Math.max(0, Math.min(newValue, 10)));
-        deltaSum = 0;
-
-        updateWellbeingChart(wellbeingHistory);
-    }
-}*/
 
 function initEventListeners() {
-    // Loading tutorial.html as an external site
-    document.getElementById('tips-app-container').addEventListener('click', () => {
-        window.open('tutorial.html', '_blank');
-    });
-    // Opening the clicked aspect-menu
-    const aspectMenuNavigation = document.getElementById('aspect-menu-navigation');
-    if (aspectMenuNavigation) {
-        aspectMenuNavigation.addEventListener('click', (event) => {
+    // Loading tutorial as external site
+    document.getElementById('app-icon-tips').addEventListener('click', () => window.open('tutorial.html', '_blank'));
+
+    const aspectMenuNav = document.getElementById('aspect-menu-nav');
+    if (aspectMenuNav) {
+        aspectMenuNav.addEventListener('click', (event) => {
             const clickedAspect = event.target.closest('.aspect-container');
             if (clickedAspect) openAspectMenu(clickedAspect.id);
         });
     }
-    // Controlling enter & exit in nation-comparison
-    appIconControl();
-    mailIconControl();
+
+    appControl();
 }
+
+//---------- Delta ----------//
+
+export function applyEventDelta(event, isMainEvent, isAccepted) {
+    if (isMainEvent && isAccepted) {
+        simState.happinessDelta += event.happinessDelta;
+    } else if (isMainEvent && !isAccepted) {
+        simState.happinessDelta -= event.happinessDelta;
+    } else {
+        simState.shieldValue = Math.min((simState.shieldValue + event.shieldValue), 2);
+        simState.happinessDelta += (event.happinessDelta * 0.5);
+    }
+}
+
+function applyCrisisDelta(currentCrisis) {
+    let delta = currentCrisis.happinessDelta;
+    if (simState.shieldValue > 0) {
+        delta /= 2;
+        simState.shieldValue--;
+    }
+
+    simState.happinessDelta += delta;
+}
+
+function applyHappinessDelta() {
+    // Stores the last value from simState.lifeEvalScores
+    const currentScore = simState.lifeEvalScores[currentYear].at(-1);
+    const newValue = Math.max(0, Math.min((currentScore + simState.happinessDelta), 10));
+
+    simState.lifeEvalScores[currentYear].push(newValue);
+    simState.happinessDelta = 0;
+
+    initLifeEvalChart(simState, currentYear);
+    initNationCompChart(nationCompState, currentYear);
+}
+
+//---------- Events ----------//
 
 export function openAspectMenu(aspectId) {
     const aspectMenu = document.getElementById(`aspect-menu-${aspectId}`);
     const aspectContainer = document.getElementById(aspectId);
 
+    if (!aspectMenu) {
+        console.error(`Element nicht gefunden: 'aspect-menu-${aspectId}'`);
+        return;
+    }
+    if (!aspectContainer) {
+        console.error(`Element nicht gefunden: '${aspectId}'`);
+        return;
+    }
+
     aspectMenu.classList.toggle('aspect-menu-active');
     aspectContainer.classList.toggle('aspect-container-shifted');
 }
 
-function appIconControl() {
-    const nationComparisonApp = document.getElementById('nation-comparison-app-container');
-    const nationComparisonExit = document.getElementById('nation-comparison-exit-container');
-
-    if (nationComparisonApp) {
-        nationComparisonApp.addEventListener('click', () => controlNationComparison(false));
-    }
-    if (nationComparisonExit) {
-        nationComparisonExit.addEventListener('click', () => controlNationComparison(true));
+function showCoins() {
+    const coinElement = document.getElementById('coin-element');
+    if (coinElement) {
+        coinElement.textContent = `${simState.coins.toLocaleString('de-DE')} €`;
     }
 }
 
-function controlNationComparison(state) {
-    const nationComparisonWrapper = document.getElementById('nation-comparison-wrapper');
-    nationComparisonWrapper.classList.toggle('nation-comparison-wrapper-inactive', state);
+function earnMonthlyIncome(monthlyIncome) {
+    simState.coins += monthlyIncome;
+    showCoins();
 }
 
-function mailIconControl() {
-    const mailApp = document.getElementById('mails-app-container');
-    const mailExit = document.getElementById('mail-exit-container');
-
-    if (mailApp) {
-        mailApp.addEventListener('click', () => controlMail(false));
-    }
-    if (mailExit) {
-        mailExit.addEventListener('click', () => controlMail(true));
-    }
-}
-
-function controlMail(state) {
-    const mailWrapper = document.getElementById('mail-wrapper');
-    mailWrapper.classList.toggle('mail-wrapper-inactive', state);
-
-    if (!state) {
-        resetUnreadMails();
-    }
-}
-
-function createNationBtn(nationComparisonData) {
-    const nationBtnWrapper = document.getElementById('nation-btn-wrapper');
-
-    nationComparisonData.nationComparisonData.forEach(nation => {
-        const nationBtnContainer = document.createElement('div');
-        nationBtnContainer.className = 'nation-btn-container';
-        nationBtnContainer.id = `nation-btn-container-${nation.id}`;
-
-        const nationBtnElement = document.createElement('button');
-        nationBtnElement.className = 'nation-btn-element';
-        nationBtnElement.textContent = nation.nation;
-        nationBtnElement.addEventListener('click', () => {
-            console.log(`Selected Nation: ${nation.nation}`);                                           // console.log()
-            showOnlyNation(nation.id);
-        });
-        
-        nationBtnContainer.appendChild(nationBtnElement);
-        nationBtnWrapper.appendChild(nationBtnContainer);
-
-        showLifeEvaluation(nationBtnContainer, nation);
-    });
-} 
-
-let selectedNationId = null;
-
-function showOnlyNation(nationId) {
-    if (selectedNationId === nationId) {
-        nationComparisonChart.data.datasets.forEach((_, i) => {
-            nationComparisonChart.show(i);
-        });
-        selectedNationId = null;
-    } else {
-        nationComparisonChart.data.datasets.forEach((_, i) => {
-            if (i === nationId) {
-                nationComparisonChart.show(i);
-            } else {
-                nationComparisonChart.hide(i);
-            }
-        });
-        selectedNationId = nationId;
-    }
-}
-
-function showLifeEvaluation(nationBtnContainer, nation, year = 1) {
-    if (!nation || !nation.lifeEvaluation || nation.lifeEvaluation.length === 0) {
-        console.warn('No Life Evaluation data found!');
+export function subtractCosts(simData, isMainEvent, costs) {
+    if ((simState.coins - costs) < 0) {
+        showToastNotification('Nicht genug Coins!', '#fddede', '#ef4444');
         return;
     }
 
-    const nationLifeEvaluationElement = document.createElement('p');
-    nationLifeEvaluationElement.className = 'nation-life-evaluation-element';
-    nationLifeEvaluationElement.textContent = nation.lifeEvaluation[year].toFixed(3);
+    simState.coins -= costs;
 
-    nationBtnContainer.appendChild(nationLifeEvaluationElement);
+    showCoins();
+    
+    if (isMainEvent) nextCrisis(simData);
 }
 
-function showToastNotification(message, bgColor, bColor) {
-    const toastNotification = document.getElementById('toast-notification');
-    toastNotification.textContent = message;
+//---------- Crises ----------//
+
+function loadCrisis(simData) {
+    document.querySelectorAll('.reject-btn').forEach(btn => btn.classList.add('inactive'));
+    document.querySelectorAll('.event-card-highlighted').forEach(eventCard => eventCard.classList.remove('event-card-highlighted'));
+
+    const allCrises = simData.crises;
+    
+    const crisisIndex = generateCrisisIndex(allCrises);
+    const currentCrisis = allCrises[crisisIndex];
+    crisisState.currentCrisis = currentCrisis;
+
+    crisisState.currentDate = calculateDate();
+    showDate();
+
+    applyCrisisDelta(currentCrisis);
+
+    const suggestedMail = simData.mails[currentCrisis.mailSuggestion.id];
+    showAllMails(suggestedMail, crisisState.currentDate);
+}
+
+function generateCrisisIndex(allCrises) {
+    let index;
+    
+    do {
+        index = Math.floor(Math.random() * allCrises.length);
+    } while (index === crisisState.lastCrisisIndex);
+
+    crisisState.lastCrisisIndex = index;
+    return index;
+}
+
+export function nextCrisis(simData) {
+    crisisState.crisisCount++;
+    if (crisisState.crisisCount % 2 === 0) {
+        calculateNationCompScores(nationCompState, currentYear);
+        applyHappinessDelta();
+        earnMonthlyIncome(1000000);
+        showToastNotification('Neuer Monat!', '#d0f5f0', '#14b8a6');
+        saveSimData();
+        if (crisisState.crisisCount % 24 === 0) {
+            currentYear++;
+            updateChartYear(currentYear);
+        }
+    }
+    loadCrisis(simData);
+}
+
+//---------- Nation-Comparison ----------//
+
+function calculateNationCompScores(nationCompState, currentYear) {
+    nationCompState.forEach(nation => {
+        if (nation.nation === 'Deutschland') return;
+
+        const lastValue = nation.lifeEvalScores[currentYear].at(-1);
+        let newValue;
+
+        if (nation.lifeEvalScores[currentYear].length > 11) return;
+
+        if (crisisState.currentCrisis.type === 'severe') {
+            newValue = Math.max(0, Math.min((lastValue + (crisisState.currentCrisis.happinessDelta * 0.5)), 10));
+        } else if (crisisState.currentCrisis.type === 'moderate') {
+            const isNegative = Math.random() < 0.5;
+
+            if (isNegative) {
+                newValue = Math.max(0, Math.min((lastValue + (crisisState.currentCrisis.happinessDelta * 0.25)), 10));
+            } else {
+                newValue = Math.max(0, Math.min((lastValue + (Math.random() * 0.2)), 10));
+            }
+        } else if (crisisState.currentCrisis.type === 'mild') {
+            newValue = Math.max(0, Math.min((lastValue + (Math.random() * 0.2)), 10));
+        }
+
+        if (nation.lifeEvalScores[currentYear].length == 11) {
+            const nextYearStartValue = nation.lifeEvalScores[currentYear + 1]?.[0];
+            
+            if (nextYearStartValue) {
+                const difference = nextYearStartValue - newValue;
+                newValue = Math.max(0, Math.min((newValue + (difference * 0.5)), 10));
+            }
+        }
+
+        nation.lifeEvalScores[currentYear].push(newValue);
+    });
+}
+
+//---------- App-Control ----------//
+
+function appControl() {
+    const nationCompApp = document.getElementById('app-icon-nation-comp');
+    const nationCompExit = document.getElementById('app-nation-comp-exit');
+
+    if (nationCompApp) nationCompApp.addEventListener('click', () => controlApp('app-nation-comp-section', false));
+    if (nationCompExit) nationCompExit.addEventListener('click', () => controlApp('app-nation-comp-section', true));
+
+    const mailsApp = document.getElementById('app-icon-mails');
+    const mailsExit = document.getElementById('app-mails-exit');
+
+    if (mailsApp) mailsApp.addEventListener('click', () => {
+        controlApp('app-mails-section', false);
+        resetUnreadMails();
+    });
+    if (mailsExit) mailsExit.addEventListener('click', () => controlApp('app-mails-section', true));
+}
+
+function controlApp(appId, state) {
+    document.getElementById(appId).classList.toggle('inactive', state);
+}
+
+//---------- Date ----------//
+
+export function calculateDate() {
+    const month = (Math.floor(crisisState.crisisCount / 2) % 12) + 1;
+    let day;
+
+    if (crisisState.crisisCount % 2 === 1) {
+        day = Math.floor(Math.random() * 15) + 16;
+    } else {
+        day = Math.floor(Math.random() * 15) + 1;
+    }
+
+    const dayString = String(day).padStart(2, '0');
+    const monthString = String(month).padStart(2, '0');
+
+    return `${dayString}.${monthString}`;
+}
+
+function showDate() {
+    const monthNames = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
+    const [day, month] = crisisState.currentDate.split('.');
+
+    document.getElementById('date-element').innerText = `${day}. ${monthNames[parseInt(month) - 1]} ${currentYear}`;
+}
+
+//---------- Toast Notification ----------//
+
+export function showToastNotification(message, bgColor, bColor) {
+    const toastNotification = document.getElementById('toast-container');
+    if (!toastNotification) return;
+
+    toastNotification.textContent = message; 
     toastNotification.style.backgroundColor = bgColor;
     toastNotification.style.borderColor = bColor;
     toastNotification.style.color = bColor;
+
     toastNotification.classList.add('toast-notification-active');
     setTimeout(() => toastNotification.classList.remove('toast-notification-active'), 2500);
 }
