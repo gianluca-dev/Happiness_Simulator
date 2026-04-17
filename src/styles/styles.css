@@ -242,8 +242,8 @@ footer {
   border-radius: 13px;
   border: none;
   padding: 5px 7px 5px 20px;
-  background-color: var(--default-text-color);
-  color: var(--default-white);
+  background-color: var(--footer-bg-color);
+  color: var(--default-text-color);
   font-size: 16px;
   font-weight: 500;
   cursor: pointer;
@@ -256,7 +256,6 @@ footer {
   height: 25px;
   padding: 2px;
   border-radius: 9px;
-  background-color: var(--default-white);
 }
 
 .start-btn:hover {
@@ -268,9 +267,9 @@ footer {
   justify-content: space-between;
   align-items: center;
   border-radius: 13px;
-  border: 2px solid var(--default-b-color);
+  border: 2px solid var(--default-border-color);
   padding: 5px 7px 5px 20px;
-  background-color: transparent;
+  background-color: var(--footer-bg-color);
   color: var(--default-text-color);
   font-size: 16px;
   font-weight: 500;
@@ -284,7 +283,6 @@ footer {
   height: 25px;
   padding: 2px;
   border-radius: 9px;
-  background-color: var(--default-white);
 }
 
 .restart-btn:hover {
