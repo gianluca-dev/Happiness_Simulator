@@ -235,20 +235,8 @@ footer {
   cursor: pointer;
 }
 
-.hero-btns-wrapper {
-  width: 350px;
-  height: 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 25px;
-  margin: 15px 0 0 0;
-}
-
 .start-btn {
-  width: 155px;
-  height: 40px;
-  display: flex;
+  display: block;
   justify-content: space-between;
   align-items: center;
   border-radius: 13px;
@@ -276,9 +264,7 @@ footer {
 }
 
 .restart-btn {
-  width: 155px;
-  height: 40px;
-  display: flex;
+  display: block;
   justify-content: space-between;
   align-items: center;
   border-radius: 13px;
