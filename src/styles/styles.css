@@ -4,7 +4,7 @@
   --primary-component-bg-color: #f7f7f7;
   --secondary-component-bg-color: #eeeeee;
   --primary-border-color: #e5e5e5;
-  --footer-bg-color: #ffd23de8;
+  --footer-bg-color: #FBC926;
   --default-white: #ffffff;
   --default-text-color: #252525;
   --footer-text-color: #000000;
@@ -94,7 +94,7 @@ header {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  gap: 50px;
+  gap: 25px;
 }
 
 .navigation-element {
