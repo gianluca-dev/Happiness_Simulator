@@ -111,6 +111,7 @@ header {
 }
 
 .start-btn-container-nav button{
+  color: var(--default-text-color);
   background-color: var(--button-bg-color);
   border-radius: 15px;
   padding: 10px 20px;
