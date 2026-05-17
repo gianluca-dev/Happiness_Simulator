@@ -12,6 +12,7 @@ export function showAllMails(suggestedMail, date) {
     suggestedMail.date = date;
     mailState.allMails.unshift(suggestedMail);
     showMailNotification();
+    showMailPreview(suggestedMail, date);
 
     const allMailsContainer = document.getElementById('mails-collection-container');
     allMailsContainer.innerHTML = '';
@@ -185,25 +186,98 @@ function showMail(mail, date) {
     mailContentContainer.appendChild(mailSubject);
     mailContentContainer.appendChild(mailText);
 
-    const mailEventSuggestion = document.createElement('span');
-    mailEventSuggestion.className = 'mail-event-suggestion';
-    mailEventSuggestion.textContent = `Handlungsempfehlung: ${mail.eventSuggestion.title}`;
-    mailEventSuggestion.addEventListener('click', () => {
-        openAspectMenu(mail.eventSuggestion.type);
-        setAsMainEvent(mail.eventSuggestion.id);
-    });
-
     const mailElement = document.createElement('div');
     mailElement.className = 'mail-element';
     mailElement.appendChild(mailUtilityContainer);
     mailElement.appendChild(mailHeader);
     mailElement.appendChild(mailContentContainer);
-    mailElement.appendChild(mailEventSuggestion);
+
+    if (mail.eventSuggestion) {
+        const mailEventSuggestion = document.createElement('span');
+        mailEventSuggestion.className = 'mail-event-suggestion';
+        mailEventSuggestion.textContent = `Handlungsempfehlung: ${mail.eventSuggestion.title}`;
+        mailEventSuggestion.addEventListener('click', () => {
+            openAspectMenu(mail.eventSuggestion.type);
+            setAsMainEvent(mail.eventSuggestion.id);
+        });
+
+        mailElement.appendChild(mailEventSuggestion);
+    }
 
     const mailContainer = document.getElementById('mails-container');
     mailContainer.innerHTML = '';
 
     mailContainer.appendChild(mailElement);
+}   
+
+function showMailPreview(mail, date) {
+    const previewMailSenderImage = document.createElement('img');
+    previewMailSenderImage.className = 'preview-mail-sender-image';
+    previewMailSenderImage.loading = 'eager';
+    previewMailSenderImage.src = mail.senderInformation.profileImage.src;
+    previewMailSenderImage.alt = mail.senderInformation.profileImage.alt;
+
+    const previewMailSender = document.createElement('p');
+    previewMailSender.className = 'preview-mail-sender';
+    previewMailSender.textContent = mail.senderInformation.sender;
+
+    const previewMailRecipient = document.createElement('p');
+    previewMailRecipient.className = 'preview-mail-recipient';
+    previewMailRecipient.textContent = 'an Happinessmanager';
+
+    const previewMailSenderText = document.createElement('div');
+    previewMailSenderText.className = 'preview-mail-sender-text';
+    previewMailSenderText.appendChild(previewMailSender);
+    previewMailSenderText.appendChild(previewMailRecipient);
+
+    const previewMailSenderInformation = document.createElement('div');
+    previewMailSenderInformation.className = 'preview-mail-sender-information';
+    previewMailSenderInformation.appendChild(previewMailSenderImage);
+    previewMailSenderInformation.appendChild(previewMailSenderText);
+
+    const previewMailHeaderDate = document.createElement('div');
+    previewMailHeaderDate.className = 'preview-mail-header-date';
+    previewMailHeaderDate.textContent = date;
+
+    const previewMailHeader = document.createElement('div');
+    previewMailHeader.className = 'preview-mail-header';
+    previewMailHeader.appendChild(previewMailSenderInformation);
+    previewMailHeader.appendChild(previewMailHeaderDate);
+
+    const previewMailSubject = document.createElement('p');
+    previewMailSubject.className = 'preview-mail-subject';
+    previewMailSubject.textContent = `Warnung! Rückgang der Zufriedenheit durch ${mail.subject}`;
+
+    const previewMailText = document.createElement('p');
+    previewMailText.className = 'preview-mail-text';
+    previewMailText.textContent = mail.information;
+
+    const previewMailContentContainer = document.createElement('div');
+    previewMailContentContainer.className = 'preview-mail-content-container';
+    previewMailContentContainer.appendChild(previewMailSubject);
+    previewMailContentContainer.appendChild(previewMailText);
+
+    const previewMailElement = document.createElement('div');
+    previewMailElement.className = 'preview-mail-element';
+    previewMailElement.appendChild(previewMailHeader);
+    previewMailElement.appendChild(previewMailContentContainer);
+
+    if (mail.eventSuggestion) {
+        const previewMailEventSuggestion = document.createElement('span');
+        previewMailEventSuggestion.className = 'preview-mail-event-suggestion';
+        previewMailEventSuggestion.textContent = `Handlungsempfehlung: ${mail.eventSuggestion.title}`;
+        previewMailEventSuggestion.addEventListener('click', () => {
+            openAspectMenu(mail.eventSuggestion.type);
+            setAsMainEvent(mail.eventSuggestion.id);
+        });
+
+        previewMailElement.appendChild(previewMailEventSuggestion);
+    }
+
+    const mailPreviewContainer = document.getElementById('mails-preview-container');
+    mailPreviewContainer.innerHTML = '';
+
+    mailPreviewContainer.appendChild(previewMailElement);
 }   
 
 function showMailNotification() {

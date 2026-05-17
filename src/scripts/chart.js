@@ -1,5 +1,5 @@
 let lifeEvalChart = null; 
-let nationCompChart = null;
+export let nationCompChart = null;
 
 const monthNames = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
 

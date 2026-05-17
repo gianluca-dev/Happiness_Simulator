@@ -78,7 +78,9 @@
                 <p id="coin-element">0.00 €</p>
             </div>
         </div>
-        <section class="content-section"></section>
+        <section class="content-section">
+            <img src="assets/images/Gemini_Generated_Image_97zejk97zejk97ze.png" loading="lazy" alt="content-image">
+        </section>
         <!--Life-Evaluation-Section-->
         <section class="life-eval-section">
             <div class="life-eval-chart-container">
@@ -88,7 +90,83 @@
             </div>
         </section>
         <!--Life-Evaluation-Statistics-Section-->
-        <section class="life-eval-stats-section"></section>
+        <section class="life-eval-stats-section">
+            <!--Life-Eval-Stats-Header-->
+            <div class="life-eval-stats-header">
+                <div class="view-swap-container" id="view-swap-container">
+                    <img src="assets/simulator_icons/arrows-left-right.svg" loading="eager" alt="arrows-left-right-icon">
+                </div>
+            </div>
+            <!--Stats-Preview-->
+            <div class="stats-preview" id="stats-preview">
+                <p>Statistiken</p>
+                <div class="current-life-eval-scores-container">
+                    <table>
+                        <tr>
+                            <th>Lebenszufriedenheit</th>
+                            <th>Datum</th>
+                        </tr>
+                        <tr>
+                            <td id="current-score">7.406</td><!--Nur Platzhalter! Muss dynamisch aktualisiert werden!-->
+                            <td id="current-date">2023-10-01</td><!--Nur Platzhalter! Muss dynamisch aktualisiert werden!-->
+                        </tr>
+                        <tr>
+                            <td id="previous-score">7.389</td><!--Nur Platzhalter! Muss dynamisch aktualisiert werden!-->
+                            <td id="previous-date">2023-09-01</td><!--Nur Platzhalter! Muss dynamisch aktualisiert werden!-->
+                        </tr>
+                        <tr>
+                            <td id="second-to-last-score">7.372</td><!--Nur Platzhalter! Muss dynamisch aktualisiert werden!-->
+                            <td id="second-to-last-date">2023-08-01</td><!--Nur Platzhalter! Muss dynamisch aktualisiert werden!-->
+                        </tr>
+                    </table>
+                </div>
+                <!--Nation-Comparison-Preview-->
+                <div class="nation-comp-preview">
+                    <div class="nation-comp-container">
+                        <!--Nation-Preview-->
+                        <div class="nation-preview" id="preview-finnland">
+                            <div class="color-dot" id="preview-finnland-color-dot"></div>
+                            <p class="nation-name" id="preview-finnland">Finnland</p>
+                            <p class="nation-score" id="preview-finnland-score">0.000</p>
+                        </div>
+                        <!--Nation-Preview-->
+                        <div class="nation-preview" id="preview-dänemark">
+                            <div class="color-dot" id="preview-dänemark-color-dot"></div>
+                            <p class="nation-name" id="preview-dänemark">Dänemark</p>
+                            <p class="nation-score" id="preview-dänemark-score">0.000</p>
+                        </div>
+                        <!--Nation-Preview-->
+                        <div class="nation-preview" id="preview-norwegen">
+                            <div class="color-dot" id="preview-norwegen-color-dot"></div>
+                            <p class="nation-name" id="preview-norwegen">Norwegen</p>
+                            <p class="nation-score" id="preview-norwegen-score">0.000</p>
+                        </div>
+                        <!--Nation-Preview-->
+                        <div class="nation-preview" id="preview-schweden">
+                            <div class="color-dot" id="preview-schweden-color-dot"></div>
+                            <p class="nation-name" id="preview-schweden">Schweden</p>
+                            <p class="nation-score" id="preview-schweden-score">0.000</p>
+                        </div>
+                        <!--Nation-Preview-->
+                        <div class="nation-preview" id="preview-island">
+                            <div class="color-dot" id="preview-island-color-dot"></div>
+                            <p class="nation-name" id="preview-island">Island</p>
+                            <p class="nation-score" id="preview-island-score">0.000</p>
+                        </div>
+                        <!--Nation-Preview-->
+                        <div class="nation-preview" id="preview-niederlande">
+                            <div class="color-dot" id="preview-niederlande-color-dot"></div>
+                            <p class="nation-name" id="preview-niederlande">Niederlande</p>
+                            <p class="nation-score" id="preview-niederlande-score">0.000</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Mails-Preview-->
+            <div class="mails-preview inactive" id="mails-preview">
+                <div class="mails-preview-container" id="mails-preview-container"></div>
+            </div>
+        </section>
         <!--Mails-Section-->
         <section class="app-mails-section inactive" id="app-mails-section">
             <header class="mails-header">
@@ -152,10 +230,76 @@
                     <img src="assets/simulator_icons/exit.svg" loading="eager" alt="exit-icon">
                 </div>
             </header>
-            <div class="nation-comp-chart-container">
-                <canvas class="nation-comp-chart-canvas" id="nation-comp-chart-canvas">
-                    <p>Browser unterstützt kein Canvas!</p>
-                </canvas>
+            <!--nation-Comp-Main-Start-(Chart)-->
+            <div class="nation-comp-main-start">
+                <div class="nation-comp-chart-container">
+                    <canvas class="nation-comp-chart-canvas" id="nation-comp-chart-canvas">
+                        <p>Browser unterstützt kein Canvas!</p>
+                    </canvas>
+                </div>
+            </div>
+            <!--Nation-Comp-Main-End-(Nationen-Container)-->
+            <div class="nation-comp-main-end">
+                <!--Nation-(Deutschland)-->
+                <div class="nation-container" id="deutschland">
+                    <div class="nation-container-start">
+                        <div class="color-dot" id="deutschland-color-dot"></div>
+                        <p class="nation-name">Deutschland</p>
+                    </div>
+                    <p class="nation-score" id="deutschland-score">0.000</p>
+                </div>
+                <!--Nation-(Finnland)-->
+                <div class="nation-container" id="finnland">
+                    <div class="nation-container-start">
+                        <div class="color-dot" id="finnland-color-dot"></div>
+                        <p class="nation-name">Finnland</p>
+                    </div>
+                    <p class="nation-score" id="finnland-score">0.000</p>
+                </div>
+                <!--Nation-(Dänemark)-->
+                <div class="nation-container" id="dänemark">
+                    <div class="nation-container-start">
+                        <div class="color-dot" id="dänemark-color-dot"></div>
+                        <p class="nation-name">Dänemark</p>
+                    </div>
+                    <p class="nation-score" id="dänemark-score">0.000</p>
+                </div>
+                <!--Nation-(Norwegen)-->
+                <div class="nation-container" id="norwegen">
+                    <div class="nation-container-start">
+                        <div class="color-dot" id="norwegen-color-dot"></div>
+                        <p class="nation-name">Norwegen</p>
+                    </div>
+                    <p class="nation-score" id="norwegen-score">0.000</p>
+                </div>
+                <!--Nation-(Schweden)-->
+                <div class="nation-container" id="schweden">
+                    <div class="nation-container-start">
+                        <div class="color-dot" id="schweden-color-dot"></div>
+                        <p class="nation-name">Schweden</p>
+                    </div>
+                    <p class="nation-score" id="schweden-score">0.000</p>
+                </div>
+                <!--Nation-(Island)-->
+                <div class="nation-container" id="island">
+                    <div class="nation-container-start">
+                        <div class="color-dot" id="island-color-dot"></div>
+                        <p class="nation-name">Island</p>
+                    </div>
+                    <p class="nation-score" id="island-score">0.000</p>
+                </div>
+                <!--Nation-(Niederlande)-->
+                <div class="nation-container" id="niederlande">
+                    <div class="nation-container-start">
+                        <div class="color-dot" id="niederlande-color-dot"></div>
+                        <p class="nation-name">Niederlande</p>
+                    </div>
+                    <p class="nation-score" id="niederlande-score">0.000</p>
+                </div>
+                <!--Nation-Information-Container-->
+                <div class="nation-information-container inactive" id="nation-information-container">
+                    <p>Placeholder</p>
+                </div>
             </div>
         </section>
     </main>
