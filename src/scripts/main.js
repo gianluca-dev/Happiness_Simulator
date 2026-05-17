@@ -80,6 +80,10 @@ let currentYear = 2019;
 const path = window.location.pathname;
 // Enabling EventListener for start on index.html
 if (path.includes('index.html') || path.endsWith('/')) {
+    document.getElementById('start-btn-navbar').addEventListener('click', () => {
+        window.location.href = 'simulator.html';
+    });
+
     document.getElementById('start-btn').addEventListener('click', () => {
         window.location.href = 'simulator.html';
     });
