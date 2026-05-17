@@ -1,4 +1,4 @@
-import { subtractCosts, applyEventDelta, nextCrisis, showToastNotification } from './main.js';
+import { subtractCosts, applyEventDelta, nextCrisis, showToastNotification, simState, crisisState } from './main.js';
 
 const eventState = {
     sideEventCount: 0
@@ -24,10 +24,6 @@ export function showEventCards(simData) {
         eventExtend.loading = 'eager';
         eventExtend.src = 'assets/simulator_icons/caret-circle-right.svg';
         eventExtend.alt = 'caret-right-icon';
-        eventExtend.addEventListener('click', () => {
-            eventCardMain.classList.toggle('inactive');
-            eventCard.classList.toggle('extended');
-        });
 
         const eventHeaderIconContainer = document.createElement('div');
         eventHeaderIconContainer.className = 'event-header-icon-container';
@@ -38,6 +34,10 @@ export function showEventCards(simData) {
         eventCardHeader.className = 'event-card-header';
         eventCardHeader.appendChild(eventTitle);
         eventCardHeader.appendChild(eventHeaderIconContainer);
+        eventCardHeader.addEventListener('click', () => {
+            eventCardMain.classList.toggle('inactive');
+            eventCard.classList.toggle('extended');
+        });
 
         //---------- Event-Btns ----------//
         const acceptBtn = document.createElement('button');
@@ -45,6 +45,7 @@ export function showEventCards(simData) {
         acceptBtn.textContent = 'Akzeptieren';
         acceptBtn.addEventListener('click', () => {
             const isMainEvent = !rejectBtn.classList.contains('inactive');
+            identifyEvents(event);
             handleAccept(simData, event, isMainEvent, event.costs);
         });
 
@@ -62,20 +63,33 @@ export function showEventCards(simData) {
         eventCardBtns.appendChild(rejectBtn);
 
         //---------- Event-Main ----------//
+        const happinessDeltaTitle = document.createElement('p');
+        happinessDeltaTitle.className = 'happiness-delta-title';
+        happinessDeltaTitle.textContent = 'Zufriedenheit';
+
         const happinessDeltaIcon = document.createElement('img');
         happinessDeltaIcon.className = 'happiness-delta-icon';
         happinessDeltaIcon.loading = 'eager';
-        happinessDeltaIcon.src = 'assets/simulator_icons/shield.svg';
+        happinessDeltaIcon.src = 'assets/simulator_icons/smiley.svg';
         happinessDeltaIcon.alt = 'smiley-icon';
 
         const happinessDelta = document.createElement('p');
         happinessDelta.className = 'happiness-delta';
         happinessDelta.textContent = event.happinessDelta;
 
+        const happinessDeltaHeader = document.createElement('div');
+        happinessDeltaHeader.className = 'happiness-delta-header';
+        happinessDeltaHeader.appendChild(happinessDeltaIcon);
+        happinessDeltaHeader.appendChild(happinessDeltaTitle);
+
         const happinessDeltaContainer = document.createElement('div');
         happinessDeltaContainer.className = 'happiness-delta-container';
-        happinessDeltaContainer.appendChild(happinessDeltaIcon);
+        happinessDeltaContainer.appendChild(happinessDeltaHeader);
         happinessDeltaContainer.appendChild(happinessDelta);
+
+        const shieldValueTitle = document.createElement('p');
+        shieldValueTitle.className = 'shield-value-title';
+        shieldValueTitle.textContent = 'Schutzpunkte';
 
         const shieldValueIcon = document.createElement('img');
         shieldValueIcon.className = 'shield-value-icon';
@@ -87,20 +101,33 @@ export function showEventCards(simData) {
         shieldValue.className = 'shield-value';
         shieldValue.textContent = event.shieldValue;
 
+        const shieldValueHeader = document.createElement('div');
+        shieldValueHeader.className = 'shield-value-header';
+        shieldValueHeader.appendChild(shieldValueIcon);
+        shieldValueHeader.appendChild(shieldValueTitle);
+
         const shieldValueContainer = document.createElement('div');
         shieldValueContainer.className = 'shield-value-container';
-        shieldValueContainer.appendChild(shieldValueIcon);
+        shieldValueContainer.appendChild(shieldValueHeader);
         shieldValueContainer.appendChild(shieldValue);
 
         const eventCosts = document.createElement('p');
         eventCosts.className = 'event-costs';
         eventCosts.textContent = `${event.costs.toLocaleString('de-DE')} €`;
 
+        const eventCostsContainer = document.createElement('div');
+        eventCostsContainer.className = 'event-costs-container';
+        eventCostsContainer.appendChild(eventCosts);
+
+        const eventCardDetailsWrapper = document.createElement('div');
+        eventCardDetailsWrapper.className = 'event-card-details-wrapper';
+        eventCardDetailsWrapper.appendChild(happinessDeltaContainer);
+        eventCardDetailsWrapper.appendChild(shieldValueContainer);
+
         const eventCardDetails = document.createElement('div');
         eventCardDetails.className = 'event-card-details';
-        //eventCardDetails.appendChild(happinessDeltaContainer);
-        //eventCardDetails.appendChild(shieldValueContainer);
-        eventCardDetails.appendChild(eventCosts);
+        eventCardDetails.appendChild(eventCardDetailsWrapper);
+        eventCardDetails.appendChild(eventCostsContainer);
 
         const eventCardMain = document.createElement('div');
         eventCardMain.className = 'event-card-main inactive';
@@ -166,4 +193,38 @@ function enableMainEvents() {
         const rejectBtn = card.querySelector('.reject-btn');
         if (rejectBtn && !rejectBtn.classList.contains('inactive')) card.querySelector('.accept-btn').disabled = false;
     });
+}
+
+function identifyEvents(event) {
+    switch (event.effect) {
+        case 'tax_reduction': 
+            taxReduction();
+        break;
+        case 'political_instability':
+            politicalInstability();        
+        break;
+        case 'vaccination_campaign':
+            vaccinationCampaign();
+        break;
+        default:
+            console.error('No effect identified for : ', event.effect);
+    }
+}
+
+function taxReduction() {
+    const monthlyIncomeReduction = simState.income * 0.88;
+    simState.income = monthlyIncomeReduction;
+
+    simState.activeEffects.taxReductionEnd = crisisState.crisisCount + 6;
+}
+
+function politicalInstability() {
+    simState.activeEffects.politicalInstabilityStart = crisisState.crisisCount;
+}
+
+function vaccinationCampaign() {
+    simState.maxShieldValue = 3;
+    simState.shieldValue = Math.min((simState.shieldValue + 1), 3);
+
+    simState.activeEffects.vaccinationCampaignEnd = crisisState.crisisCount + 6;
 }

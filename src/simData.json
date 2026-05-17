@@ -5,6 +5,7 @@
             "type": "economic",
             "title": "Steuersenkung",
             "description": "Mehrwertsteuer von 19% auf 7% gesenkt.",
+            "effect": "tax_reduction",
             "costs": 500000,
             "happinessDelta": 0.15,
             "shieldValue": 0,
@@ -18,6 +19,7 @@
             "type": "economic",
             "title": "Steuersenkung",
             "description": "Mehrwertsteuer von 19% auf 7% gesenkt.",
+            "effect": "tax_reduction",
             "costs": 500000,
             "happinessDelta": 0.15,
             "shieldValue": 0,
@@ -31,6 +33,7 @@
             "type": "health",
             "title": "Impfkampagne",
             "description": "Es wird eine Impfkampagne gestartet.",
+            "effect": "vaccination_campaign",
             "costs": 1500000,
             "happinessDelta": 0.25,
             "shieldValue": 1,
@@ -44,6 +47,7 @@
             "type": "political",
             "title": "Neuwahlen",
             "description": "Es werden Neuwahlen angesetzt.",
+            "effect": "political_instability",
             "costs": 2500000,
             "happinessDelta": 0.50,
             "shieldValue": 2,
@@ -56,26 +60,48 @@
     "crises": [
         {
             "id": 0,
+            "title": "Proteste",
+            "happinessDelta": -0.25,
+            "mailSuggestion": {
+                "id": 0
+            },
+            "isProtest": true
+        },
+        {
+            "id": 1,
             "type": "mild",
             "title": "Steuern",
             "happinessDelta": -0.15,
             "mailSuggestion": {
-                "id": 0
+                "id": 1
             }
         },
         {
-            "id": 1,
+            "id": 2,
             "type": "moderate",
             "title": "Virusmutation",
             "happinessDelta": -0.35,
             "mailSuggestion": {
-                "id": 1
+                "id": 2
             }
         }
     ],
     "mails": [
         {
             "id": 0,
+            "type": "political",
+            "subject": "Proteste",
+            "information": "Die Bürger gehen landesweit auf die Straßen.",
+            "senderInformation": {
+                "sender": "Innenminister",
+                "profileImage": {
+                    "src": "assets/images/Copilot_20260306_205712.avif",
+                    "alt": "Innenminister"
+                }
+            }
+        },
+        {
+            "id": 1,
             "type": "economic",
             "subject": "Steuern",
             "information": "Die Zufriedenheit der Bürger sinkt durch zu hohe Steuern.",
@@ -93,7 +119,7 @@
             }
         },
         {
-            "id": 1,
+            "id": 2,
             "type": "health",
             "subject": "Virusmutation",
             "information": "Die Zufriedenheit der Bürger sinkt durch eine weitere Virusmutation.",
