@@ -79,85 +79,143 @@
             </div>
         </div>
         <section class="content-section">
-            <img src="assets/images/Gemini_Generated_Image_97zejk97zejk97ze.png" loading="lazy" alt="content-image">
+            <img src="assets/images/1000_F_340692564_plWiQvnaVCN0tgbpihjM3UfPDsammH0S_image.avif" loading="lazy" alt="content-image">
+            <div class="marker-deutschland" id="marker-deutschland"></div>
+            <div class="marker-finnland" id="marker-finnland"></div>
+            <div class="marker-dänemark" id="marker-dänemark"></div>
+            <div class="marker-norwegen" id="marker-norwegen"></div>
+            <div class="marker-schweden" id="marker-schweden"></div>
+            <div class="marker-island" id="marker-island"></div>
+            <div class="marker-niederlande" id="marker-niederlande"></div>
         </section>
         <!--Life-Evaluation-Section-->
         <section class="life-eval-section">
-            <div class="life-eval-chart-container">
-                <canvas class="life-eval-chart-canvas" id="life-eval-chart-canvas">
-                    <p>Browser unterstützt kein Canvas!</p>
-                </canvas>
+            <div class="life-eval-chart-wrapper">
+                <div class="life-eval-chart-container">
+                    <canvas class="life-eval-chart-canvas" id="life-eval-chart-canvas">
+                        <p>Browser unterstützt kein Canvas!</p>
+                    </canvas>
+                </div>
             </div>
         </section>
         <!--Life-Evaluation-Statistics-Section-->
         <section class="life-eval-stats-section">
-            <!--Life-Eval-Stats-Header-->
-            <div class="life-eval-stats-header">
+            <!--View-Swapper-->
+            <div class="view-swap-wrapper">
                 <div class="view-swap-container" id="view-swap-container">
                     <img src="assets/simulator_icons/arrows-left-right.svg" loading="eager" alt="arrows-left-right-icon">
                 </div>
             </div>
             <!--Stats-Preview-->
             <div class="stats-preview" id="stats-preview">
-                <p>Statistiken</p>
-                <div class="current-life-eval-scores-container">
-                    <table>
-                        <tr>
-                            <th>Lebenszufriedenheit</th>
-                            <th>Datum</th>
-                        </tr>
-                        <tr>
-                            <td id="current-score">7.406</td><!--Nur Platzhalter! Muss dynamisch aktualisiert werden!-->
-                            <td id="current-date">2023-10-01</td><!--Nur Platzhalter! Muss dynamisch aktualisiert werden!-->
-                        </tr>
-                        <tr>
-                            <td id="previous-score">7.389</td><!--Nur Platzhalter! Muss dynamisch aktualisiert werden!-->
-                            <td id="previous-date">2023-09-01</td><!--Nur Platzhalter! Muss dynamisch aktualisiert werden!-->
-                        </tr>
-                        <tr>
-                            <td id="second-to-last-score">7.372</td><!--Nur Platzhalter! Muss dynamisch aktualisiert werden!-->
-                            <td id="second-to-last-date">2023-08-01</td><!--Nur Platzhalter! Muss dynamisch aktualisiert werden!-->
-                        </tr>
-                    </table>
+                <!--Stats-Preview-Start-->
+                <div class="stats-preview-start">
+                    <!--Nation-Stats-Preview-->
+                    <div class="nation-stats-preview">
+                        <!--Nation-Stats-Header-->
+                        <div class="nation-stats-header">
+                            <p class="nation-stats-name">Deutschland</p>
+                            <p class="nation-stats-date" id="score-date"></p>
+                        </div>
+                        <!--Nation-Stats-Main-->
+                        <div class="nation-stats-main">
+                            <span class="current-score" id="current-score">0.000</span>
+                            <p class="nation-stats-description">Lebenszufriedenheit Deutschland</p>
+                            <p class="nation-stats-trend-description"><span class="trend-value" id="trend-value">0.00</span> seit letztem Monat</p>
+                        </div>
+                    </div>
+                    <!--Last-Scores-Preview-->
+                    <div class="last-scores-preview">
+                        <div class="last-scores-header">
+                            <p>Letzte drei Messungen</p>
+                        </div>
+                        <div class="last-scores-main">
+                            <!--Current-Score-->
+                            <div class="last-scores-card">
+                                <div class="last-scores-card-header">
+                                    <p class="score-date" id="current-score-date">Okt. 2023</p>
+                                </div>
+                                <span class="last-scores-card-score" id="last-scores-current-score">0.000</span>
+                            </div>
+                            <!--Last-Score-->
+                            <div class="last-scores-card">
+                                <div class="last-scores-card-header">
+                                    <p class="score-date" id="last-score-date">Sep. 2023</p>
+                                </div>
+                                <span class="last-scores-card-score" id="last-scores-last-score">0.000</span>
+                            </div>
+                            <!--Previous-Last-Score-->
+                            <div class="last-scores-card">
+                                <div class="last-scores-card-header">
+                                    <p class="score-date" id="previous-score-date">Aug. 2023</p>
+                                </div>
+                                <span class="last-scores-card-score" id="last-scores-previous-score">0.000</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <!--Nation-Comparison-Preview-->
-                <div class="nation-comp-preview">
-                    <div class="nation-comp-container">
-                        <!--Nation-Preview-->
-                        <div class="nation-preview" id="preview-finnland">
-                            <div class="color-dot" id="preview-finnland-color-dot"></div>
-                            <p class="nation-name" id="preview-finnland">Finnland</p>
-                            <p class="nation-score" id="preview-finnland-score">0.000</p>
-                        </div>
-                        <!--Nation-Preview-->
-                        <div class="nation-preview" id="preview-dänemark">
-                            <div class="color-dot" id="preview-dänemark-color-dot"></div>
-                            <p class="nation-name" id="preview-dänemark">Dänemark</p>
-                            <p class="nation-score" id="preview-dänemark-score">0.000</p>
-                        </div>
-                        <!--Nation-Preview-->
-                        <div class="nation-preview" id="preview-norwegen">
-                            <div class="color-dot" id="preview-norwegen-color-dot"></div>
-                            <p class="nation-name" id="preview-norwegen">Norwegen</p>
-                            <p class="nation-score" id="preview-norwegen-score">0.000</p>
-                        </div>
-                        <!--Nation-Preview-->
-                        <div class="nation-preview" id="preview-schweden">
-                            <div class="color-dot" id="preview-schweden-color-dot"></div>
-                            <p class="nation-name" id="preview-schweden">Schweden</p>
-                            <p class="nation-score" id="preview-schweden-score">0.000</p>
-                        </div>
-                        <!--Nation-Preview-->
-                        <div class="nation-preview" id="preview-island">
-                            <div class="color-dot" id="preview-island-color-dot"></div>
-                            <p class="nation-name" id="preview-island">Island</p>
-                            <p class="nation-score" id="preview-island-score">0.000</p>
-                        </div>
-                        <!--Nation-Preview-->
-                        <div class="nation-preview" id="preview-niederlande">
-                            <div class="color-dot" id="preview-niederlande-color-dot"></div>
-                            <p class="nation-name" id="preview-niederlande">Niederlande</p>
-                            <p class="nation-score" id="preview-niederlande-score">0.000</p>
+                <!--Stats-Preview-End-->
+                <div class="stats-preview-end">
+                    <!--Nation-Comparison-Preview-->
+                    <div class="nation-comp-preview-header">
+                        <p>Nationen</p>
+                    </div>
+                    <div class="nation-comp-preview">
+                        <div class="nation-comp-container">
+                            <!--Nation-Preview-->
+                            <div class="nation-preview" id="preview-finnland">
+                                <!--Nation-Preview-Start-->
+                                <div class="nation-preview-start">
+                                    <div class="color-dot" id="preview-finnland-color-dot"></div>
+                                    <p class="nation-name" id="preview-finnland">Finnland</p>
+                                </div>
+                                <p class="nation-score" id="preview-finnland-score">0.000</p>
+                            </div>
+                            <!--Nation-Preview-->
+                            <div class="nation-preview" id="preview-dänemark">
+                                <!--Nation-Preview-Start-->
+                                <div class="nation-preview-start">
+                                    <div class="color-dot" id="preview-dänemark-color-dot"></div>
+                                    <p class="nation-name" id="preview-dänemark">Dänemark</p>
+                                </div>
+                                <p class="nation-score" id="preview-dänemark-score">0.000</p>
+                            </div>
+                            <!--Nation-Preview-->
+                            <div class="nation-preview" id="preview-norwegen">
+                                <!--Nation-Preview-Start-->
+                                <div class="nation-preview-start">
+                                    <div class="color-dot" id="preview-norwegen-color-dot"></div>
+                                    <p class="nation-name" id="preview-norwegen">Norwegen</p>
+                                </div>
+                                <p class="nation-score" id="preview-norwegen-score">0.000</p>
+                            </div>
+                            <!--Nation-Preview-->
+                            <div class="nation-preview" id="preview-schweden">
+                                <!--Nation-Preview-Start-->
+                                <div class="nation-preview-start">
+                                    <div class="color-dot" id="preview-schweden-color-dot"></div>
+                                    <p class="nation-name" id="preview-schweden">Schweden</p>
+                                </div>
+                                <p class="nation-score" id="preview-schweden-score">0.000</p>
+                            </div>
+                            <!--Nation-Preview-->
+                            <div class="nation-preview" id="preview-island">
+                                <!--Nation-Preview-Start-->
+                                <div class="nation-preview-start">
+                                    <div class="color-dot" id="preview-island-color-dot"></div>
+                                    <p class="nation-name" id="preview-island">Island</p>
+                                </div>
+                                <p class="nation-score" id="preview-island-score">0.000</p>
+                            </div>
+                            <!--Nation-Preview-->
+                            <div class="nation-preview" id="preview-niederlande">
+                                <!--Nation-Preview-Start-->
+                                <div class="nation-preview-start">
+                                    <div class="color-dot" id="preview-niederlande-color-dot"></div>
+                                    <p class="nation-name" id="preview-niederlande">Niederlande</p>
+                                </div>
+                                <p class="nation-score" id="preview-niederlande-score">0.000</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -298,7 +356,10 @@
                 </div>
                 <!--Nation-Information-Container-->
                 <div class="nation-information-container inactive" id="nation-information-container">
-                    <p>Placeholder</p>
+                    <div class="current-nation-score-container">
+                        <img src="assets/simulator_icons/numeral_I.svg" loading="eager" alt="numeral_icon">
+                        <span id="current-nation-score">0.000</span>
+                    </div>
                 </div>
             </div>
         </section>

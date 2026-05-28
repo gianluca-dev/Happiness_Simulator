@@ -246,7 +246,7 @@ function showMailPreview(mail, date) {
 
     const previewMailSubject = document.createElement('p');
     previewMailSubject.className = 'preview-mail-subject';
-    previewMailSubject.textContent = `Warnung! Rückgang der Zufriedenheit durch ${mail.subject}`;
+    previewMailSubject.textContent = `Warnung! Zufriedenheitsrückgang durch ${mail.subject}`;
 
     const previewMailText = document.createElement('p');
     previewMailText.className = 'preview-mail-text';

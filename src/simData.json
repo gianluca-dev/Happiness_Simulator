@@ -12,7 +12,8 @@
             "image": {
                 "src": "assets/simulator_icons/coins.svg",
                 "alt": "aspect-economic-icon"
-            }
+            },
+            "tooltip": ""
         },
         {
             "id": 4,
@@ -26,7 +27,8 @@
             "image": {
                 "src": "assets/simulator_icons/coins.svg",
                 "alt": "aspect-economic-icon"
-            }
+            },
+            "tooltip": ""
         },
         {
             "id": 1,
@@ -40,7 +42,8 @@
             "image": {
                 "src": "assets/simulator_icons/health.svg",
                 "alt": "aspect-health-icon"
-            }
+            },
+            "tooltip": ""
         },
         {
             "id": 2,
@@ -54,7 +57,8 @@
             "image": {
                 "src": "assets/simulator_icons/political.svg",
                 "alt": "aspect-political-icon"
-            }
+            },
+            "tooltip": ""
         }
     ],
     "crises": [

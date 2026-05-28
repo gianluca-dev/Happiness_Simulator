@@ -19,6 +19,32 @@ export function showEventCards(simData) {
         eventInfo.src = 'assets/simulator_icons/info.svg';
         eventInfo.alt = 'info-icon';
 
+        const eventTooltip = document.createElement('div');
+        eventTooltip.className = 'event-tooltip inactive';
+        eventTooltip.textContent = event.tooltip;
+
+        const eventInfoContainer = document.createElement('div');
+        eventInfoContainer.className = 'event-info-container';
+        eventInfoContainer.appendChild(eventInfo);
+        eventInfoContainer.appendChild(eventTooltip);
+
+        eventInfo.addEventListener('click', (event) => {
+            event.stopPropagation();
+            
+            const wasInactive = eventTooltip.classList.contains('inactive');
+            document.querySelectorAll('.event-tooltip').forEach(tooltip => tooltip.classList.add('inactive'));
+
+            if (wasInactive) {
+                const rect = eventInfo.closest('.event-card').getBoundingClientRect();
+                eventTooltip.style.top = `${rect.top + (rect.height / 2)}px`;
+                eventTooltip.style.left = `${rect.right + 25}px`;
+                eventTooltip.style.transform = 'translateY(-50%)';
+                eventTooltip.classList.remove('inactive');
+            }
+        });
+
+        document.addEventListener('click', () => eventTooltip.classList.add('inactive'));
+
         const eventExtend = document.createElement('img');
         eventExtend.className = 'event-extend';
         eventExtend.loading = 'eager';
@@ -27,7 +53,7 @@ export function showEventCards(simData) {
 
         const eventHeaderIconContainer = document.createElement('div');
         eventHeaderIconContainer.className = 'event-header-icon-container';
-        eventHeaderIconContainer.appendChild(eventInfo);
+        eventHeaderIconContainer.appendChild(eventInfoContainer);
         eventHeaderIconContainer.appendChild(eventExtend);
 
         const eventCardHeader = document.createElement('div');

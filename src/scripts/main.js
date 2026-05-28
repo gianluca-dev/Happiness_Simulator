@@ -176,8 +176,12 @@ function initEventListeners() {
     }
 
     initNationContainerListeners();
+    initRedirectListeners('preview-');
+    initRedirectListeners('marker-');
     showNationElements();
     showNationPreview();
+    showCurrentScore();
+    showLastScores();
     appControl();
 }
 
@@ -334,6 +338,8 @@ export function nextCrisis(simData) {
         applyHappinessDelta(simData);
         showNationElements();
         showNationPreview();
+        showCurrentScore();
+        showLastScores();
         earnMonthlyIncome(simState.income);
         showToastNotification('Neuer Monat!', '#d0f5f0', '#14b8a6');
         saveSimData();
@@ -411,15 +417,15 @@ function initNationContainerListeners() {
                 nationCompState.forEach((n, i) => {
                     nationCompChart.setDatasetVisibility(i, n.nation === nation.nation);
 
+                    const nationElement = document.getElementById(n.nation.toLowerCase());
                     if (n.nation !== nation.nation) {
-                        const nationElement = document.getElementById(n.nation.toLowerCase());
-
-                        if (nationElement) {
-                            nationElement.classList.add('inactive');
-                            document.getElementById('nation-information-container').classList.remove('inactive');
-                        }
+                        if (nationElement) nationElement.classList.add('inactive');
                     }
                 });
+                document.getElementById('nation-information-container').classList.remove('inactive');
+
+                const selectedElement = document.getElementById(nation.nation.toLowerCase());
+                if (selectedElement) showNationInfo(selectedElement);
             }
             updateChartScale();
             nationCompChart.update();
@@ -475,6 +481,29 @@ function showNationElements() {
     });
 }
 
+function showNationInfo(selectedElement, nationName) {
+    const infoContainer = document.getElementById('nation-information-container');
+
+    const elementColor = selectedElement.style.backgroundColor;
+    infoContainer.style.backgroundColor = elementColor;
+}
+
+function resetNationSelection() {
+    selectedNation = null;
+
+    nationCompState.forEach((_, i) => {
+        nationCompChart.setDatasetVisibility(i, true);
+        const nationElement = document.getElementById(nationCompState[i].nation.toLowerCase());
+        
+        if (nationElement) nationElement.classList.remove('inactive');
+    });
+
+    document.getElementById('nation-information-container').classList.add('inactive');
+
+    updateChartScale();
+    nationCompChart.update();
+}
+
 //---------- App-Control ----------//
 
 function appControl() {
@@ -482,7 +511,10 @@ function appControl() {
     const nationCompExit = document.getElementById('app-nation-comp-exit');
 
     if (nationCompApp) nationCompApp.addEventListener('click', () => controlApp('app-nation-comp-section', false));
-    if (nationCompExit) nationCompExit.addEventListener('click', () => controlApp('app-nation-comp-section', true));
+    if (nationCompExit) nationCompExit.addEventListener('click', () => {
+        controlApp('app-nation-comp-section', true);
+        resetNationSelection();
+    });
 
     const mailsApp = document.getElementById('app-icon-mails');
     const mailsExit = document.getElementById('app-mails-exit');
@@ -525,6 +557,19 @@ function showDate() {
 
 //---------- Preview Window ----------//
 
+function initRedirectListeners(idPrefix) {
+    nationCompState.forEach(nation => {
+        const nationName = nation.nation.toLowerCase();
+        const element = document.getElementById(`${idPrefix}${nationName}`);
+        if (!element) return;
+
+        element.addEventListener('click', () => {
+            controlApp('app-nation-comp-section', false);
+            document.getElementById(nationName)?.click();
+        });
+    });
+}
+
 function showNationPreview() {
     nationCompState.forEach(nation => {
         const nationName = nation.nation;
@@ -538,15 +583,68 @@ function showNationPreview() {
         }   
 
         const nationPreviewElement = document.getElementById(`preview-${nationName.toLowerCase()}`);
-        if (nationPreviewElement) {
-            nationPreviewElement.style.backgroundColor = nation.styles.backgroundColor;
-            nationPreviewElement.style.borderColor = nation.styles.borderColor;
-            nationPreviewElement.style.color = nation.styles.color;
-        }
 
         const colorDot = document.getElementById(`preview-${nationName.toLowerCase()}-color-dot`);
         if (colorDot) colorDot.style.backgroundColor = nation.styles.color;
     });
+}
+
+function getScore(index) {
+    const score = simState.lifeEvalScores[currentYear]?.at(index);
+    return score != null ? score.toFixed(3) : '-';
+}
+
+function showCurrentScore() {
+    document.getElementById('current-score').innerText = getScore(-1);
+    document.getElementById('score-date').innerText = getScoreDate(-1);
+
+    const trend = getTrend();
+    const trendElement = document.getElementById('trend-value');
+    trendElement.innerText = (trend > 0 ? '+' : '') + trend.toFixed(2);
+    trendElement.style.color = trend > 0 ? '#2fa18e' : trend < 0 ? '#ef4444' : 'inherit';
+}
+
+function showLastScores() {
+    document.getElementById('last-scores-current-score').innerText = getScore(-1);
+    document.getElementById('last-scores-last-score').innerText = getScore(-2);
+    document.getElementById('last-scores-previous-score').innerText = getScore(-3);
+
+    document.getElementById('current-score-date').innerText = getScoreDate(-1);
+    document.getElementById('last-score-date').innerText = getScoreDate(-2);
+    document.getElementById('previous-score-date').innerText = getScoreDate(-3);
+}
+
+function getScoreDate(scoreIndex) {
+    const monthNames = ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'];
+    const scores = simState.lifeEvalScores[currentYear];
+    const absoluteIndex = scores.length + scoreIndex;
+
+    if (absoluteIndex < 0) {
+        const prevScores = simState.lifeEvalScores[currentYear - 1];
+
+        if (!prevScores) return '-';
+
+        const prevAbsoluteIndex = prevScores.length + absoluteIndex;
+        const month = prevAbsoluteIndex % 12;
+
+        return `${monthNames[month]}. ${currentYear - 1}`;
+    }
+
+    const month = absoluteIndex % 12;
+    return `${monthNames[month]}. ${currentYear}`;
+}
+
+function getTrend() {
+    const current = simState.lifeEvalScores[currentYear]?.at(-1) ?? 0;
+    const scores = simState.lifeEvalScores[currentYear];
+
+    if (scores.length >= 2) {
+        return current - scores.at(-2);
+    }
+
+    const prevScores = simState.lifeEvalScores[currentYear - 1];
+    const last = prevScores?.at(-1) ?? current;
+    return current - last;
 }
 
 //---------- Toast Notification ----------//
