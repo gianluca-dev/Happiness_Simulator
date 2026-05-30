@@ -94,8 +94,10 @@ if (path.includes('index.html') || path.endsWith('/')) {
     });
 } else if (path.includes('simulator.html')) {
     document.addEventListener('DOMContentLoaded', async () => {
+        let simData;
+    
         try {
-            const simData = await loadSimData();
+            simData = await loadSimData();
             loadSavedData();
             loadCrisis(simData);
             showEventCards(simData);
@@ -103,7 +105,7 @@ if (path.includes('index.html') || path.endsWith('/')) {
             console.error(error);
         }
 
-        initEventListeners();
+        initEventListeners(simData);
         showCoins();
 
         initLifeEvalChart(simState, currentYear);
@@ -154,9 +156,11 @@ function deleteSimData() {
     localStorage.removeItem('Happiness-Simulator');
 }
 
-function initEventListeners() {
+function initEventListeners(simData) {
     // Loading tutorial as external site
     document.getElementById('app-icon-tips').addEventListener('click', () => window.open('tutorial.html', '_blank'));
+    // Dev-Btn to skip to 2 months before end
+    document.getElementById('dev-skip-btn').addEventListener('click', () => skipToNearEnd(simData));
 
     document.getElementById('view-swap-container').addEventListener('click', () => {
         const mailsPreview = document.getElementById('mails-preview');
@@ -444,7 +448,8 @@ function updateChartScale() {
         nationCompChart.options.scales.y.ticks.callback = (value) => value.toFixed(1);
     } else {
         const nation = nationCompState.find(n => n.nation === selectedNation);
-        const scores = Object.values(nation.lifeEvalScores).flat().filter(v => v !== undefined);
+
+        const scores = nation.nation === 'Deutschland' ? nation.lifeEvalScores[currentYear].filter(v => v !== undefined) : Object.values(nation.lifeEvalScores).flat().filter(v => v !== undefined);
 
         const min = Math.min(...scores);
         const max = Math.max(...scores);
@@ -645,6 +650,52 @@ function getTrend() {
     const prevScores = simState.lifeEvalScores[currentYear - 1];
     const last = prevScores?.at(-1) ?? current;
     return current - last;
+}
+
+function skipToNearEnd(simData) {
+    const targetCrisisCount = 116;
+    if (crisisState.crisisCount >= targetCrisisCount) return;
+
+    const normalCrises = simData.crises.filter(crisis => !crisis.isProtest);
+
+    while (crisisState.crisisCount < targetCrisisCount) {
+        const randomCrisis = normalCrises[Math.floor(Math.random() * normalCrises.length)];
+
+        crisisState.currentCrisis = randomCrisis;
+        crisisState.crisisCount++;
+
+        simState.coins += (simState.income * 0.25);
+
+        if (crisisState.crisisCount % 2 === 0) {
+            calculateNationCompScores(nationCompState, currentYear);
+
+            const currentScore = simState.lifeEvalScores[currentYear].at(-1);
+            const drift = -0.05 + (Math.random() * 1.0 - 0.5);
+            const newValue = Math.max(1, Math.min((currentScore + drift), 10));
+
+            simState.lifeEvalScores[currentYear].push(newValue);
+
+            if (crisisState.crisisCount % 24 === 0) {
+                currentYear++;
+
+                const lastScore = simState.lifeEvalScores[currentYear - 1].at(-1);
+                simState.lifeEvalScores[currentYear] = [lastScore];
+
+                updateChartYear(currentYear);
+            }
+        }
+    }
+
+    saveSimData();
+    showCoins();
+    showNationElements();
+    showNationPreview();
+    showCurrentScore();
+    showLastScores();
+    initLifeEvalChart(simState, currentYear);
+    initNationCompChart(nationCompState, currentYear);
+    loadCrisis(simData);
+    showToastNotification('Zum vorletzten Monat gesprungen!', '#d0f5f0', '#14b8a6');
 }
 
 //---------- Toast Notification ----------//
