@@ -6,13 +6,15 @@
             "title": "Steuersenkung",
             "description": "Mehrwertsteuer von 19% auf 7% gesenkt.",
             "effect": "tax_reduction",
+            "duration": 6,
             "costs": 500000,
             "happinessDelta": 0.15,
             "shieldValue": 0,
             "image": {
                 "src": "assets/simulator_icons/coins.svg",
                 "alt": "aspect-economic-icon"
-            }
+            },
+            "tooltip": ""
         },
         {
             "id": 4,
@@ -20,13 +22,15 @@
             "title": "Steuersenkung",
             "description": "Mehrwertsteuer von 19% auf 7% gesenkt.",
             "effect": "tax_reduction",
+            "duration": 6,
             "costs": 500000,
             "happinessDelta": 0.15,
             "shieldValue": 0,
             "image": {
                 "src": "assets/simulator_icons/coins.svg",
                 "alt": "aspect-economic-icon"
-            }
+            },
+            "tooltip": ""
         },
         {
             "id": 1,
@@ -34,13 +38,15 @@
             "title": "Impfkampagne",
             "description": "Es wird eine Impfkampagne gestartet.",
             "effect": "vaccination_campaign",
+            "duration": 6,
             "costs": 1500000,
             "happinessDelta": 0.25,
             "shieldValue": 1,
             "image": {
                 "src": "assets/simulator_icons/health.svg",
                 "alt": "aspect-health-icon"
-            }
+            },
+            "tooltip": ""
         },
         {
             "id": 2,
@@ -48,13 +54,15 @@
             "title": "Neuwahlen",
             "description": "Es werden Neuwahlen angesetzt.",
             "effect": "political_instability",
+            "duration": 6,
             "costs": 2500000,
             "happinessDelta": 0.50,
             "shieldValue": 2,
             "image": {
                 "src": "assets/simulator_icons/political.svg",
                 "alt": "aspect-political-icon"
-            }
+            },
+            "tooltip": ""
         }
     ],
     "crises": [
@@ -80,6 +88,15 @@
             "id": 2,
             "type": "moderate",
             "title": "Virusmutation",
+            "happinessDelta": -0.35,
+            "mailSuggestion": {
+                "id": 2
+            }
+        },
+        {
+            "id": 3,
+            "type": "moderate",
+            "title": "Inflation",
             "happinessDelta": -0.35,
             "mailSuggestion": {
                 "id": 2

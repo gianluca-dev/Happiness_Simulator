@@ -196,7 +196,8 @@ function showMail(mail, date) {
         const mailEventSuggestion = document.createElement('span');
         mailEventSuggestion.className = 'mail-event-suggestion';
         mailEventSuggestion.textContent = `Handlungsempfehlung: ${mail.eventSuggestion.title}`;
-        mailEventSuggestion.addEventListener('click', () => {
+        mailEventSuggestion.addEventListener('click', (event) => {
+            event.stopPropagation();
             openAspectMenu(mail.eventSuggestion.type);
             setAsMainEvent(mail.eventSuggestion.id);
         });
@@ -246,7 +247,7 @@ function showMailPreview(mail, date) {
 
     const previewMailSubject = document.createElement('p');
     previewMailSubject.className = 'preview-mail-subject';
-    previewMailSubject.textContent = `Warnung! Rückgang der Zufriedenheit durch ${mail.subject}`;
+    previewMailSubject.textContent = `Warnung! Zufriedenheitsrückgang durch ${mail.subject}`;
 
     const previewMailText = document.createElement('p');
     previewMailText.className = 'preview-mail-text';
@@ -266,7 +267,8 @@ function showMailPreview(mail, date) {
         const previewMailEventSuggestion = document.createElement('span');
         previewMailEventSuggestion.className = 'preview-mail-event-suggestion';
         previewMailEventSuggestion.textContent = `Handlungsempfehlung: ${mail.eventSuggestion.title}`;
-        previewMailEventSuggestion.addEventListener('click', () => {
+        previewMailEventSuggestion.addEventListener('click', (event) => {
+            event.stopPropagation();
             openAspectMenu(mail.eventSuggestion.type);
             setAsMainEvent(mail.eventSuggestion.id);
         });

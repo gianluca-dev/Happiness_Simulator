@@ -19,6 +19,32 @@ export function showEventCards(simData) {
         eventInfo.src = 'assets/simulator_icons/info.svg';
         eventInfo.alt = 'info-icon';
 
+        const eventTooltip = document.createElement('div');
+        eventTooltip.className = 'event-tooltip inactive';
+        eventTooltip.textContent = event.tooltip;
+
+        const eventInfoContainer = document.createElement('div');
+        eventInfoContainer.className = 'event-info-container';
+        eventInfoContainer.appendChild(eventInfo);
+        eventInfoContainer.appendChild(eventTooltip);
+
+        eventInfo.addEventListener('click', (event) => {
+            event.stopPropagation();
+            
+            const wasInactive = eventTooltip.classList.contains('inactive');
+            document.querySelectorAll('.event-tooltip').forEach(tooltip => tooltip.classList.add('inactive'));
+
+            if (wasInactive) {
+                const rect = eventInfo.closest('.event-card').getBoundingClientRect();
+                eventTooltip.style.top = `${rect.top + (rect.height / 2)}px`;
+                eventTooltip.style.left = `${rect.right + 25}px`;
+                eventTooltip.style.transform = 'translateY(-50%)';
+                eventTooltip.classList.remove('inactive');
+            }
+        });
+
+        document.addEventListener('click', () => eventTooltip.classList.add('inactive'));
+
         const eventExtend = document.createElement('img');
         eventExtend.className = 'event-extend';
         eventExtend.loading = 'eager';
@@ -27,7 +53,7 @@ export function showEventCards(simData) {
 
         const eventHeaderIconContainer = document.createElement('div');
         eventHeaderIconContainer.className = 'event-header-icon-container';
-        eventHeaderIconContainer.appendChild(eventInfo);
+        eventHeaderIconContainer.appendChild(eventInfoContainer);
         eventHeaderIconContainer.appendChild(eventExtend);
 
         const eventCardHeader = document.createElement('div');
@@ -45,7 +71,6 @@ export function showEventCards(simData) {
         acceptBtn.textContent = 'Akzeptieren';
         acceptBtn.addEventListener('click', () => {
             const isMainEvent = !rejectBtn.classList.contains('inactive');
-            identifyEvents(event);
             handleAccept(simData, event, isMainEvent, event.costs);
         });
 
@@ -180,6 +205,8 @@ function handleAccept(simData, event, isMainEvent, costs) {
             showToastNotification('Maximale Anzahl an Nebenereignissen erreicht!', '#fddede', '#ef4444');
         }
     }
+
+    activateEffect(event);
     applyEventDelta(event, isMainEvent, true);
     subtractCosts(simData, isMainEvent, costs);
 }
@@ -195,36 +222,26 @@ function enableMainEvents() {
     });
 }
 
-function identifyEvents(event) {
-    switch (event.effect) {
-        case 'tax_reduction': 
-            taxReduction();
-        break;
-        case 'political_instability':
-            politicalInstability();        
-        break;
-        case 'vaccination_campaign':
-            vaccinationCampaign();
-        break;
-        default:
-            console.error('No effect identified for : ', event.effect);
+function activateEffect(event) {
+    if (event.effect === 'tax_reduction') {
+        simState.income *= 0.88;
     }
-}
 
-function taxReduction() {
-    const monthlyIncomeReduction = simState.income * 0.88;
-    simState.income = monthlyIncomeReduction;
+    if (event.effect === 'vaccination_campaign') {
+        simState.maxShieldValue = 3;
+        simState.shieldValue = Math.min((simState.shieldValue + 1), 3);
+    }
 
-    simState.activeEffects.taxReductionEnd = crisisState.crisisCount + 6;
-}
+    const newEffect = {
+        effect: event.effect,
+        label: event.title,
+        icon: event.image.src,
+        endCount: crisisState.crisisCount + event.duration
+    };
 
-function politicalInstability() {
-    simState.activeEffects.politicalInstabilityStart = crisisState.crisisCount;
-}
+    if (event.effect === 'political_instability') {
+        newEffect.startCount = crisisState.crisisCount;
+    }
 
-function vaccinationCampaign() {
-    simState.maxShieldValue = 3;
-    simState.shieldValue = Math.min((simState.shieldValue + 1), 3);
-
-    simState.activeEffects.vaccinationCampaignEnd = crisisState.crisisCount + 6;
+    simState.activeEffects.push(newEffect);
 }
