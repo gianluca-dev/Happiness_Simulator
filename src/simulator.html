@@ -138,21 +138,21 @@
                             <!--Current-Score-->
                             <div class="last-scores-card">
                                 <div class="last-scores-card-header">
-                                    <p class="score-date" id="current-score-date">Okt. 2023</p>
+                                    <p class="score-date" id="current-score-date">Mär. 2019</p>
                                 </div>
                                 <span class="last-scores-card-score" id="last-scores-current-score">0.000</span>
                             </div>
                             <!--Last-Score-->
                             <div class="last-scores-card">
                                 <div class="last-scores-card-header">
-                                    <p class="score-date" id="last-score-date">Sep. 2023</p>
+                                    <p class="score-date" id="last-score-date">Feb. 2019</p>
                                 </div>
                                 <span class="last-scores-card-score" id="last-scores-last-score">0.000</span>
                             </div>
-                            <!--Previous-Last-Score-->
+                            <!--Previous-Score-->
                             <div class="last-scores-card">
                                 <div class="last-scores-card-header">
-                                    <p class="score-date" id="previous-score-date">Aug. 2023</p>
+                                    <p class="score-date" id="previous-score-date">Jan. 2019</p>
                                 </div>
                                 <span class="last-scores-card-score" id="last-scores-previous-score">0.000</span>
                             </div>
@@ -361,9 +361,77 @@
                 </div>
                 <!--Nation-Information-Container-->
                 <div class="nation-information-container inactive" id="nation-information-container">
-                    <div class="current-nation-score-container">
-                        <img src="assets/simulator_icons/numeral_I.svg" loading="eager" alt="numeral_icon">
-                        <span id="current-nation-score">0.000</span>
+                    <div class="nation-information-score-container">
+                        <!--Nation-Information-Score-Header-->
+                        <div class="nation-information-score-header">
+                            <p class="nation-information-score-name" id="nation-information-score-name"></p>
+                            <p class="nation-information-score-date" id="nation-information-score-date"></p>
+                        </div>
+                        <!--Nation-Information-Score-Main-->
+                        <div class="nation-information-score-main">
+                            <span class="nation-information-score-current-score" id="nation-information-score-current-score">0.000</span>
+                            <p class="nation-information-score-description">Lebenszufriedenheit <span id="nation-information-score-description-name"></span></p>
+                            <p class="nation-information-score-trend-description"><span class="nation-information-score-trend-value" id="nation-information-score-trend-value">0.00</span> seit letztem Monat</p>
+                        </div>
+                    </div>
+                    <!--Nation-Information-Last-Scores-Container-->
+                    <div class="nation-information-last-scores-container">
+                        <!--Nation-Information-Last-Scores-Header-->
+                        <div class="nation-information-last-scores-header">
+                            <p>Letzte drei Messungen</p>
+                        </div>
+                        <!--Nation-Information-Last-Scores-Main-->
+                        <div class="nation-information-last-scores-main">
+                            <!--Current-Score-->
+                            <div class="nation-information-last-scores-card">
+                                <div class="nation-information-last-scores-card-header">
+                                    <p class="nation-information-last-scores-date" id="nation-information-last-scores-current-score-date">Mär. 2019</p>
+                                </div>
+                                <span class="nation-information-last-scores-card-score" id="nation-information-last-scores-current-score">0.000</span>
+                            </div>
+                            <!--Last-Score-->
+                            <div class="nation-information-last-scores-card">
+                                <div class="nation-information-last-scores-card-header">
+                                    <p class="nation-information-last-scores-date" id="nation-information-last-scores-last-score-date">Feb. 2019</p>
+                                </div>
+                                <span class="nation-information-last-scores-card-score" id="nation-information-last-scores-last-score">0.000</span>
+                            </div>
+                            <!--Previous-Score-->
+                            <div class="nation-information-last-scores-card">
+                                <div class="nation-information-last-scores-card-header">
+                                    <p class="nation-information-last-scores-date" id="nation-information-last-scores-previous-score-date">Jan. 2019</p>
+                                </div>
+                                <span class="nation-information-last-scores-card-score" id="nation-information-last-scores-previous-score">0.000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Nation-Information-Crisis-Type-Container-->
+                    <div class="nation-information-crisis-type-container">
+                        <!--Nation-Information-Crisis-Type-Header-->
+                        <div class="nation-information-crisis-type-header">
+                            <p>Erwarteter Krisentyp</p>
+                        </div>
+                        <!--Nation-Information-Crisis-Type-Main-->
+                        <div class="nation-information-crisis-type-main">
+                            <div class="nation-information-crisis-type-icon-container">
+                                <img src="assets/simulator_icons/type-warning-moderate.svg" loading="eager" alt="type-warning-icon">
+                            </div>
+                            <div class="nation-information-crisis-type-info-container">
+                                <span class="nation-information-crisis-type-crisis-type">moderat</span>
+                                <p class="nation-information-crisis-type-description">Erwartet in den nächsten Wochen</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Nation-Information-Active-Events-Container-->
+                    <div class="nation-information-active-events-container">
+                        <!--Nation-Information-Active-Events-Header-->
+                        <div class="nation-information-active-events-header">
+                            <p>Aktive Ereignisse</p>
+                        </div>
+                        <!--Nation-Information-Active-Events-Main-->
+                        <div class="nation-information-active-events-main">
+                            <div class="active-events-container" id="active-events-container"></div>
+                        </div>
                     </div>
                 </div>
             </div>
