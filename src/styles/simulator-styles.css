@@ -543,6 +543,14 @@ footer {
   font-size: 13px;
 }
 
+.mails-preview {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  padding: 7px;
+  background-color: var(--default-placeholder-color);
+}
+
 .preview-mail-element {
   width: 100%;
   height: auto;
@@ -571,9 +579,10 @@ footer {
 }
 
 .preview-mail-sender-image {
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   border-radius: 35px;
+  border: 1.5px solid #e7e7e7;
 }
 
 .preview-mail-sender-information {
@@ -590,6 +599,7 @@ footer {
 }
 
 .preview-mail-header-date {
+  margin: 3px 0 0 0;
   font-size: 12px;
 }
 
@@ -597,13 +607,13 @@ footer {
   width: calc(100% - 25px);
   height: auto;
   position: absolute;
-  top: 145px;
+  top: 140px;
   left: 85px;
   display: flex;
   flex-direction: column;
   padding: 25px 0 15px 0;
   border-bottom: 1.5px solid var(--line-color);
-  white-space: nowrap; /*---Bis bessere Lösung da ist so lassen!---*/
+  white-space: wrap; /*---Bis bessere Lösung da ist so lassen!---*/
   overflow: scroll; /*---Bis bessere Lösung da ist so lassen!---*/
 }
 
@@ -623,7 +633,7 @@ footer {
   width: calc(100% - 95px);
   height: 25px;
   position: absolute;
-  top: 265px;
+  top: 230px;
   left: 85px;
   padding: 10px 0 0 0;
   font-size: 13px;
@@ -802,6 +812,7 @@ footer {
   width: 35px;
   height: 35px;
   border-radius: 35px;
+  border: 1.5px solid #e7e7e7;
 }
 
 .mail-utility-nav {
@@ -887,7 +898,7 @@ footer {
   cursor: pointer;
 }
 
-/*---Nation Comparison---*/
+/*---Nation-Comparison---*/
 
 .app-nation-comp-section {
   width: 85%;
@@ -1628,6 +1639,367 @@ footer {
   background-color: rgb(224, 224, 227);
 }
 
+/*---Results-Overlay---*/
+
+.results-overlay {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem 1rem;
+  background-color: rgba(247, 247, 247, 0.9);
+  backdrop-filter: blur(6px);
+  overflow-y: auto;
+  inset: 0;
+  z-index: 1000;
+}
+
+.results-overlay.inactive {
+  display: none;
+}
+
+.results-container {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/*---Results-Header---*/
+
+.results-header {
+  padding: 1rem 0 0.5rem;
+  text-align: center;
+}
+
+.results-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--default-text-color);
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.results-subtitle {
+  font-size: 0.85rem;
+  color: #626979;
+  margin: 0.25rem 0 0;
+  letter-spacing: 0.02em;
+}
+
+/*---Results-Grid---*/
+
+.results-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+/*---Results-Cards---*/
+
+.results-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  border-radius: 10px;
+  border: 1.5px solid var(--default-b-color);
+  padding: 1.25rem 1.5rem;
+  background-color: var(--default-bg-color);
+}
+
+.results-card-chart {
+  grid-column: 1 / -1;
+}
+
+.results-card-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--default-text-color);
+  margin: 0;
+}
+
+.results-card-description {
+  font-size: 0.75rem;
+  color: #626979;
+  margin: -0.5rem 0 0;
+}
+
+/*---Averages---*/
+
+.results-averages {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.results-averages-row {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr 3.5rem 3.5rem;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.results-averages-year {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #3f3f3f;
+}
+
+.results-averages-bar-wrapper {
+  height: 6px;
+  border-radius: 35px;
+  background-color: #dfdfdf;
+  overflow: hidden;
+}
+
+.results-averages-bar {
+  height: 100%;
+  border-radius: 35px;
+  background: linear-gradient(90deg, #36a2eb, #60c4ff);
+  transition: width 0.5s ease;
+}
+
+.results-averages-score {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--default-text-color);
+  text-align: right;
+}
+
+.results-averages-difference {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-align: right;
+}
+
+/*---Historical-Chart---*/
+
+.results-chart-wrapper {
+  position: relative;
+  height: 250px;
+}
+
+/*---WHR-Comparison---*/
+
+.results-whr {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.results-whr-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.results-whr-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  background-color: var(--content-section-bg-color);
+}
+
+.results-whr-label {
+  font-size: 0.7rem;
+  color: #3f3f3f;
+  letter-spacing: 0.06em;
+  margin: 0;
+}
+
+.results-whr-value {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--default-text-color);
+  margin: 0;
+}
+
+.results-whr-sublabel {
+  font-size: 0.7rem;
+  color: #626979;
+  margin: 0;
+}
+
+.results-whr-note {
+  font-size: 0.75rem;
+  color: #3f3f3f;
+  line-height: 1.5;
+  border-radius: 10px;
+  border: 1.5px solid var(--default-b-color);
+  margin: 0;
+  padding: 0.75rem;
+  background: var(--content-section-bg-color);
+}
+
+/*---Realistisc-Rank---*/
+
+.results-rank-main {
+  text-align: center;
+  padding: 0.5rem 0 0.75rem;
+  border-bottom: 1.5px solid var(--default-b-color);
+}
+
+.results-rank-number {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #36a2eb;
+  margin: 0;
+  line-height: 1;
+}
+
+.results-rank-label {
+  font-size: 0.85rem;
+  color: #626979;
+  margin: 0.25rem 0 0;
+}
+
+.results-rank-score {
+  font-size: 0.75rem;
+  color: var(--default-text-color);
+  margin: 0.15rem 0 0;
+}
+
+.results-rank-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-top: 0.5rem;
+}
+
+.results-rank-row {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr auto;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0.35rem 0.5rem;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  color: #3f3f3f;
+}
+
+.results-rank-row-player {
+  border: 1.5px solid rgba(54, 162, 235, 0.5);
+  background-color: rgba(54, 162, 235, 0.12);
+  color: #36a2eb;
+  font-weight: 600;
+}
+
+.results-rank-position {
+  color: #626979;
+  font-size: 0.7rem;
+}
+
+.results-rank-row-player .results-rank-position {
+  color: #36a2eb;
+}
+
+.results-rank-value {
+  font-weight: 550;
+  color: #3f3f3f;
+}
+
+/*---Factors---*/
+
+.results-factors-wrapper {
+  width: 140px;
+  height: 140px;
+  margin: 0 auto;
+}
+
+.results-factors-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: 0.25rem;
+}
+
+.results-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: #626979;
+}
+
+.results-legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.results-legend-count {
+  margin-left: auto;
+  font-weight: 600;
+  color: #3f3f3f;
+}
+
+.results-empty {
+  font-size: 0.8rem;
+  color: #3f3f3f;
+  text-align: center;
+  padding: 1rem;
+}
+
+/*---Restart-Btn---*/
+
+.results-restart-btn {
+  width: 100%;
+  height: 45px;
+  border-radius: 35px;
+  border: none;
+  background-color: var(--default-text-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  color: var(--default-placeholder-color);
+  font-size: 14px;
+  font-weight: 550;
+  letter-spacing: 0.03em;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.results-restart-btn:hover {
+  background-color: #3f3f3f;
+}
+
+/*---Rank-Expand---*/
+
+.results-rank-expand-btn {
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background-color: transparent;
+  border-radius: 10px;
+  border: 1.5px solid var(--default-b-color);
+  color: #3f3f3f;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition:
+    border-color 0.2s,
+    color 0.2s;
+}
+
+.results-rank-expand-btn:hover {
+  border-color: #36a2eb;
+  color: #36a2eb;
+}
+
+.results-rank-list-full {
+  max-height: 305px;
+  overflow-y: scroll;
+  margin-top: 0.75rem;
+}
+
+.results-rank-list-full.inactive {
+  display: none;
+}
+
 /*---Media-Queries---*/
 
 /*---Tablet---*/
@@ -1687,5 +2059,25 @@ footer {
 
   .mail-notification {
     left: 455px;
+  }
+}
+
+/*---Results-Overlay---*/
+
+@media (max-width: 600px) {
+  .results-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .results-card-chart {
+    grid-column: auto;
+  }
+
+  .results-whr-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .results-whr-row > :last-child {
+    grid-column: 1 / -1;
   }
 }
