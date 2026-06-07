@@ -1,6 +1,7 @@
 import { showEventCards } from './event.js';
 import { showAllMails, resetUnreadMails } from './mail.js';
 import { nationCompChart, initLifeEvalChart, initNationCompChart, updateChartYear } from './chart.js';
+import { showResults } from './results.js';
 
 export const simState = {
     coins: 100000000,
@@ -8,6 +9,7 @@ export const simState = {
     shieldValue: 0,
     maxShieldValue: 2,
     happinessDelta: 0,
+    happinessRewardClaimed: false,
     activeEffects: [],
     lifeEvalScores: {
         2019: [7.406],
@@ -96,8 +98,12 @@ if (path.includes('index.html') || path.endsWith('/')) {
         try {
             simData = await loadSimData();
             loadSavedData();
-            loadCrisis(simData);
-            showEventCards(simData);
+            if (localStorage.getItem('Happiness-Simulator-Results')) {
+                showResults(simData);
+            } else {
+                loadCrisis(simData);
+                showEventCards(simData);
+            }
         } catch (error) {
             console.error(error);
         }
@@ -251,6 +257,25 @@ function applyHappinessDelta(simData) {
     simState.lifeEvalScores[currentYear].push(newValue);
     simState.happinessDelta = 0;
 
+    if (newValue <= 1) {
+        showResults(simData);
+        return;
+    }
+
+    if (newValue >= 8.5) {
+        if (!simState.happinessRewardClaimed) {
+            simState.coins += 2500000;
+            simState.shieldValue = Math.min(simState.shieldValue + 2, simState.maxShieldValue);
+            simState.happinessRewardClaimed = true;
+
+            showToastNotification('Meilenstein erreicht!', '#d0f5f0', '#14b8a6');
+        } else {
+            simState.coins += 500000;
+
+            showToastNotification('Meilenstein gehalten!', '#d0f5f0', '#14b8a6');
+        }
+    }
+
     if (newValue < 3) {
         const protestCrisis = simData.crises.find(crisis => crisis.isProtest);
 
@@ -269,6 +294,7 @@ function applyHappinessDelta(simData) {
 
     initLifeEvalChart(simState, currentYear);
     initNationCompChart(nationCompState, currentYear);
+    return false;
 }
 
 //---------- Events ----------//
@@ -392,6 +418,11 @@ export function nextCrisis(simData) {
 
         if (crisisState.crisisCount % 24 === 0) {
             currentYear++;
+
+            if (crisisState.crisisCount >= 120) {
+                showResults(simData);
+                return;
+            }
 
             const lastScore = simState.lifeEvalScores[currentYear - 1].at(-1);
             simState.lifeEvalScores[currentYear].push(lastScore);
