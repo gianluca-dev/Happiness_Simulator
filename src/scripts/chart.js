@@ -1,5 +1,5 @@
 let lifeEvalChart = null; 
-let nationCompChart = null;
+export let nationCompChart = null;
 
 const monthNames = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
 
@@ -130,8 +130,10 @@ export function initNationCompChart(nationCompState, currentYear) {
 
 export function updateChartYear(currentYear) {
     lifeEvalChart.options.scales.x.title.text = `Monate ${currentYear}`;
+    lifeEvalChart.options.plugins.tooltip.callbacks.title = (items) => `Deutschland (${monthNames[items[0].dataIndex]} ${currentYear})`;
     lifeEvalChart.update();
 
     nationCompChart.options.scales.x.title.text = `Monate ${currentYear}`;
+    nationCompChart.options.plugins.tooltip.callbacks.title = (items) => `${items[0].dataset.label} (${monthNames[items[0].dataIndex]} ${currentYear})`;
     nationCompChart.update();
 }
