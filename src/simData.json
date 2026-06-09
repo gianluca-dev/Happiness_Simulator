@@ -4,7 +4,7 @@
             "id": 0,
             "type": "economic",
             "title": "Steuersenkung",
-            "description": "Mehrwertsteuer von 19% auf 7% gesenkt.",
+            "description": "Die Mehrwertsteuer wird von 19% auf 7% gesenkt.",
             "effect": "tax_reduction",
             "duration": 6,
             "costs": 500000,
@@ -14,23 +14,7 @@
                 "src": "assets/simulator_icons/coins.svg",
                 "alt": "aspect-economic-icon"
             },
-            "tooltip": ""
-        },
-        {
-            "id": 4,
-            "type": "economic",
-            "title": "Steuersenkung",
-            "description": "Mehrwertsteuer von 19% auf 7% gesenkt.",
-            "effect": "tax_reduction",
-            "duration": 6,
-            "costs": 500000,
-            "happinessDelta": 0.15,
-            "shieldValue": 0,
-            "image": {
-                "src": "assets/simulator_icons/coins.svg",
-                "alt": "aspect-economic-icon"
-            },
-            "tooltip": ""
+            "tooltip": "Steuersenkungen erhöhen das verfügbare Einkommen, besonders bei niedrigen Einkommen steigt die Lebenszufriedenheit stark an."
         },
         {
             "id": 1,
@@ -46,7 +30,7 @@
                 "src": "assets/simulator_icons/health.svg",
                 "alt": "aspect-health-icon"
             },
-            "tooltip": ""
+            "tooltip": "Impfkampagnen schützen vor schweren Krankheitsverläufen, jede chronische Erkrankung senkt die Lebenszufriedenheit um 0,22 Punkte."
         },
         {
             "id": 2,
@@ -62,7 +46,87 @@
                 "src": "assets/simulator_icons/political.svg",
                 "alt": "aspect-political-icon"
             },
-            "tooltip": ""
+            "tooltip": "Neuwahlen können politische Stabilität wiederherstellen, verursachen aber auch kurzfristig Unsicherheit in der Bevölkerung."
+        },
+        {
+            "id": 3,
+            "type": "economic",
+            "title": "Lohnerhöhung",
+            "description": "Der Mindestlohn wird angehoben.",
+            "effect": "income_boost",
+            "duration": 6,
+            "costs": 1000000,
+            "happinessDelta": 0.15,
+            "shieldValue": 1,
+            "image": {
+                "src": "assets/simulator_icons/coins.svg",
+                "alt": "aspect-economic-icon"
+            },
+            "tooltip": "Jede Verdopplung des Einkommens erhöht die Lebenszufriedenheit um ca. 0,3 Punkte, besonders bei niedrigen Einkommen."
+        },
+        {
+            "id": 4,
+            "type": "economic",
+            "title": "Jobprogramm",
+            "description": "Staatliche Förderprogramme schaffen neue Arbeitsplätze.",
+            "effect": "employment_boost",
+            "duration": 6,
+            "costs": 2000000,
+            "happinessDelta": 0.35,
+            "shieldValue": 2,
+            "image": {
+                "src": "assets/simulator_icons/coins.svg",
+                "alt": "aspect-economic-icon"
+            },
+            "tooltip": "Arbeitslosigkeit senkt die Lebenszufriedenheit um einen vollen Punkt, Beschäftigung wirkt entsprechend stark."
+        },
+        {
+            "id": 5,
+            "type": "social",
+            "title": "Familienförderung",
+            "description": "Staatliche Förderung für Familien und Paarberatungsangebote.",
+            "effect": "family_support",
+            "duration": 6,
+            "costs": 750000,
+            "happinessDelta": 0.20,
+            "shieldValue": 1,
+            "image": {
+                "src": "assets/simulator_icons/social.svg",
+                "alt": "aspect-social-icon"
+            },
+            "tooltip": "Stabile Partnerschaften und Familienbindungen erhöhen die Lebenszufriedenheit."
+        },
+        {
+            "id": 6,
+            "type": "health",
+            "title": "Präventionsprogramm",
+            "description": "Staatliche Förderung von Vorsorgeuntersuchungen und gesunder Lebensweise.",
+            "effect": "physical_health",
+            "duration": 6,
+            "costs": 1000000,
+            "happinessDelta": 0.20,
+            "shieldValue": 1,
+            "image": {
+                "src": "assets/simulator_icons/health.svg",
+                "alt": "aspect-health-icon"
+            },
+            "tooltip": "Jede chronische Erkrankung senkt die Lebenszufriedenheit um 0,22 Punkte."
+        },
+        {
+            "id": 7,
+            "type": "political",
+            "title": "Institutionenreform",
+            "description": "Transparenz- und Antikorruptionsmaßnahmen stärken das Vetrauen in staatliche Institutionen.",
+            "effect": "institution_trust",
+            "duration": 6,
+            "costs": 2500000,
+            "happinessDelta": 0.45,
+            "shieldValue": 2,
+            "image": {
+                "src": "assets/simulator_icons/political.svg",
+                "alt": "aspect-political-icon"
+            },
+            "tooltip": "Eine Einheitserhöhung des Vertrauensindex steigert die Lebenszufriedenheit um 0,24 Punkte."
         }
     ],
     "crises": [
@@ -100,6 +164,51 @@
             "happinessDelta": -0.35,
             "mailSuggestion": {
                 "id": 2
+            }
+        },
+        {
+            "id": 4,
+            "type": "mild",
+            "title": "Lohnstagnation",
+            "happinessDelta": -0.15,
+            "mailSuggestion": {
+                "id": 3
+            }
+        },
+        {
+            "id": 5,
+            "type": "severe",
+            "title": "Arbeitslosigkeit",
+            "happinessDelta": -0.40,
+            "mailSuggestion": {
+                "id": 4
+            }
+        },
+        {
+            "id": 6,
+            "type": "mild",
+            "title": "Einsamkeit",
+            "happinessDelta": -0.20,
+            "mailSuggestion": {
+                "id": 5
+            }
+        },
+        {
+            "id": 7,
+            "type": "moderate",
+            "title": "Krankheitswelle",
+            "happinessDelta": -0.30,
+            "mailSuggestion": {
+                "id": 6
+            }
+        },
+        {
+            "id": 8,
+            "type": "severe",
+            "title": "Vertrauenskrise",
+            "happinessDelta": -0.50,
+            "mailSuggestion": {
+                "id": 7
             }
         }
     ],
@@ -151,6 +260,96 @@
                 "id": 1,
                 "type": "health",
                 "title": "Impfkampagne"
+            }
+        },
+        {
+            "id": 3,
+            "type": "economic",
+            "subject": "Lohnstagnation",
+            "information": "Stagnierende Löhne belasten die Bevölkerung und senken die Zufriedenheit.",
+            "senderInformation": {
+                "sender": "Wirtschaftsminister",
+                "profileImage": {
+                    "src": "assets/images/Copilot_20260306_205712.avif",
+                    "alt": "Wirtschaftsminister"
+                }
+            },
+            "eventSuggestion": {
+                "id": 3,
+                "type": "economic",
+                "title": "Lohnerhöhung"
+            }
+        },
+        {
+            "id": 4,
+            "type": "economic",
+            "subject": "Arbeitslosigkeit",
+            "information": "Die steigende Arbeitslosigkeit trifft die Bevölkerung hart und senkt die Zufriedenheit.",
+            "senderInformation": {
+                "sender": "Wirtschaftsminister",
+                "profileImage": {
+                    "src": "assets/images/Copilot_20260306_205712.avif",
+                    "alt": "Wirtschaftsminister"
+                }
+            },
+            "eventSuggestion": {
+                "id": 4,
+                "type": "economic",
+                "title": "Jobprogramm"
+            }
+        },
+        {
+            "id": 5,
+            "type": "social",
+            "subject": "Einsamkeit",
+            "information": "Zunehmende Einsamkeit und instabile Familienverhältnisse belasten die gesellschaftliche Zufriedenheit.",
+            "senderInformation": {
+                "sender": "Sozialminister",
+                "profileImage": {
+                    "src": "assets/images/Copilot_20260306_205712.avif",
+                    "alt": "Sozialminister"
+                }
+            },
+            "eventSuggestion": {
+                "id": 5,
+                "type": "social",
+                "title": "Familienförderung"
+            }
+        },
+        {
+            "id": 6,
+            "type": "health",
+            "subject": "Krankheitswelle",
+            "information": "Eine Welle chronischer Erkrankungen belastet die Bevölkerung und senkt die Zufriedenheit.",
+            "senderInformation": {
+                "sender": "Gesundheitsminister",
+                "profileImage": {
+                    "src": "assets/images/Copilot_20260306_205712.avif",
+                    "alt": "Gesundheitsminister"
+                }
+            },
+            "eventSuggestion": {
+                "id": 6,
+                "type": "health",
+                "title": "Präventionsprogramm"
+            }
+        },
+        {
+            "id": 7,
+            "type": "political",
+            "subject": "Vertrauenskrise",
+            "information": "Das Vertrauen der Bevölkerung in staatliche Institutionen bricht ein und destabilisiert die Gesellschaft.",
+            "senderInformation": {
+                "sender": "Innenminister",
+                "profileImage": {
+                    "src": "assets/images/Copilot_20260306_205712.avif",
+                    "alt": "Innenminister"
+                }
+            },
+            "eventSuggestion": {
+                "id": 7,
+                "type": "political",
+                "title": "Institutionenreform"
             }
         }
     ]
