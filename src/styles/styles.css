@@ -11,7 +11,7 @@
   --button-bg-color: #ffd23de8;
   --button-link-color: #ebb400;
 }
-
+/*---Darkmode---*/
 .darkmode {
   --primary-component-bg-color: #363636;
   --secondary-component-bg-color: #221f1f;
@@ -25,15 +25,19 @@
 .darkmode .darkmode-toggle svg:first-child {
   display: block;
 }
+
 .darkmode .darkmode-toggle svg:last-child {
   display: none;
 }
+
 .darkmode-toggle svg:first-child {
   display: none;
 }
+
 .socials-container img {
   filter: invert(100%);
 }
+
 .darkmode .socials-container img {
   filter: invert(0%);
 }
@@ -41,6 +45,7 @@
 .socials-container img {
   filter: invert(100%);
 }
+
 .darkmode .socials-container img {
   filter: invert(0%);
 }
@@ -51,10 +56,19 @@
 }
 
 .darkmode-toggle-container svg {
+  width: 100%;
+  height: 100%;
+}
+
+.darkmode-toggle-container button {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: var(--primary-component-bg-color);
   display: flex;
-  position: fixed;
   justify-content: center;
   align-items: center;
+  padding: 0;
 }
 
 * {
@@ -64,15 +78,12 @@
   font-family: "Roboto", sans-serif;
 }
 
-.darkmode-toggle-container button {
-  width: 100%;
-  height: 100%;
-  border: none;
-  background-color: var(--primary-component-bg-color);
-  align-items: baseline;
-}
+/*---Anpassung für IPad---*/
 
 @media (max-width: 1025px) {
+
+  /*---Header---*/
+
   header {
     width: 100%;
     height: 75px;
@@ -490,15 +501,9 @@
     color: var(--footer-text-color);
   }
 
-  .logo-container {
-    width: 50px;
-    height: 50px;
-    overflow: hidden;
-  }
+  
 }
 
-@media (prefers-color-scheme: dark) {
-}
 * {
   margin: 0px;
   padding: 0px;
@@ -650,9 +655,10 @@ main {
 }
 
 .startscreen-content button {
-  display: block;
-  align-content: center;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px; 
   margin: auto;
   width: 80%;
   height: 50px;
@@ -662,12 +668,19 @@ main {
   background-color: var(--button-bg-color);
   border-radius: 15px;
   cursor: pointer;
+  padding: 0 16px; 
+}
+
+.btn_text {
+  color: var(--default-text-color);
+  text-align: center;
+  padding: 0; 
 }
 
 .start-btn {
+  display: inline-flex;
   align-items: center;
-  text-align: center;
-  margin-bottom: 10px;
+  justify-content: center;
 }
 
 .content-container a {
@@ -708,8 +721,6 @@ footer {
 }
 
 .legals-container {
-  width: auto;
-  height: auto;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -717,8 +728,6 @@ footer {
 }
 
 .policy-container {
-  width: auto;
-  height: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
