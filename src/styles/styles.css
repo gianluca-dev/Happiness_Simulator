@@ -10,16 +10,19 @@
   --footer-text-color: #000000;
   --button-bg-color: #ffd23de8;
   --button-link-color: #ebb400;
+  --button-text-color: #252525;
 }
 /*---Darkmode---*/
 .darkmode {
-  --primary-component-bg-color: #3b3a3a;
-  --secondary-component-bg-color: #464646;
+  --primary-component-bg-color:  #20252b;
+  --secondary-component-bg-color: #2a3138;
   --primary-border-color: #444444;
-  --footer-bg-color: #ffc400be;
+  --footer-bg-color: #ffc400;
   --default-white: #ffffff;
   --default-text-color: #f7f7f7;
   --footer-text-color: #f7f7f7;
+  --button-bg-color: #E6B832;
+  --button-text-color: #f7f7f7;
 }
 
 .darkmode .darkmode-toggle svg:first-child {
@@ -79,6 +82,11 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Roboto", sans-serif;
+}
+
+body {
+  width: 100%;
+  height: 100%;
 }
 
 /*---Anpassung für IPad---*/
@@ -459,6 +467,56 @@ header {
   color: var(--default-text-color);
 }
 
+.navigation-option a {
+  text-decoration: none;
+  color: var(--default-text-color);
+}
+
+.start-btn-container {
+  width: 500px;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.start-btn-wrapper {
+  width: 335px;
+  height: 40;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 25px;
+  margin: 15px 0 0 0;
+}
+
+.start-btn {
+  width: 155px;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 13px;
+  border: none;
+  padding: 5px 7px 5px 20px;
+  background-color: var(--default-text-color);
+  color: var(--default-white);
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.start-btn img {
+  width: 25px;
+  height: 25px;
+  padding: 2px;
+  border-radius: 9px;
+  background-color: var(--default-white);
+}
+
+
 .start-btn-container-nav {
   height: 50px;
   display: flex;
@@ -471,6 +529,7 @@ header {
   width: 155px;
   height: 35px;
   background-color: var(--button-bg-color);
+  color: var(--button-text-color);
   border-radius: 13px;
   border: none;
   margin: 7.5px 0;
@@ -493,9 +552,10 @@ main {
   background-color: var(--primary-component-bg-color);
   color: var(--default-text-color);
   width: 100%;
-  height: calc(100% - 75px);
+  min-height: 100vh;
+  padding-top: 75px;
+  padding-bottom: 75px;
   position: relative;
-  padding: 75px 0px 75px 0px;
   justify-content: center;
 }
 
@@ -549,17 +609,31 @@ main {
   justify-content: center;
   align-items: center;
 }
+
+.startpage-top-container {
+  width: 1024px;
+}
+
+.startpage-top-container img {
+  position: relative;
+  right: 25px;
+}
+
 .startpage-top-container #content-startscreen-wissenschaftlich {
   background-color: rgba(255, 210, 61, 0.6);
-  width: 41%;
+  width: 325px;
   height: 35px;
+  position: relative;
+  top: -75px;
+  left: -150px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   gap: 15px;
   padding: 15px;
-  font-size: 1.25rem;
+  font-size: 0.85rem;
   border-radius: 35px;
+  color: rgb(194, 156, 31);
   border: 1.5px solid var(--button-link-color);
 }
 
@@ -602,35 +676,6 @@ main {
   border-radius: 15px;
 }
 
-.startscreen-content button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px; 
-  margin: auto;
-  width: 80%;
-  height: 50px;
-  margin-top: 10px;
-  font-size: 1.25rem;
-  font-weight: bold;
-  background-color: var(--button-bg-color);
-  border-radius: 15px;
-  cursor: pointer;
-  padding: 0 16px; 
-}
-
-.btn_text {
-  color: var(--default-text-color);
-  text-align: center;
-  padding: 0; 
-}
-
-.start-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .content-container a {
   text-decoration: none;
   color: var(--default-text-color);
@@ -641,10 +686,11 @@ main {
   height: 100%;
   position: relative;
   padding: 25px;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 10px;
 }
 
 footer {
