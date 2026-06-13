@@ -10,30 +10,37 @@
   --footer-text-color: #000000;
   --button-bg-color: #ffd23de8;
   --button-link-color: #ebb400;
+  --button-text-color: #252525;
 }
-
+/*---Darkmode---*/
 .darkmode {
-  --primary-component-bg-color: #363636;
-  --secondary-component-bg-color: #221f1f;
+  --primary-component-bg-color:  #20252b;
+  --secondary-component-bg-color: #2a3138;
   --primary-border-color: #444444;
-  --footer-bg-color: #ffc400be;
+  --footer-bg-color: #ffc400;
   --default-white: #ffffff;
   --default-text-color: #f7f7f7;
   --footer-text-color: #f7f7f7;
+  --button-bg-color: #E6B832;
+  --button-text-color: #f7f7f7;
 }
 
 .darkmode .darkmode-toggle svg:first-child {
   display: block;
 }
+
 .darkmode .darkmode-toggle svg:last-child {
   display: none;
 }
+
 .darkmode-toggle svg:first-child {
   display: none;
 }
+
 .socials-container img {
   filter: invert(100%);
 }
+
 .darkmode .socials-container img {
   filter: invert(0%);
 }
@@ -41,6 +48,7 @@
 .socials-container img {
   filter: invert(100%);
 }
+
 .darkmode .socials-container img {
   filter: invert(0%);
 }
@@ -48,13 +56,25 @@
 .darkmode-toggle-container {
   width: 40px;
   height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .darkmode-toggle-container svg {
+  width: 75%;
+  height: 75%;
+}
+
+.darkmode-toggle-container button {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: var(--secondary-component-bg-color);
   display: flex;
-  position: fixed;
   justify-content: center;
   align-items: center;
+  padding: 0;
 }
 
 * {
@@ -64,20 +84,22 @@
   font-family: "Roboto", sans-serif;
 }
 
-.darkmode-toggle-container button {
+body {
   width: 100%;
   height: 100%;
-  border: none;
-  background-color: var(--primary-component-bg-color);
-  align-items: baseline;
 }
 
+/*---Anpassung für IPad---*/
+
 @media (max-width: 1025px) {
+
+  /*---Header---*/
+
   header {
     width: 100%;
     height: 75px;
     position: fixed;
-    background-color: var(--primary-component-bg-color);
+    background-color: var(--secondary-component-bg-color);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     z-index: 50;
   }
@@ -100,7 +122,7 @@
   }
 
   .logo-container {
-    width: 50px;
+    width: 50px; 
     height: 50px;
     overflow: hidden;
   }
@@ -127,10 +149,11 @@
   }
 
   .start-btn-container-nav button {
+    width: 145px;
+    height: 40px;
     color: var(--default-text-color);
     background-color: var(--button-bg-color);
     border-radius: 15px;
-    padding: 10px 20px;
     border: none;
   }
 
@@ -138,28 +161,6 @@
     width: 50px;
     height: 50px;
     overflow: hidden;
-  }
-
-  .login-btn {
-    width: 100px;
-    height: 35px;
-    border: none;
-    background-color: var(--primary-component-bg-color);
-    color: var(--default-text-color);
-    font-size: 14px;
-    font-weight: 550;
-  }
-
-  .demo-btn {
-    width: 135px;
-    height: 35px;
-    border-radius: 7px;
-    border: none;
-    background-color: var(--primary-theme-color);
-    font-size: 14px;
-    font-weight: 500;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    color: var(--default-text-color);
   }
 
   /*---Main---*/
@@ -313,22 +314,6 @@
     margin: 35px 0 0 0;
   }
 
-  .info {
-    width: auto;
-    height: auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 7px;
-    color: var(--secondary-text-color);
-    font-size: 13px;
-  }
-
-  .info img {
-    width: 20px;
-    height: 20px;
-  }
-
   .hero-image-container {
     width: 100%;
     height: 60vh;
@@ -363,76 +348,6 @@
     color: var(--default-white);
     transform: translate(-50%);
     z-index: 25;
-  }
-
-  .overlay-title {
-    font-size: 18px;
-    font-weight: 650;
-  }
-
-  .simulator-info {
-    width: 175px;
-    height: 25px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    margin: 0 0 15px 0;
-    padding: 0 8px;
-    border-radius: 35px;
-    border: 1px solid var(--primary-accent-color);
-    background-color: #ffd23d3f;
-  }
-
-  .simulator-info p {
-    font-size: 0.75rem;
-    font-weight: 550;
-    color: #ecc238;
-  }
-
-  .pulse {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: var(--primary-accent-color);
-    animation: pulse 1s infinite;
-  }
-
-  @keyframes pulse {
-    0% {
-      transform: scale(1);
-      opacity: 1;
-    }
-    50% {
-      transform: scale(1.15);
-      opacity: 0.7;
-    }
-    100% {
-      transform: scale(1);
-      opacity: 1;
-    }
-  }
-
-  .circle-container > div:first-child {
-    width: 425px;
-    height: 425px;
-    position: absolute;
-    top: 35px;
-    right: -45px;
-    border-radius: 50%;
-    background-color: #ecc23865;
-    z-index: 1;
-  }
-
-  .circle-container > div:last-child {
-    width: 275px;
-    height: 275px;
-    position: absolute;
-    bottom: 65px;
-    left: -20px;
-    border-radius: 50%;
-    background-color: #ecc23865;
-    z-index: 1;
   }
 
   /*---Footer---*/
@@ -490,15 +405,9 @@
     color: var(--footer-text-color);
   }
 
-  .logo-container {
-    width: 50px;
-    height: 50px;
-    overflow: hidden;
-  }
+  
 }
 
-@media (prefers-color-scheme: dark) {
-}
 * {
   margin: 0px;
   padding: 0px;
@@ -510,7 +419,10 @@ header {
   width: 100%;
   height: 75px;
   position: fixed;
-  background-color: var(--primary-component-bg-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--secondary-component-bg-color);
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
   z-index: 50;
 }
@@ -519,17 +431,27 @@ header {
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   padding: 0px 25px;
-  gap: 250px;
+  gap: 175px;
+  padding: 0 25px;
 }
 
 .start-navigation-wrapper {
+  width: auto;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   gap: 50px;
+}
+
+.end-navigation-wrapper {
+  width: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 35px;
 }
 
 .navigation-element {
@@ -545,11 +467,72 @@ header {
   color: var(--default-text-color);
 }
 
-.start-btn-container-nav button {
-  background-color: var(--button-bg-color);
-  border-radius: 15px;
-  padding: 10px 20px;
+.navigation-option a {
+  text-decoration: none;
+  color: var(--default-text-color);
+}
+
+.start-btn-container {
+  width: 500px;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.start-btn-wrapper {
+  width: 335px;
+  height: 40;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 25px;
+  margin: 15px 0 0 0;
+}
+
+.start-btn {
+  width: 155px;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 13px;
   border: none;
+  padding: 5px 7px 5px 20px;
+  background-color: var(--default-text-color);
+  color: var(--default-white);
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.start-btn img {
+  width: 25px;
+  height: 25px;
+  padding: 2px;
+  border-radius: 9px;
+  background-color: var(--default-white);
+}
+
+
+.start-btn-container-nav {
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 25px;
+}
+
+.start-btn-container-nav button {
+  width: 155px;
+  height: 35px;
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+  border-radius: 13px;
+  border: none;
+  margin: 7.5px 0;
 }
 
 .logo-container {
@@ -569,9 +552,10 @@ main {
   background-color: var(--primary-component-bg-color);
   color: var(--default-text-color);
   width: 100%;
-  height: calc(100% - 75px);
+  min-height: 100vh;
+  padding-top: 75px;
+  padding-bottom: 75px;
   position: relative;
-  padding: 75px 0px 75px 0px;
   justify-content: center;
 }
 
@@ -625,12 +609,55 @@ main {
   justify-content: center;
   align-items: center;
 }
-.startpage-top-container #content-startscreen-Wissenschaftlich {
-  background-color: var(--footer-bg-color);
-  width: 50%;
+
+.startpage-top-container {
+  width: 1024px;
+}
+
+.startpage-top-container img {
+  position: relative;
+  right: 25px;
+}
+
+.startpage-top-container #content-startscreen-wissenschaftlich {
+  background-color: rgba(255, 210, 61, 0.6);
+  width: 325px;
+  height: 35px;
+  position: relative;
+  top: -75px;
+  left: -150px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 15px;
   padding: 15px;
-  font-size: 1.5rem;
-  border-radius: 15px;
+  font-size: 0.85rem;
+  border-radius: 35px;
+  color: rgb(194, 156, 31);
+  border: 1.5px solid var(--button-link-color);
+}
+
+.pulse-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--button-link-color);
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .startpage-top-container {
@@ -649,27 +676,6 @@ main {
   border-radius: 15px;
 }
 
-.startscreen-content button {
-  display: block;
-  align-content: center;
-  text-align: center;
-  margin: auto;
-  width: 80%;
-  height: 50px;
-  margin-top: 10px;
-  font-size: 1.25rem;
-  font-weight: bold;
-  background-color: var(--button-bg-color);
-  border-radius: 15px;
-  cursor: pointer;
-}
-
-.start-btn {
-  align-items: center;
-  text-align: center;
-  margin-bottom: 10px;
-}
-
 .content-container a {
   text-decoration: none;
   color: var(--default-text-color);
@@ -680,10 +686,11 @@ main {
   height: 100%;
   position: relative;
   padding: 25px;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 10px;
 }
 
 footer {
@@ -708,8 +715,6 @@ footer {
 }
 
 .legals-container {
-  width: auto;
-  height: auto;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -717,8 +722,6 @@ footer {
 }
 
 .policy-container {
-  width: auto;
-  height: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
