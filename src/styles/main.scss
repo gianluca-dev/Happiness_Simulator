@@ -1,0 +1,18 @@
+// ===== SCSS Main File =====
+// Alle Dateien müssen in dieser Reihenfolge importiert werden!
+
+// 1. Variablen ZUERST (alle anderen Dateien brauchen diese)
+@import "variables";
+
+// 2. Dark Mode
+@import "darkmode";
+
+// 3. Komponenten (Header, Buttons, etc.)
+@import "header";
+@import "buttons";
+
+// 4. Allgemeine Styles (nutzt Variablen + Komponenten)
+@import "styles";
+
+// 5. Responsive Design (überschreibt bei Bedarf)
+@import "responsive";

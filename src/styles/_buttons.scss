@@ -1,0 +1,116 @@
+// ===== Button Styles =====
+
+.startscreen-content button {
+  display: block;
+  margin: auto;
+  width: 80%;
+  height: 50px;
+  margin-top: 10px;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: $default-text-color;
+  background-color: $button-bg-color;
+  border-radius: $border-radius-large;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-wrapper {
+  width: 80%;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: $spacing-large;
+  margin: 15px 0 0 0;
+}
+
+//==== Start Button =====
+
+.start-btn-container {
+  width: 500px;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  button {
+    justify-content: center;
+    align-items: center;
+    border: none;
+    height: auto;
+  }
+}
+
+.start-btn {
+  width: 155px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: $border-radius-small;
+  border: none;
+  padding: 5px 12px;
+  background-color: $default-text-color;
+  color: $default-white;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: $transition-default;
+  box-shadow: $box-shadow-light;
+
+  img {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+//====Restart Button ====== 
+
+.restart-btn-container {
+  width: 500px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+
+  button {
+    justify-content: center;
+    align-items: center;
+    border: none;
+    height: auto;
+  }
+}  
+
+.restart-btn {
+  width: 210px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: $border-radius-small;
+  border: none;
+  padding: 5px 12px;
+  background-color: $button-bg-color;
+  color: $button-text-color;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: $transition-default;
+
+  &:hover {
+    background-color: $default-text-color;
+    color: $default-white;
+  }
+
+  img {
+    width: 20px;
+    height: 20px;
+    margin-left: $spacing-small;
+    margin-top: $spacing-small;
+  }
+}
+
+
+
