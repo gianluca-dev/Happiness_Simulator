@@ -1,5 +1,47 @@
 // ===== Button Styles =====
 
+.startscreen-content button {
+  display: block;
+  margin: auto;
+  width: 80%;
+  height: 50px;
+  margin-top: 10px;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: $default-text-color;
+  background-color: $button-bg-color;
+  border-radius: $border-radius-large;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-wrapper {
+  width: 80%;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: $spacing-large;
+  margin: 15px 0 0 0;
+}
+
+//==== Start Button =====
+
+.start-btn-container {
+  width: 500px;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  button {
+    justify-content: center;
+    align-items: center;
+    border: none;
+    height: auto;
+  }
+}
+
 .start-btn {
   width: 155px;
   height: 40px;
@@ -24,11 +66,12 @@
   }
 }
 
-.start-btn-container {
+//====Restart Button ====== 
+
+.restart-btn-container {
   width: 500px;
   height: 50px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
 
   button {
@@ -37,45 +80,11 @@
     border: none;
     height: auto;
   }
-}
-
-.start-btn-wrapper {
-  width: 80%;
-  height: 50px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: $spacing-large;
-  margin: 15px 0 0 0;
-}
-
-.start-btn-container-nav {
-  height: 50px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  gap: $spacing-large;
-
-  button {
-    width: 210px;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    background-color: $button-bg-color;
-    color: $button-text-color;
-    border-radius: $border-radius-large;
-    border: none;
-    font-weight: 500;
-    cursor: pointer;
-  }
-}
+}  
 
 .restart-btn {
   width: 210px;
-  height: 50px;
+  height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -98,20 +107,10 @@
   img {
     width: 20px;
     height: 20px;
+    margin-left: $spacing-small;
+    margin-top: $spacing-small;
   }
 }
 
-.startscreen-content button {
-  display: block;
-  margin: auto;
-  width: 80%;
-  height: 50px;
-  margin-top: 10px;
-  font-size: 1.25rem;
-  font-weight: bold;
-  color: $default-text-color;
-  background-color: $button-bg-color;
-  border-radius: $border-radius-large;
-  cursor: pointer;
-  border: none;
-}
+
+

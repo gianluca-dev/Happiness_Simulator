@@ -56,6 +56,19 @@ header {
   z-index: 50;
 }
 
+.logo-container {
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+}
+.logo-container img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  transform: scale(1.15);
+}
+
 .navigation {
   width: 100%;
   height: 100%;
@@ -96,17 +109,66 @@ header {
   color: #252525;
 }
 
-.logo-container {
-  width: 50px;
+.start-btn-container-nav {
   height: 50px;
-  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 25px;
 }
-.logo-container img {
-  width: 100%;
-  height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-  transform: scale(1.15);
+.start-btn-container-nav button {
+  width: 210px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  background-color: rgba(255, 210, 61, 0.9098039216);
+  color: #252525;
+  border-radius: 15px;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.startscreen-content button {
+  display: block;
+  margin: auto;
+  width: 80%;
+  height: 50px;
+  margin-top: 10px;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #252525;
+  background-color: rgba(255, 210, 61, 0.9098039216);
+  border-radius: 15px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-wrapper {
+  width: 80%;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 25px;
+  margin: 15px 0 0 0;
+}
+
+.start-btn-container {
+  width: 500px;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.start-btn-container button {
+  justify-content: center;
+  align-items: center;
+  border: none;
+  height: auto;
 }
 
 .start-btn {
@@ -132,56 +194,22 @@ header {
   height: 20px;
 }
 
-.start-btn-container {
+.restart-btn-container {
   width: 500px;
   height: 50px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
 }
-.start-btn-container button {
+.restart-btn-container button {
   justify-content: center;
   align-items: center;
   border: none;
   height: auto;
 }
 
-.start-btn-wrapper {
-  width: 80%;
-  height: 50px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 25px;
-  margin: 15px 0 0 0;
-}
-
-.start-btn-container-nav {
-  height: 50px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  gap: 25px;
-}
-.start-btn-container-nav button {
-  width: 210px;
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  background-color: rgba(255, 210, 61, 0.9098039216);
-  color: #252525;
-  border-radius: 15px;
-  border: none;
-  font-weight: 500;
-  cursor: pointer;
-}
-
 .restart-btn {
   width: 210px;
-  height: 50px;
+  height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -203,21 +231,8 @@ header {
 .restart-btn img {
   width: 20px;
   height: 20px;
-}
-
-.startscreen-content button {
-  display: block;
-  margin: auto;
-  width: 80%;
-  height: 50px;
-  margin-top: 10px;
-  font-size: 1.25rem;
-  font-weight: bold;
-  color: #252525;
-  background-color: rgba(255, 210, 61, 0.9098039216);
-  border-radius: 15px;
-  cursor: pointer;
-  border: none;
+  margin-left: 8px;
+  margin-top: 8px;
 }
 
 * {

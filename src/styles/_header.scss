@@ -12,6 +12,21 @@ header {
   z-index: 50;
 }
 
+// ===== Logo =====
+
+.logo-container {
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.15);
+  }
+}
+
 // ===== Navigation =====
 
 .navigation {
@@ -54,17 +69,27 @@ header {
   color: $default-text-color;
 }
 
-// ===== Logo =====
 
-.logo-container {
-  width: 50px;
+.start-btn-container-nav {
   height: 50px;
-  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: $spacing-large;
 
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transform: scale(1.15);
+  button {
+    width: 210px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    background-color: $button-bg-color;
+    color: $button-text-color;
+    border-radius: $border-radius-large;
+    border: none;
+    font-weight: 500;
+    cursor: pointer;
   }
 }
