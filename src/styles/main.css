@@ -1,3 +1,4 @@
+/*#20252b, #2a3138*/
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap");
 .darkmode .darkmode-toggle svg:first-child {
   display: block;
@@ -7,6 +8,9 @@
 }
 .darkmode .socials-container img {
   filter: invert(0%);
+}
+.darkmode header {
+  background-color: #141414;
 }
 
 .darkmode-toggle svg:first-child {
@@ -32,7 +36,7 @@
   width: 100%;
   height: 100%;
   border: none;
-  background-color: var(#eeeeee);
+  background-color: #eeeeee;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -115,21 +119,37 @@ header {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  gap: 25px;
+  gap: 13px;
 }
-.start-btn-container-nav button {
-  width: 210px;
-  height: 50px;
+
+.login-btn {
+  width: 125px;
+  height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
-  background-color: rgba(255, 210, 61, 0.9098039216);
+  border-radius: 35px;
+  border: 1.5px solid #252525;
+  background-color: transparent;
   color: #252525;
-  border-radius: 15px;
-  border: none;
-  font-weight: 500;
-  cursor: pointer;
+  font-size: 14px;
+  font-weight: 550;
+  letter-spacing: 0.5px;
+}
+
+.demo-btn {
+  width: 125px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 35px;
+  border: 1.5px solid #252525;
+  background-color: #252525;
+  color: #f7f7f7;
+  font-size: 14px;
+  font-weight: 550;
+  letter-spacing: 0.5px;
 }
 
 .startscreen-content button {
@@ -142,7 +162,7 @@ header {
   font-weight: bold;
   color: #252525;
   background-color: rgba(255, 210, 61, 0.9098039216);
-  border-radius: 15px;
+  border-radius: 35px;
   cursor: pointer;
   border: none;
 }
@@ -231,8 +251,8 @@ header {
 .restart-btn img {
   width: 20px;
   height: 20px;
-  margin-left: 8px;
-  margin-top: 8px;
+  margin-left: 7px;
+  margin-top: 7px;
 }
 
 * {
@@ -244,7 +264,9 @@ header {
 
 body {
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 main {
@@ -256,6 +278,7 @@ main {
   padding-bottom: 75px;
   position: relative;
   justify-content: center;
+  flex: 1;
 }
 
 .content-container {
@@ -318,7 +341,7 @@ main {
 .startpage-top-container img {
   width: 320px;
   height: auto;
-  border-radius: 15px;
+  border-radius: 35px;
 }
 .startpage-top-container #content-startscreen-wissenschaftlich {
   background-color: rgba(255, 210, 61, 0.6);
@@ -437,23 +460,69 @@ main {
 
 footer {
   width: 100%;
-  height: 75px;
-  position: fixed;
-  bottom: 0;
+  height: auto;
   display: flex;
+  flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  padding: 0 25px;
-  background-color: #fbc926;
+  padding: 25px 25px 0 25px;
+  background-color: #f1f1f1;
   z-index: 50;
 }
 
-.footer-end-container {
+.footer-start-container {
   width: 100%;
   height: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 75px;
+  margin: 13px 0 35px 0;
+  padding: 0 75px 0 13px;
+}
+
+.footer-logo-container {
+  width: 250px;
+  height: auto;
+  overflow: hidden;
+}
+
+.footer-logo-container img {
+  width: 100%;
+  height: 100%;
+}
+
+.footer-navigation {
+  width: auto;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 75px;
+}
+
+.footer-navigation ul li {
+  list-style-type: none;
+  margin: 0 0 7px 0;
+}
+
+.footer-navigation li:first-child {
+  color: #a1a1a1;
+}
+
+.footer-navigation a {
+  text-decoration: none;
+  color: #252525;
+}
+
+.footer-end-container {
+  width: 100%;
+  height: 55px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1.5px solid #e5e5e5;
+  padding: 0 13px;
 }
 
 .legals-container {
@@ -471,7 +540,7 @@ footer {
 }
 .policy-container a {
   text-decoration: none;
-  color: #000000;
+  color: #a1a1a1;
 }
 
 .socials-container img {
@@ -480,7 +549,7 @@ footer {
 }
 
 .copyright-container {
-  color: #000000;
+  color: #a1a1a1;
 }
 
 @media (max-width: 1025px) {
@@ -554,7 +623,7 @@ footer {
     font-size: 1.25rem;
     font-weight: bold;
     background-color: rgba(255, 210, 61, 0.9098039216);
-    border-radius: 15px;
+    border-radius: 35px;
     cursor: pointer;
   }
   .startpage-top-container {
@@ -569,14 +638,14 @@ footer {
   .startpage-top-container img {
     width: 320px;
     height: auto;
-    border-radius: 15px;
+    border-radius: 35px;
   }
   .startpage-top-container #content-startscreen-Wissenschaftlich {
     background-color: #fbc926;
     width: 40%;
     padding: 15px;
     font-size: 1.5rem;
-    border-radius: 15px;
+    border-radius: 35px;
   }
   .content-container a {
     text-decoration: none;
