@@ -87,6 +87,10 @@ if (path.includes('index.html') || path.endsWith('/')) {
         window.location.href = 'simulator.html';
     });
 
+    document.getElementById('start-btn-cta').addEventListener('click', () => {
+        window.location.href = 'simulator.html';
+    });
+
     document.getElementById('restart-btn').addEventListener('click', () => {
         deleteSimData();
         window.location.href = 'simulator.html';
