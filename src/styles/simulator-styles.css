@@ -15,6 +15,13 @@
   --secondary-accept-btn-color: #14b8a6;
   --reject-btn-b-color: #ef4444;
   --reject-btn-bg-color: #fddede;
+
+  --header-h: 75px;
+  --section-top: 100px;
+  --section-bottom: 125px;
+  --footer-h: 75px;
+  --aside-w: 50px;
+  --available-h: calc(100vh - var(--section-top) - var(--section-bottom));
 }
 
 * {
@@ -28,7 +35,7 @@
 
 header {
   width: 100%;
-  height: 75px;
+  height: var(--header-h);
   position: fixed;
   display: flex;
   justify-content: space-between;
@@ -69,11 +76,11 @@ header {
 /*---Footer---*/
 
 footer {
-  width: 50%;
-  height: 75px;
+  width: calc(50% - var(--aside-w));
+  height: var(--footer-h);
   position: fixed;
   bottom: 0;
-  left: 75px;
+  left: var(--aside-w);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -103,7 +110,7 @@ footer {
 /*---Sections---*/
 
 .aspect-menu-nav {
-  height: calc(100% - 75px);
+  height: calc(100% - var(--header-h));
   position: absolute;
   top: 0;
   left: 0;
@@ -127,7 +134,7 @@ footer {
 }
 
 .aspect-container {
-  width: 50px;
+  width: var(--aside-w);
   height: 50px;
   position: relative;
   display: flex;
@@ -158,7 +165,7 @@ footer {
   width: 300px;
   height: 100%;
   position: absolute;
-  top: 75px;
+  top: var(--header-h);
   left: 0;
   display: flex;
   flex-direction: column;
@@ -179,7 +186,7 @@ footer {
   width: 125px;
   height: 50px;
   position: fixed;
-  top: 75px;
+  top: var(--header-h);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -197,19 +204,18 @@ footer {
   width: 150px;
   height: 75px;
   position: fixed;
-  top: 75px;
+  top: var(--header-h);
   border-radius: 0 0 13px 0;
   background-color: var(--default-placeholder-color);
   z-index: 55;
 }
 
 .content-section {
-  width: 48%;
-  height: 65vh;
-  position: absolute;
-  bottom: 65px;
-  left: 50px;
-  margin: 25px;
+  width: calc(55% - var(--aside-w) - 25px);
+  height: var(--available-h);
+  position: fixed;
+  top: var(--section-top);
+  left: calc(var(--aside-w) + 25px);
   padding: 3px;
   border-radius: 0 13px 13px 13px;
   background-color: var(--content-section-bg-color);
@@ -226,30 +232,32 @@ footer {
 }
 
 .life-eval-section {
-  width: 40%;
-  height: 29vh;
-  position: absolute;
-  top: 75px;
+  width: calc(45% - 50px);
+  height: calc(var(--available-h) * 0.45);
+  position: fixed;
+  top: var(--section-top);
   right: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 25px;
+  margin: 0 25px 0 0;
   padding: 5px;
   border-radius: 13px;
   background-color: var(--default-bg-color);
+  z-index: 25;
 }
 
 .life-eval-stats-section {
-  width: 40%;
-  height: 32vh; /*vorher 31vh*/
-  position: absolute;
-  bottom: 65px;
+  width: calc(45% - 50px);
+  height: calc(var(--available-h) * 0.49);
+  position: fixed;
+  bottom: var(--section-bottom);
   right: 0;
-  margin: 25px;
+  margin: 0 25px 0 25px;
   padding: 5px;
   border-radius: 13px;
   background-color: var(--default-bg-color);
+  z-index: 25;
 }
 
 .app-icon-navigation {
@@ -261,7 +269,7 @@ footer {
   gap: 13px;
   border-radius: 35px;
   padding: 7px;
-  margin: 0 0 15px 0;
+  margin: 0 0 5% 0;
   background-color: #f0f0f0;
 }
 
@@ -270,17 +278,20 @@ footer {
 .life-eval-chart-wrapper {
   width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 10px;
   background-color: var(--default-placeholder-color);
 }
 
 .life-eval-chart-container {
-  width: 99%;
-  height: auto;
+  width: auto;
+  height: 101%;
 }
 
 .life-eval-chart-canvas {
-  width: 100%;
+  width: auto;
   height: 100%;
 }
 
@@ -381,7 +392,7 @@ footer {
 }
 
 .nation-stats-description {
-  margin: 7px 0 0 0;
+  margin: 5px 0 0 0;
   font-size: 15px;
   color: #3f3f3f;
 }
@@ -613,8 +624,8 @@ footer {
   flex-direction: column;
   padding: 25px 0 15px 0;
   border-bottom: 1.5px solid var(--line-color);
-  white-space: wrap; /*---Bis bessere Lösung da ist so lassen!---*/
-  overflow: scroll; /*---Bis bessere Lösung da ist so lassen!---*/
+  white-space: wrap;
+  overflow: scroll;
 }
 
 .preview-mail-subject {
@@ -1545,7 +1556,9 @@ footer {
   width: 15px;
   height: 15px;
   position: absolute;
-  left: 220px;
+  /* Wird jetzt relativ zum footer-wrapper positioniert, nicht mehr fix px */
+  left: 50%;
+  transform: translateX(-22px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1556,85 +1569,74 @@ footer {
   font-size: 10px;
 }
 
+.footer-app-icon-wrapper {
+  position: relative;
+}
+
 .inactive {
   display: none;
 }
 
-/*---Content-Section-Map-Markers---*/
-
-.marker-deutschland {
+.marker-deutschland,
+.marker-finnland,
+.marker-dänemark,
+.marker-norwegen,
+.marker-schweden,
+.marker-island,
+.marker-niederlande {
   width: 13px;
   height: 13px;
   position: absolute;
-  top: 265px;
-  left: 295px;
   border-radius: 50%;
+  width: clamp(11px, 1.3%, 16px);
+  height: clamp(11px, 1.3%, 16px);
+}
+
+.marker-deutschland {
+  top: 54.3%;
+  left: 62.4%;
   border: 1.5px solid rgb(54, 162, 235);
   background-color: rgb(150, 204, 241);
 }
 
 .marker-finnland {
-  width: 13px;
-  height: 13px;
-  position: absolute;
-  top: 155px;
-  left: 380px;
-  border-radius: 50%;
+  top: 31.7%;
+  left: 80.3%;
   border: 1.5px solid rgb(255, 99, 132);
   background-color: rgb(251, 173, 189);
 }
 
 .marker-dänemark {
-  width: 13px;
-  height: 13px;
-  position: absolute;
-  top: 220px;
-  left: 290px;
-  border-radius: 50%;
+  top: 44.3%;
+  left: 61.5%;
   border: 1.5px solid rgb(255, 159, 64);
   background-color: rgb(251, 203, 155);
 }
 
 .marker-norwegen {
-  width: 13px;
-  height: 13px;
-  position: absolute;
-  top: 165px;
-  left: 290px;
-  border-radius: 50%;
+  top: 33.5%;
+  left: 61.5%;
   border: 1.5px solid rgb(255, 205, 86);
   background-color: rgb(251, 226, 166);
 }
 
 .marker-schweden {
-  width: 13px;
-  height: 13px;
-  position: absolute;
-  top: 190px;
-  left: 318px;
-  border-radius: 50%;
+  top: 38.9%;
+  left: 67.1%;
   border: 1.5px solid rgb(115, 205, 205);
   background-color: rgb(161, 219, 219);
 }
 
 .marker-island {
-  width: 13px;
-  height: 13px;
-  position: absolute;
-  top: 73px;
-  left: 175px;
-  border-radius: 50%;
+  top: 15%;
+  left: 37.7%;
   border: 1.5px solid rgb(171, 129, 253);
   background-color: rgb(200, 174, 251);
 }
 
 .marker-niederlande {
-  width: 13px;
-  height: 13px;
-  position: absolute;
-  top: 255px;
-  left: 250px;
-  border-radius: 50%;
+  top: 52.5%;
+  left: 53.3%;
   border: 1.5px solid rgb(210, 211, 215);
   background-color: rgb(224, 224, 227);
 }
@@ -1836,7 +1838,7 @@ footer {
   background: var(--content-section-bg-color);
 }
 
-/*---Realistisc-Rank---*/
+/*---Realistic-Rank---*/
 
 .results-rank-main {
   text-align: center;
@@ -2002,67 +2004,175 @@ footer {
 
 /*---Media-Queries---*/
 
-/*---Tablet---*/
-
-@media (min-width: 768px) and (max-width: 1025px) {
+@media (max-width: 1084px) {
   footer {
-    width: 47%;
+    width: calc(51% - var(--aside-w));
   }
 
   .content-section {
-    width: 47%;
-    height: 75vh;
-    bottom: 70px;
+    width: calc(51% - var(--aside-w) - 25px);
+    height: 64vh;
   }
 
   .life-eval-section {
-    width: 40%;
-    height: 35vh;
-    top: 75px;
+    width: calc(49% - 50px);
+    height: 30vh;
   }
 
   .life-eval-stats-section {
-    width: 40%;
-    height: 35vh;
-    bottom: 70px;
+    width: calc(49% - 50px);
+    height: 32vh;
+    margin: 0 25px -30px 0;
   }
 
-  .mail-notification {
-    left: 180px;
+  .app-icon-navigation {
+    margin: 0 0 4% 0;
+  }
+
+  .marker-deutschland {
+    top: 54.3%;
+    left: 62.4%;
+  }
+
+  .marker-finnland {
+    top: 31.7%;
+    left: 80.3%;
+  }
+
+  .marker-dänemark {
+    top: 44.3%;
+    left: 61.5%;
+  }
+
+  .marker-norwegen {
+    top: 33.5%;
+    left: 61.5%;
+  }
+
+  .marker-schweden {
+    top: 38.9%;
+    left: 67.1%;
+  }
+
+  .marker-island {
+    top: 15%;
+    left: 37.7%;
+  }
+
+  .marker-niederlande {
+    top: 52.5%;
+    left: 53.3%;
   }
 }
 
-/*---Monitor-(1080p)---*/
-
-@media (min-width: 1085px) and (max-width: 1920px) {
+@media (min-width: 1085px) {
   footer {
-    width: 53%;
+    width: calc(56% - var(--aside-w));
   }
 
   .content-section {
-    width: 53%;
-    height: 80vh;
-    bottom: 70px;
+    width: calc(56% - var(--aside-w) - 25px);
   }
 
   .life-eval-section {
-    width: 40%;
-    height: 38vh;
-    top: 75px;
+    width: calc(44% - 50px);
   }
 
   .life-eval-stats-section {
-    width: 40%;
-    height: 38vh;
-    bottom: 70px;
+    width: calc(44% - 50px);
   }
 
-  .mail-notification {
-    left: 455px;
+  .app-icon-navigation {
+    margin: 0 0 10% 0;
+  }
+
+  .marker-deutschland {
+    top: 56.3%;
+    left: 63.4%;
+  }
+
+  .marker-finnland {
+    top: 33.2%;
+    left: 82.3%;
+  }
+
+  .marker-dänemark {
+    top: 46.2%;
+    left: 62.9%;
+  }
+
+  .marker-norwegen {
+    top: 35.1%;
+    left: 63.5%;
+  }
+
+  .marker-schweden {
+    top: 40.4%;
+    left: 69.1%;
+  }
+
+  .marker-island {
+    top: 16.5%;
+    left: 39.3%;
+  }
+
+  .marker-niederlande {
+    top: 54.5%;
+    left: 55.2%;
+  }
+
+  .life-eval-chart-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background-color: var(--default-placeholder-color);
+  }
+
+  .life-eval-chart-container {
+    width: 99%;
+    height: auto;
+  }
+
+  .life-eval-chart-canvas {
+    width: auto;
+    height: 100%;
+  }
+
+  .nation-stats-preview {
+    height: 150px;
+  }
+
+  .last-scores-preview {
+    height: 125px;
+  }
+
+  .last-scores-header {
+    width: 100%;
+    height: 35px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 10px 0 10px;
+    color: #3f3f3f;
+  }
+
+  .nation-preview {
+    height: 37px;
+  }
+
+  .current-score {
+    font-size: 32px;
+  }
+
+  .nation-stats-description {
+    margin: 28px 0 0 0;
   }
 }
 
-/*---Results-Overlay---*/
+/*---Results-Overlay small screens---*/
 
 @media (max-width: 600px) {
   .results-grid {

@@ -29,7 +29,7 @@ export function showAllMails(suggestedMail, date) {
         mailSenderImage.alt = mail.senderInformation.profileImage.alt;
     
         const mailSender = document.createElement('p');
-        mailSender.clasName = 'mail-sender';
+        mailSender.className = 'mail-sender';
         mailSender.textContent = mail.senderInformation.sender;
 
         const  mailSenderContainer = document.createElement('div');
