@@ -12,7 +12,37 @@ $darkmode-button-text-color: #f7f7f7;
 
 // ===== Dark Mode Styles =====
 
+.darkmode-toggle-container {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    svg {
+      width: 75%;
+      height: 75%;
+    }
+
+    button {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background-color: var($secondary-component-bg-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+      cursor: pointer;
+      transition: $transition-default;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
 .darkmode {
+
   // ===== Dark Mode Toggle Icons =====
   .darkmode-toggle {
     svg:first-child {
@@ -43,36 +73,4 @@ $darkmode-button-text-color: #f7f7f7;
 
 .socials-container img {
   filter: invert(100%);
-}
-
-// ===== Dark Mode Toggle Button =====
-
-.darkmode-toggle-container {
-  width: 40px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  svg {
-    width: 75%;
-    height: 75%;
-  }
-
-  button {
-    width: 100%;
-    height: 100%;
-    border: none;
-    background-color: var($secondary-component-bg-color);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
-    cursor: pointer;
-    transition: $transition-default;
-
-    &:hover {
-      opacity: 0.8;
-    }
-  }
 }
