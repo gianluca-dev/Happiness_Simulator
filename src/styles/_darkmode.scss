@@ -1,5 +1,5 @@
 // ===== Dark Mode Variables =====
-
+.darkmode {
 // ===== Darkmode Colors =====
 $darkmode-default-white: #16161a;
 $darkmode-primary-component-bg-color: #222227;
@@ -35,7 +35,7 @@ $darkmode-cta-box-shadow-light: 0 0 20px rgba(255, 202, 40, 0.4);
 
 // ===== Dark Mode Styles =====
 
-.darkmode {
+
   // ===== Dark Mode Toggle Icons =====
   .darkmode-toggle {
     svg:first-child {
