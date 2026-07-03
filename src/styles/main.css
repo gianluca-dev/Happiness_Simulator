@@ -1,22 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap");
-.darkmode .darkmode-toggle svg:first-child {
-  display: block;
-}
-.darkmode .darkmode-toggle svg:last-child {
-  display: none;
-}
-.darkmode .socials-container img {
-  filter: invert(0%);
-}
-
-.darkmode-toggle svg:first-child {
-  display: none;
-}
-
-.socials-container img {
-  filter: invert(100%);
-}
-
 .darkmode-toggle-container {
   width: 40px;
   height: 40px;
@@ -42,6 +24,24 @@
 }
 .darkmode-toggle-container button:hover {
   opacity: 0.8;
+}
+
+.darkmode .darkmode-toggle svg:first-child {
+  display: block;
+}
+.darkmode .darkmode-toggle svg:last-child {
+  display: none;
+}
+.darkmode .socials-container img {
+  filter: invert(0%);
+}
+
+.darkmode-toggle svg:first-child {
+  display: none;
+}
+
+.socials-container img {
+  filter: invert(100%);
 }
 
 header {
@@ -701,10 +701,10 @@ footer {
 
 @media (max-width: 1025px) {
   .navigation {
-    gap: 100px;
+    gap: 8px;
   }
   .start-navigation-wrapper {
-    gap: 20px;
+    gap: 8px;
   }
   .hero-section {
     width: 100%;
