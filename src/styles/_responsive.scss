@@ -179,29 +179,73 @@
   // ===== Footer iPad =====
 
   footer {
-    width: 100%;
-    height: 75px;
-    position: absolute;
-    bottom: 0;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 0 $spacing-large;
-    background-color: $footer-bg-color;
-    z-index: 50;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: $spacing-large $spacing-large 0 $spacing-large;
+  background-color: $primary-footer-color;
+  z-index: 50;
   }
 
-  .footer-end-container {
+  .footer-start-container {
     width: 100%;
     height: auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: $spacing-footer;
+    margin: $spacing-medium 0 $spacing-xl 0;
+    padding: 0 $spacing-footer 0 $spacing-medium;
+  }
+
+  .footer-logo-container {
+    width: 250px;
+    height: auto;
+    overflow: hidden;
+  }
+
+  .footer-logo-container img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .footer-navigation {
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: $spacing-footer;
+  }
+
+  .footer-navigation ul li {
+    list-style-type: none;
+    margin: 0 0 $spacing-small 0;
+  }
+
+  .footer-navigation li:first-child {
+    color: $footer-link-color;
+  }
+
+  .footer-navigation a {
+    text-decoration: none;
+    color: $default-text-color;
+  }
+
+  .footer-end-container {
+    width: 100%;
+    height: 55px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1.5px solid $default-border-color;
+    padding: 0 $spacing-medium;
   }
 
   .legals-container {
-    width: auto;
-    height: auto;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -209,8 +253,6 @@
   }
 
   .policy-container {
-    width: auto;
-    height: auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -218,7 +260,7 @@
 
     a {
       text-decoration: none;
-      color: $footer-text-color;
+      color: $footer-link-color;
     }
   }
 
@@ -228,6 +270,6 @@
   }
 
   .copyright-container {
-    color: $footer-text-color;
+    color: $footer-link-color;
   }
 }

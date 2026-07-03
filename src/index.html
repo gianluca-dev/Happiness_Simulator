@@ -27,8 +27,8 @@
             </div>
             <div class="end-navigation-wrapper">
                 <div class="start-btn-container-nav">
-                    <button class="start-btn nav" id="start-btn-navbar">Jetzt ausprobieren</button>
-                    <button class="start-btn nav" id="anmelde-btn">Anmelden</button>
+                    <button class="login-btn" id="login-btn">Einloggen</button>
+                    <button class="demo-btn" id="start-btn-navbar">Loslegen</button>
                 </div>
                 <!--Darkmode toggle-->
                 <div class="darkmode-toggle-container">
@@ -42,27 +42,108 @@
         </nav>
     </header>
     <main>
-        <!--Startseite Content--> 
-        <div class="content-container startscreen-content">
-        <div class="startpage-top-container">    
-            <p id="content-startscreen-wissenschaftlich"><span class="pulse-dot"></span>Wissenschaftlich fundierte Lernanwendung</p>
-            <img src="assets/images/Happiness_Bild_Startseite.jpg" alt="Happiness_Simulator_Bild" class="content-startscreen-image">
+        <div class="info-popup-container">
+            <p class="info-popup"><div class="pulse-dot"></div>Wissenschaftlich fundierte Lernanwendung</p>
         </div>
-        <h2>Willkommen beim Happiness Simulator </h2>
-        <p>Der Happiness Simulator ist ein Spiel, in dem du die Faktoren der Zufriedenheit erlebst und verstehst. Du spielst einen Happiness-Manager der Regierung. Als ebendieser ist es deine Aufgabe, die Zufriedenheit der Bürger mit deinen Entscheidungen steigern. Die Simulation spielt in den Jahren 2019 - 2024. Somit werden Krisen aus diesen Jahren die Zufriedenheit beeinflussen. Stelle Dein Können unter Beweis, indem du verschiedene Entscheidungen triffst und die Zufriedenheit der Bürger steigerst! Viel Spaß beim Spielen!</p>
-        <br>
-        <!--Start Button-->
-        <div class="btn-wrapper">
-            <div class="start-btn-container">
-                <button class="start-btn" id="start-btn">Start<img src="assets/icons/arrow.svg" loading="eager" alt="arrow-icon"></button>
+        <section class="hero-section">
+            <div class="hero-section-start-wrapper">
+                <div class="hero-text-container">
+                    <p class="hero-title">Happiness Simulator</p>
+                    <p class="hero-slogan">Verstehe die Faktoren der Zufriedenheit</p>
+                    <p class="hero-description">Simuliere politische Entscheidungen und ihre Auswirkungen auf die Zufriedenheit.</p>
+                </div>
+                <!--Start-Button-->
+                <div class="hero-btn-wrapper">
+                    <div class="start-btn-container">
+                        <button class="start-btn" id="start-btn">Loslegen<img src="assets/icons/arrow.svg" loading="eager" alt="arrow-icon"></button>
+                    </div>
+                    <!--Restart-Button-->
+                    <div class="restart-btn-container">
+                        <button class="restart-btn" id="restart-btn">Neu starten<img src="assets/icons/arrow-clockwise.svg" loading="eager" alt="arrow-icon"></button>
+                    </div>
+                </div>
             </div>
-            <!--Restart-Button-->
-            <div class="restart-btn-container">
-                <button class="restart-btn" id="restart-btn">Restart<img src="assets/icons/arrow-clockwise.svg" loading="eager" alt="arrow-icon"></button>
+            <div class="hero-section-end-wrapper">
+                <div class="simulator-preview-container">
+                    <img src="assets/images/simulator-preview.png" loading="lazy" alt="simulator-preview">
+                </div>
+            </div>
+        </section>
+        <div class="circle-small"></div>
+        <div class="circle-large"></div>
+        <!--Social-Proof-->
+        <div class="social-proof-container">
+            <p>Der Simulator basiert auf realen Daten des <a href="https://data.worldhappiness.report/map" target="_blank"><span>World Happiness Reports</span></a></p>
+        </div>
+        <!--Feature-Section-->
+        <section class="feature-section">
+            <div class="feature">
+                <!--Feature-Image-->
+                <div class="feature-image-container">
+                    <img src="assets/images/mail-preview.png" loading="lazy" alt="mail-preview">
+                </div>
+                <!--Feature-Info-->
+                <div class="feature-info-container">
+                    <p class="feature-info-title">Reagiere auf Krisen in Echtzeit!</p>
+                    <p class="feature-info-description">Als Happiness-Manager schläft dein Postfach nie: Kritische Zufriedenheitswarnungen und Eilmeldungen fordern deine ungeteilte Aufmerksamkeit.</p>
+                </div>
+            </div>
+            <div class="feature">
+                <!--Feature-Info-->
+                <div class="feature-info-container">
+                    <p class="feature-info-title">Vergleiche dich mit anderen Nationen!</p>
+                    <p class="feature-info-description">Zieht Finnland dir davon? Analysiere die Zufriedenheit Deutschlands im direkten Live-Vergleich mit den europäischen Nachbarn. Wie gut schlägst du dich?</p>
+                </div>
+                <!--Feature-Image-->
+                <div class="feature-image-container">
+                    <img src="assets/images/nation-comp-preview.png" loading="lazy" alt="nation-comparison-preview">
+                </div>
+            </div>
+            <div class="feature-circle-small"></div>
+            <div class="feature-circle-medium"></div>
+            <div class="feature-circle-large"></div>
+        </section>
+        <!--Call-To-Action-Section-->
+        <section class="call-to-action-section">
+            <div class="blur-container">
+                <div class="cta-circle-small"></div>
+                <div class="cta-circle-medium"></div>
+            </div>
+            <div class="call-to-action-container">
+                <p class="call-to-action-title">Bereit, die Welt ein bisschen glücklicher zu machen?</p>
+                <p class="call-to-action-description">Starte jetzt deine erste Simulation und übernimm die Verantwortung für das Glück deiner Nation!</p>
+                <div class="call-to-action-btn-container">
+                    <button class="cta-start-btn" id="start-btn-cta">Loslegen</button>
+                </div>
             </div>
         </section>
     </main>
     <footer>
+        <div class="footer-start-container">
+            <div class="footer-logo-container">
+                <img src="assets/happiness_simulator/happiness_simulator_logo_with_text.svg" loading="lazy" alt="happiness-simulator-logo">
+            </div>
+            <div class="footer-navigation">
+                <ul class="list-project">
+                    <li>Projekt</li>
+                    <li><a href="index.html">Startseite</a></li>
+                    <li><a href="about.html">Über uns</a></li>
+                    <li><a href="about.html">Das Team</a></li>
+                </ul>
+                <ul class="list-simulator">
+                    <li>Simulator</li>
+                    <li><a href="simulator.html">Loslegen</a></li>
+                    <li><a href="tutorial.html">Tutorial</a></li>
+                    <li><a href="https://data.worldhappiness.report/map" target="_blank">Daten</a></li>
+                </ul>
+                <ul class="list-support">
+                    <li>Support</li>
+                    <li><a href="contact.html">Kontakt</a></li>
+                    <li><a href="contact.html">FAQ</a></li>
+                    <li><a href="contact.html">Feedback</a></li>
+                </ul>
+            </div>
+        </div>
         <div class="footer-end-container">
             <div class="legals-container">
                 <div class="copyright-container">
@@ -78,7 +159,9 @@
                 </div>
             </div>
             <div class="socials-container">
-                <img src="assets/socials/Instagram_Glyph_White.svg" loading="lazy" alt="instagram-logo">
+                <a href="https://www.instagram.com" target="_blank">
+                    <img src="assets/socials/Instagram_Glyph_White.svg" loading="lazy" alt="instagram-logo">
+                </a>
             </div>
         </div>
     </footer>

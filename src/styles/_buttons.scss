@@ -1,116 +1,90 @@
 // ===== Button Styles =====
 
-.startscreen-content button {
-  display: block;
-  margin: auto;
-  width: 80%;
+.hero-btn-wrapper {
+  width: 275px;
   height: 50px;
-  margin-top: 10px;
-  font-size: 1.25rem;
-  font-weight: bold;
-  color: $default-text-color;
-  background-color: $button-bg-color;
-  border-radius: $border-radius-large;
-  cursor: pointer;
-  border: none;
-}
-
-.btn-wrapper {
-  width: 80%;
-  height: 50px;
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: $spacing-large;
-  margin: 15px 0 0 0;
+  gap: $spacing-medium;
+  margin: 55px 0 0 0;
+  z-index: 25;
 }
 
 //==== Start Button =====
 
-.start-btn-container {
-  width: 500px;
-  height: 50px;
+.start-btn {
+  width: 155px;
+  height: 45px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  button {
-    justify-content: center;
-    align-items: center;
-    border: none;
-    height: auto;
-  }
-}
-
-.start-btn {
-  width: 155px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  border-radius: $border-radius-small;
+  border-radius: $border-radius-large;
   border: none;
-  padding: 5px 12px;
+  padding: 5px 7px 5px 20px;
   background-color: $default-text-color;
   color: $default-white;
   font-size: 16px;
   font-weight: 500;
   cursor: pointer;
-  transition: $transition-default;
+  transition: background-color 0.2s ease;
   box-shadow: $box-shadow-light;
-
-  img {
-    width: 20px;
-    height: 20px;
-  }
 }
+
+.start-btn img {
+  width: 25px;
+  height: 25px;
+  padding: 2px;
+  border-radius: $border-radius-large;
+  background-color: $default-white;
+}
+
 
 //====Restart Button ====== 
 
-.restart-btn-container {
-  width: 500px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-
-  button {
-    justify-content: center;
-    align-items: center;
-    border: none;
-    height: auto;
-  }
-}  
-
 .restart-btn {
-  width: 210px;
-  height: 40px;
+  width: 155px;
+  height: 45px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: 8px;
-  border-radius: $border-radius-small;
-  border: none;
-  padding: 5px 12px;
-  background-color: $button-bg-color;
-  color: $button-text-color;
+  border-radius: $border-radius-large;
+  border: 2px solid $default-border-color;
+  padding: 5px 7px 5px 20px;
+  background-color: $primary-component-bg-color;
+  color: $default-text-color;
   font-size: 16px;
   font-weight: 500;
   cursor: pointer;
-  transition: $transition-default;
-
-  &:hover {
-    background-color: $default-text-color;
-    color: $default-white;
-  }
-
-  img {
-    width: 20px;
-    height: 20px;
-    margin-left: $spacing-small;
-    margin-top: $spacing-small;
-  }
+  transition: background-color 0.2s ease;
+  box-shadow: $box-shadow-light;
 }
 
+.restart-btn img {
+  width: 25px;
+  height: 25px;
+  padding: 2px;
+  border-radius: $border-radius-large;
+  background-color: $default-white;
+}
 
+//===== CTA-Start-Btn=====
 
+.cta-start-btn {
+  width: 155px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: $border-radius-large;
+  border: none;
+  padding: 5px;
+  background-color: $footer-bg-color;
+  color: $secondary-text-color;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  box-shadow: $cta-box-shadow-light;
+}
