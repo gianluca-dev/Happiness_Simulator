@@ -1,37 +1,37 @@
 // ===== Dark Mode Variables =====
 .darkmode {
 // ===== Darkmode Colors =====
-$darkmode-default-white: #16161a;
-$darkmode-primary-component-bg-color: #222227;
-$darkmode-secondary-component-bg-color: #2b2b32;
-$darkmode-primary-footer-color: #0f0f12;
-$darkmode-footer-bg-color: #1c1c22;
+$default-white: #16161a;
+$primary-component-bg-color: #222227;
+$secondary-component-bg-color: #2b2b32;
+$primary-footer-color: #0f0f12;
+$footer-bg-color: #1c1c22;
 
 // Borders
-$darkmode-primary-border-color: #2d2d35;           
-$darkmode-default-border-color: #2d2d35;
+$primary-border-color: #2d2d35;           
+$default-border-color: #2d2d35;
 
 // Text Colors
-$darkmode-default-text-color: #f3f4f6;
-$darkmode-secondary-text-color: #e5e7eb;
-$darkmode-tertiary-text-color: #9ca3af;
-$darkmode-footer-text-color: #e5e7eb;
-$darkmode-footer-link-color: #6b7280;
+$default-text-color: #f3f4f6;
+$secondary-text-color: #e5e7eb;
+$tertiary-text-color: #9ca3af;
+$footer-text-color: #e5e7eb;
+$footer-link-color: #6b7280;
 
 // Happiness Gold
-$darkmode-button-link-color: #ffca28;
-$darkmode-button-bg-color: rgba(255, 202, 40, 0.15);
-$darkmode-button-text-color: #ffca28;
+$button-link-color: #ffca28;
+$button-bg-color: rgba(255, 202, 40, 0.15);
+$button-text-color: #ffca28;
 
 // Call-To-Action Section
-$darkmode-cta-blur-color: rgba(15, 23, 42, 0.75);
-$darkmode-cta-secondary-text-color: #e2e8f0;
+$cta-blur-color: rgba(15, 23, 42, 0.75);
+$cta-secondary-text-color: #e2e8f0;
 
 // ===== Box Shadows =====
-$darkmode-box-shadow-light: 0 4px 12px rgba(0, 0, 0, 0.4);
-$darkmode-box-shadow-header: 0px 4px 16px rgba(0, 0, 0, 0.6);
+$box-shadow-light: 0 4px 12px rgba(0, 0, 0, 0.4);
+$box-shadow-header: 0px 4px 16px rgba(0, 0, 0, 0.6);
 
-$darkmode-cta-box-shadow-light: 0 0 20px rgba(255, 202, 40, 0.4);
+$cta-box-shadow-light: 0 0 20px rgba(255, 202, 40, 0.4);
 
 // ===== Dark Mode Styles =====
 
