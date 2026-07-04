@@ -1,37 +1,28 @@
 // ===== Dark Mode Variables =====
 
-// ===== Darkmode Colors =====
-$darkmode-default-white: #16161a;
-$darkmode-primary-component-bg-color: #222227;
-$darkmode-secondary-component-bg-color: #2b2b32;
-$darkmode-primary-footer-color: #0f0f12;
-$darkmode-footer-bg-color: #1c1c22;
+$darkmode-primary-component-bg-color: #201e1e;
+$darkmode-secondary-component-bg-color: #1b1a1a;
+$darkmode-button-bg-color: #3f3f3e57;
 
-// Borders
-$darkmode-primary-border-color: #2d2d35;           
-$darkmode-default-border-color: #2d2d35;
+$darkmode-primary-footer-color: #ffffff;
+$darkmode-primary-border-color: #e5e5e5;
+$darkmode-footer-bg-color: #181813;
+$darkmode-default-border-color: #ffffff;
+$darkmode-cta-blur-color: #242222;
 
-// Text Colors
-$darkmode-default-text-color: #f3f4f6;
-$darkmode-secondary-text-color: #e5e7eb;
-$darkmode-tertiary-text-color: #9ca3af;
-$darkmode-footer-text-color: #e5e7eb;
-$darkmode-footer-link-color: #6b7280;
 
-// Happiness Gold
-$darkmode-button-link-color: #ffca28;
-$darkmode-button-bg-color: rgba(255, 202, 40, 0.15);
-$darkmode-button-text-color: #ffca28;
+$darkmode-default-text-color: #ffffff;
+$darkmode-footer-text-color: #9e8f8f;
+$darkmode-footer-link-color: #f1d9d9;
+$darkmode-button-link-color: #ffffff;
+$darkmode-button-text-color: #ffffff;
+$darkmode-secondary-text-color: #ffffff;
+$darkmode-tertiary-text-color: #bbacac;
+$darkmode-cta-secondary-text-color: #f3f4f6;
 
-// Call-To-Action Section
-$darkmode-cta-blur-color: rgba(15, 23, 42, 0.75);
-$darkmode-cta-secondary-text-color: #e2e8f0;
+$darkmode-default-white: #000000;
 
-// ===== Box Shadows =====
-$darkmode-box-shadow-light: 0 4px 12px rgba(0, 0, 0, 0.4);
-$darkmode-box-shadow-header: 0px 4px 16px rgba(0, 0, 0, 0.6);
 
-$darkmode-cta-box-shadow-light: 0 0 20px rgba(255, 202, 40, 0.4);
 
 // ===== Dark Mode Styles =====
 
@@ -82,6 +73,76 @@ $darkmode-cta-box-shadow-light: 0 0 20px rgba(255, 202, 40, 0.4);
   .socials-container img {
     filter: invert(0%);
   }
+
+  
+
+
+  header{
+    background-color: $darkmode-primary-component-bg-color;
+  }
+  .navigation-link,.navigation-option{
+    a{
+    color: $darkmode-default-text-color;
+    }
+  }
+
+  .login-btn{
+    color: $darkmode-default-text-color;
+  }
+
+  main{
+    background-color: $darkmode-secondary-component-bg-color;
+    color: $darkmode-default-text-color;
+  }
+
+  .hero-slogan{
+    color: $darkmode-secondary-text-color;
+  }
+
+  .hero-description{
+    color: $darkmode-tertiary-text-color;
+  }
+
+  .social-proof-container{
+    background-color: $darkmode-secondary-component-bg-color;
+    p{
+      color: $darkmode-secondary-text-color;
+    }
+    a{
+      color:$darkmode-secondary-text-color;
+    }
+    
+  }
+  .feature-section{
+    background-color: $darkmode-secondary-component-bg-color;
+  }
+  .feature-info-title{
+    color: $darkmode-secondary-text-color;
+  }
+  .feature-info-description{
+    color: $darkmode-tertiary-text-color;
+  }
+
+  .blur-container{
+    background-color:$darkmode-cta-blur-color;
+  }
+
+  footer{
+    background-color: $darkmode-footer-bg-color;
+    .footer-navigation li:first-child{
+      color: $darkmode-footer-link-color;
+    }
+    .footer-navigation{
+      a{
+        color: $darkmode-footer-text-color;
+      }
+    }
+  }
+.darkmode-toggle-container{
+  button{
+    background-color: $darkmode-primary-component-bg-color;
+  }
+}
 }
 
 // ===== Light Mode Toggle Icons =====
@@ -128,4 +189,6 @@ $darkmode-cta-box-shadow-light: 0 0 20px rgba(255, 202, 40, 0.4);
       opacity: 0.8;
     }
   }
+
+  
 }
