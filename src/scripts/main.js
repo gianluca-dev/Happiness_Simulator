@@ -79,7 +79,7 @@ let currentYear = 2019;
 const path = window.location.pathname;
 // Enabling EventListener for start on index.html
 if (path.includes('index.html') || path.endsWith('/')) {
-    document.getElementById('start-btn-navbar').addEventListener('click', () => {
+    document.getElementById('start-btn-navbar-landing').addEventListener('click', () => {
         window.location.href = 'simulator.html';
     });
 
@@ -95,7 +95,31 @@ if (path.includes('index.html') || path.endsWith('/')) {
         deleteSimData();
         window.location.href = 'simulator.html';
     });
-} else if (path.includes('simulator.html')) {
+}else if(path.includes('about.html')){
+    document.getElementById('start-btn-navbar').addEventListener('click', () => {
+        window.location.href = 'simulator.html';
+    });
+}else if(path.includes('contact.html')){
+    document.getElementById('start-btn-navbar').addEventListener('click', () => {
+        window.location.href = 'simulator.html';
+    });
+}else if(path.includes('factors.html')){
+    document.getElementById('start-btn-navbar').addEventListener('click', () => {
+        window.location.href = 'simulator.html';
+    });
+}else if(path.includes('imprint.html')){
+    document.getElementById('start-btn-navbar').addEventListener('click', () => {
+        window.location.href = 'simulator.html';
+    });
+}else if(path.includes('privacy-policy.html')){
+    document.getElementById('start-btn-navbar').addEventListener('click', () => {
+        window.location.href = 'simulator.html';
+    });
+}else if(path.includes('tutorial.html')){
+    document.getElementById('start-btn-navbar').addEventListener('click', () => {
+        window.location.href = 'simulator.html';
+    });
+}else if (path.includes('simulator.html')) {
     document.addEventListener('DOMContentLoaded', async () => {
         let simData;
     
