@@ -4,7 +4,7 @@ import { nationCompChart, initLifeEvalChart, initNationCompChart, updateChartYea
 import { showResults } from './results.js';
 
 export const simState = {
-    coins: 100000000,
+    coins: 20000000,
     income: 1000000,
     shieldValue: 0,
     maxShieldValue: 2,
@@ -290,7 +290,7 @@ function applyHappinessDelta(simData) {
         return;
     }
 
-    if (newValue >= 8.5) {
+    if (newValue >= 8.0) {
         if (!simState.happinessRewardClaimed) {
             simState.coins += 2500000;
             simState.shieldValue = Math.min(simState.shieldValue + 2, simState.maxShieldValue);
@@ -354,6 +354,14 @@ function showCoins() {
 function earnMonthlyIncome(monthlyIncome) {
     simState.activeEffects.forEach(effect => {
         if (effect.effect === 'tax_reduction' && effect.endCount <= crisisState.crisisCount) {
+            simState.income = 1000000;
+        }
+
+        if (effect.effect === 'income_boost' && effect.endCount > crisisState.crisisCount) {
+            simState.income = 1000000;
+        }
+
+        if (effect.effect === 'institution_trust' && effect.endCount > crisisState.crisisCount) {
             simState.income = 1000000;
         }
     });
@@ -432,15 +440,17 @@ export function nextCrisis(simData) {
     crisisState.crisisCount++;
     if (crisisState.crisisCount % 2 === 0) {
         calculateNationCompScores(nationCompState, currentYear);
+
+        const temporaryLatestScore = simState.lifeEvalScores[currentYear].at(-1);
+        if (temporaryLatestScore >= 3) showToastNotification('Neuer Monat!', '#d0f5f0', '#14b8a6');
+
         applyHappinessDelta(simData);
+
         showNationElements();
         showNationPreview();
         showCurrentScore();
         showLastScores();
         earnMonthlyIncome(simState.income);
-
-        const latestScore = simState.lifeEvalScores[currentYear].at(-1);
-        if (latestScore >= 3) showToastNotification('Neuer Monat!', '#d0f5f0', '#14b8a6');
 
         saveSimData();
 
@@ -704,7 +714,7 @@ function getNationStats(nationName) {
 }
 
 function getActiveEffects() {
-    return simState.activeEffects.filter(effect => effect.endCount > crisisState.crisisCount).map(effect => ({
+    return simState.activeEffects.filter(effect => effect.endCount > crisisState.crisisCount && !effect.isCosmetic).map(effect => ({
         label: effect.label,
         icon: effect.icon,
         monthsLeft: Math.ceil((effect.endCount - crisisState.crisisCount) / 2)
@@ -873,7 +883,11 @@ function getTrend() {
 
 function skipToNearEnd(simData) {
     const targetCrisisCount = 116;
+    const startApproachingAt = 80;
+
     if (crisisState.crisisCount >= targetCrisisCount) return;
+
+    const startingCoins = simState.coins;
 
     const normalCrises = simData.crises.filter(crisis => !crisis.isProtest);
 
@@ -888,11 +902,48 @@ function skipToNearEnd(simData) {
         if (crisisState.crisisCount % 2 === 0) {
             calculateNationCompScores(nationCompState, currentYear);
 
+            // Code if not presentation
+            /*
             const currentScore = simState.lifeEvalScores[currentYear].at(-1);
             const drift = -0.05 + (Math.random() * 1.0 - 0.5);
             const newValue = Math.max(1, Math.min((currentScore + drift), 10));
+            */
+
+            const currentScore = simState.lifeEvalScores[currentYear].at(-1);
+            let newValue;
+
+            if (crisisState.crisisCount < startApproachingAt) {
+                const naturalDrift = -0.05 + (Math.random() * 1.0 - 0.5);
+                newValue = Math.max(1, Math.min((currentScore + naturalDrift), 10));
+            } else {
+                const phaseProgress = (crisisState.crisisCount - startApproachingAt) / (targetCrisisCount - startApproachingAt);
+
+                const smoothProgress = 1 - Math.pow(1 - phaseProgress, 2);
+                const idealCenter = (currentScore * (1 - smoothProgress)) + (1.5 * smoothProgress);
+
+                const heavyWiggle = (Math.random() * 0.9) - 0.45;
+
+                const rawValue = idealCenter + heavyWiggle;
+
+                const stepDelta = rawValue - currentScore;
+                const cappedDelta = Math.max(-0.35, Math.min(stepDelta, 0.35));
+
+                newValue = Math.max(1, Math.min((currentScore + cappedDelta), 10));
+            }
 
             simState.lifeEvalScores[currentYear].push(newValue);
+
+            for (let i = 0; i < 2; i++) {
+                const randomEvent = simData.events[Math.floor(Math.random() * simData.events.length)];
+
+                simState.activeEffects.push({
+                    effect: randomEvent.effect,
+                    label: randomEvent.title,
+                    icon: randomEvent.image.src,
+                    endCount: 999,
+                    isCosmetic: true
+                });
+            }
 
             if (crisisState.crisisCount % 24 === 0) {
                 currentYear++;
@@ -904,6 +955,13 @@ function skipToNearEnd(simData) {
             }
         }
     }
+
+    if (simState.lifeEvalScores[currentYear] && simState.lifeEvalScores[currentYear].length > 0) {
+        const lastIndex = simState.lifeEvalScores[currentYear].length - 1;
+        simState.lifeEvalScores[currentYear][lastIndex] = parseFloat((1.5 + (Math.random() * 0.08 - 0.04)).toFixed(3));
+    }
+
+    simState.coins = startingCoins - 1500000;
 
     saveSimData();
     showCoins();
