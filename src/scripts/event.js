@@ -223,6 +223,18 @@ function enableMainEvents() {
 }
 
 function activateEffect(event) {
+    const existingEffect = simState.activeEffects.find(effect => effect.effect === event.effect);
+
+    if (existingEffect) {
+        existingEffect.endCount = crisisState.crisisCount + event.duration;
+
+        if (event.effect === 'political_instability') {
+            existingEffect.startCount = crisisState.crisisCount;
+        }
+
+        return;
+    }
+
     if (event.effect === 'tax_reduction') {
         simState.income *= 0.88;
     }
@@ -230,6 +242,29 @@ function activateEffect(event) {
     if (event.effect === 'vaccination_campaign') {
         simState.maxShieldValue = 3;
         simState.shieldValue = Math.min((simState.shieldValue + 1), 3);
+    }
+
+    if (event.effect === 'income_boost') {
+        simState.income *= 1.10;
+    }
+
+    if (event.effect === 'employment_boost') {
+        simState.maxShieldValue = 3;
+        simState.shieldValue = Math.min((simState.shieldValue + 2), 3);
+    }
+
+    if (event.effect === 'family_support') {
+        simState.shieldValue = Math.min((simState.shieldValue + 1), simState.maxShieldValue);
+    }
+
+    if (event.effect === 'physical_health') {
+        simState.maxShieldValue = Math.max(simState.maxShieldValue, 3);
+        simState.shieldValue = Math.min((simState.shieldValue + 1), simState.maxShieldValue);
+    }
+
+    if (event.effect === 'institution_trust') {
+        simState.income *= 1.05;
+        simState.shieldValue = Math.min((simState.shieldValue + 2), simState.maxShieldValue);
     }
 
     const newEffect = {
