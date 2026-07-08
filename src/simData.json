@@ -127,6 +127,70 @@
                 "alt": "aspect-political-icon"
             },
             "tooltip": "Eine Einheitserhöhung des Vertrauensindex steigert die Lebenszufriedenheit um 0,24 Punkte."
+        },
+        {
+            "id": 8,
+            "type": "political",
+            "title": "Dialogprogramm",
+            "description": "Ein überparteiliches Dialogprogramm soll die politische Polarisierung verringern.",
+            "effect": "depolarization",
+            "duration": 6,
+            "costs": 1500000,
+            "happinessDelta": 0.30,
+            "shieldValue": 1,
+            "image": {
+                "src": "assets/simulator_icons/political.svg",
+                "alt": "aspect-political-icon"
+            },
+            "tooltip": "Starke politische Polarisierung erhöht Demokratieunzufriedenheit und Ausgrenzungsgefühle, was Vertrauen und Zusammenhalt und damit die Lebenszufriedenheit senkt."
+        },
+        {
+            "id": 9,
+            "type": "social",
+            "title": "Vertrauenskampagne",
+            "description": "Eine landesweite Kampagne fördert das zwischenmenschliche Vertrauen.",
+            "effect": "social_trust",
+            "duration": 6,
+            "costs": 750000,
+            "happinessDelta": 0.15,
+            "shieldValue": 1,
+            "image": {
+                "src": "assets/simulator_icons/social.svg",
+                "alt": "aspect-social-icon"
+            },
+            "tooltip": "Menschen mit hohem zwischenmenschlichem Vertrauen sind im Schnitt 1 Punkt zufriedener auf der Cantril-Ladder, besonders benachteiligte Gruppen profitieren stark."
+        },
+        {
+            "id": 10,
+            "type": "social",
+            "title": "Gemeinschaftszentren",
+            "description": "Neue Gemeinschaftszentren fördern soziale Kontakte und wirken Einsamkeit entgegen.",
+            "effect": "social_support_network",
+            "duration": 6,
+            "costs": 1000000,
+            "happinessDelta": 0.20,
+            "shieldValue": 1,
+            "image": {
+                "src": "assets/simulator_icons/social.svg",
+                "alt": "aspect-social-icon"
+            },
+            "tooltip": "Ein starkes soziales Netzwerk erhöht die Lebenszufriedenheit deutlich, während Einsamkeit sich besonders negativ auswirkt."
+        },
+        {
+            "id": 11,
+            "type": "health",
+            "title": "Beratungsstellen",
+            "description": "Der Ausbau von Beratungsstellen verbessert den Zugang zu psychologischer Versorgung.",
+            "effect": "mental_health_support",
+            "duration": 6,
+            "costs": 2000000,
+            "happinessDelta": 0.30,
+            "shieldValue": 2,
+            "image": {
+                "src": "assets/simulator_icons/health.svg",
+                "alt": "aspect-health-icon"
+            },
+            "tooltip": "Eine diagnostizierte psychische Erkrankung senkt die Lebenszufriedenheit um 0,72 Punkte und ist somit der stärkste einzelne Unglücksfaktor, von dem 20% der Erwachsenen betroffen sind."
         }
     ],
     "crises": [
@@ -209,6 +273,42 @@
             "happinessDelta": -0.50,
             "mailSuggestion": {
                 "id": 7
+            }
+        },
+        {
+            "id": 9,
+            "type": "moderate",
+            "title": "Polarisierung",
+            "happinessDelta": -0.35,
+            "mailSuggestion": {
+                "id": 8
+            }
+        },
+        {
+            "id": 10,
+            "type": "mild",
+            "title": "Misstrauen",
+            "happinessDelta": -0.15,
+            "mailSuggestion": {
+                "id": 9
+            }
+        },
+        {
+            "id": 11,
+            "type": "mild",
+            "title": "Soziale Isolation",
+            "happinessDelta": -0.20,
+            "mailSuggestion": {
+                "id": 10
+            }
+        },
+        {
+            "id": 12,
+            "type": "severe",
+            "title": "Psychische Belastung",
+            "happinessDelta": -0.50,
+            "mailSuggestion": {
+                "id": 11
             }
         }
     ],
@@ -350,6 +450,78 @@
                 "id": 7,
                 "type": "political",
                 "title": "Institutionenreform"
+            }
+        },
+        {
+            "id": 8,
+            "type": "political",
+            "subject": "Polarisierung",
+            "information": "Die politische Polarisierung in der Bevölkerung nimmt spürbar zu.",
+            "senderInformation": {
+                "sender": "Innenminister",
+                "profileImage": {
+                    "src": "assets/images/Copilot_20260306_205712.avif",
+                    "alt": "Innenminister"
+                }
+            },
+            "eventSuggestion": {
+                "id": 8,
+                "type": "political",
+                "title": "Dialogprogramm"
+            }
+        },
+        {
+            "id": 9,
+            "type": "social",
+            "subject": "Misstrauen",
+            "information": "Das zwischenmenschliche Vertrauen in der Bevölkerung sinkt zunehmend.",
+            "senderInformation": {
+                "sender": "Sozialminister",
+                "profileImage": {
+                    "src": "assets/images/Copilot_20260306_205712.avif",
+                    "alt": "Sozialminister"
+                }
+            },
+            "eventSuggestion": {
+                "id": 9,
+                "type": "social",
+                "title": "Vertrauenskampagne"
+            }
+        },
+        {
+            "id": 10,
+            "type": "social",
+            "subject": "Soziale Isolation",
+            "information": "Immer mehr Bürger berichten von sozialer Isolation und fehlenden Kontakten.",
+            "senderInformation": {
+                "sender": "Sozialminister",
+                "profileImage": {
+                    "src": "assets/images/Copilot_20260306_205712.avif",
+                    "alt": "Sozialminister"
+                }
+            },
+            "eventSuggestion": {
+                "id": 10,
+                "type": "social",
+                "title": "Gemeinschaftszentren"
+            }
+        },
+        {
+            "id": 11,
+            "type": "health",
+            "subject": "Psychische Belastung",
+            "information": "Psychische Erkrankungen nehmen in der Bevölkerung stark zu.",
+            "senderInformation": {
+                "sender": "Gesundheitsminister",
+                "profileImage": {
+                    "src": "assets/images/Copilot_20260306_205712.avif",
+                    "alt": "Gesundheitsminister"
+                }
+            },
+            "eventSuggestion": {
+                "id": 11,
+                "type": "health",
+                "title": "Beratungsstellen"
             }
         }
     ]
