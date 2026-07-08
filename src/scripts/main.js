@@ -242,12 +242,13 @@ function applyCrisisDelta(currentCrisis) {
 
 function applyHappinessDelta(simData) {
     const instabilityEffect = simState.activeEffects.find(event => event.effect === 'political_instability');
+    const depolarizationActive = simState.activeEffects.some(event => event.effect === 'depolarization');
 
     if (instabilityEffect) {
         const monthsElapsed = Math.floor((crisisState.crisisCount - instabilityEffect.startCount) / 2);
         
         if (monthsElapsed === 0) {
-            simState.happinessDelta -= 0.15;
+            simState.happinessDelta -= depolarizationActive ? 0.05 : 0.15;
         } else if (monthsElapsed === 1) {
             simState.happinessDelta += 0.1;
         } else if (monthsElapsed === 2) {

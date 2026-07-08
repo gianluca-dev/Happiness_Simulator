@@ -267,6 +267,19 @@ function activateEffect(event) {
         simState.shieldValue = Math.min((simState.shieldValue + 2), simState.maxShieldValue);
     }
 
+    if (event.effect === 'social_trust') {
+        simState.shieldValue = Math.min((simState.shieldValue + 1), simState.maxShieldValue);
+    }
+
+    if (event.effect === 'social_support_network') {
+        simState.shieldValue = Math.min((simState.shieldValue + 1), simState.maxShieldValue);
+    }
+
+    if (event.effect === 'mental_health_support') {
+        simState.maxShieldValue = Math.max(simState.maxShieldValue, 3);
+        simState.shieldValue = Math.min((simState.shieldValue + 2), simState.maxShieldValue);
+    }
+
     const newEffect = {
         effect: event.effect,
         label: event.title,
